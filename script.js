@@ -71,6 +71,9 @@ function logout(){
 }
 
 function play(choice){
+  if (navigator.vibrate) {
+    navigator.vibrate(50);
+  }
   let users = getUsers();
   let user = users.find(u => u.username === currentUser);
 
