@@ -15,16 +15,6 @@ function createId(){
 function register(){
   let users = getUsers();
 
-  if(!username.value || !password.value){
-    msg.innerText = "请输入账号和密码";
-    return;
-  }
-
-  if(users.find(u => u.username === username.value)){
-    msg.innerText = "账号已存在";
-    return;
-  }
-
   let user = {
     id: createId(),
     username: username.value,
@@ -44,16 +34,11 @@ function register(){
 function login(){
   let users = getUsers();
 
-  let user = users.find(u => u.username === username.value && u.password === password.value);
+  let user = users.find(u => u.username == username.value && u.password == password.value);
 
   if(!user){
     msg.innerText = "账号错误";
     return;
-  }
-
-  if(!user.road){
-    user.road = [];
-    saveUsers(users);
   }
 
   currentUser = user.username;
@@ -71,12 +56,7 @@ function logout(){
 
 function play(choice){
   let users = getUsers();
-  let user = users.find(u => u.username === currentUser);
-
-  if(user.times <= 0){
-    result.innerText = "今日次数已用完";
-    return;
-  }
+  let user = users.find(u => u.username == currentUser);
 
   let coin = document.getElementById("coin");
   let coinImg = document.getElementById("coinImg");
@@ -85,34 +65,24 @@ function play(choice){
   void coin.offsetWidth;
   coin.classList.add("flip");
 
-  coinText.innerText = "翻转中...";
-  result.innerText = "硬币正在翻转...";
-
   setTimeout(() => {
-    let flipResult = Math.random() < 0.5 ? "正面" : "反面";
 
-    if(flipResult === "正面"){
-      coinImg.src = "coin.png.PNG";
-    }else{
-      coinImg.src = "coin.png2.PNG";
-    }
+    let result = Math.random() < 0.5 ? "正面" : "反面";
 
-    coinText.innerText = flipResult;
+    coinImg.src = result === "正面" ? "coin.png.PNG" : "coin.png2.PNG";
 
-    user.road.push(flipResult);
-    if(user.road.length > 30){
-      user.road.shift();
-    }
+    coinText.innerText = result;
 
-    if(choice === flipResult){
+    user.road.push(result);
+    if(user.road.length > 30) user.road.shift();
+
+    if(choice === result){
       user.score += 10;
       user.streak++;
-      result.innerText = "💰 赢了！+10";
       explodeCoins();
     }else{
       user.score -= 5;
       user.streak = 0;
-      result.innerText = "😌 惜败：" + flipResult;
     }
 
     user.times--;
@@ -122,12 +92,11 @@ function play(choice){
 
     coin.classList.remove("flip");
 
-  }, 750);
+  }, 1350); /* ✅ 和动画同步 */
 }
 
 function updateUI(){
-  let user = getUsers().find(u => u.username === currentUser);
-  if(!user) return;
+  let user = getUsers().find(u => u.username == currentUser);
 
   name.innerText = user.username;
   userId.innerText = user.id;
@@ -135,49 +104,34 @@ function updateUI(){
   streak.innerText = user.streak;
   times.innerText = user.times;
 
-  renderRoad(user.road || []);
+  renderRoad(user.road);
 }
 
 function renderRoad(road){
-  const roadMap = document.getElementById("roadMap");
-  if(!roadMap) return;
+  let map = document.getElementById("roadMap");
+  map.innerHTML = "";
 
-  roadMap.innerHTML = "";
-
-  road.forEach(item => {
-    const dot = document.createElement("div");
-    dot.className = item === "正面" ? "road-dot front" : "road-dot back";
-    dot.innerText = item === "正面" ? "正" : "反";
-    roadMap.appendChild(dot);
+  road.forEach(r=>{
+    let dot = document.createElement("div");
+    dot.className = "road-dot " + (r === "正面" ? "front" : "back");
+    map.appendChild(dot);
   });
 }
 
 function explodeCoins(){
-  const container = document.getElementById("coinExplosion");
-  if(!container) return;
+  let box = document.getElementById("coinExplosion");
+  box.innerHTML = "";
 
-  container.innerHTML = "";
+  for(let i=0;i<20;i++){
+    let c = document.createElement("div");
+    c.className = "coin-particle";
 
-  for(let i = 0; i < 34; i++){
-    let coin = document.createElement("div");
-    coin.className = "coin-particle";
+    c.style.setProperty("--x",(Math.random()-0.5)*300+"px");
+    c.style.setProperty("--y",(Math.random()-0.5)*300+"px");
 
-    let x = (Math.random() - 0.5) * 420 + "px";
-    let y = (Math.random() - 0.5) * 420 + "px";
+    c.style.left="50%";
+    c.style.top="50%";
 
-    coin.style.setProperty("--x", x);
-    coin.style.setProperty("--y", y);
-    coin.style.left = "50%";
-    coin.style.top = "45%";
-
-    container.appendChild(coin);
+    box.appendChild(c);
   }
-
-  let flash = document.createElement("div");
-  flash.className = "flash";
-  document.body.appendChild(flash);
-
-  setTimeout(() => {
-    flash.remove();
-  }, 400);
 }
