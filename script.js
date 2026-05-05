@@ -1,165 +1,105 @@
-let currentUser = null;
+let currentUser=null;
 
-/* ===== 本地数据 ===== */
 function getUsers(){
-  return JSON.parse(localStorage.getItem("users") || "[]");
+return JSON.parse(localStorage.getItem("users")||"[]");
 }
 
-function saveUsers(users){
-  localStorage.setItem("users", JSON.stringify(users));
+function saveUsers(u){
+localStorage.setItem("users",JSON.stringify(u));
 }
 
-/* ===== 生成5位ID ===== */
 function createId(){
-  return Math.floor(10000 + Math.random() * 90000);
+return Math.floor(10000+Math.random()*90000);
 }
 
-/* ===== 注册 ===== */
 function register(){
-  let users = getUsers();
+let users=getUsers();
 
-  const usernameInput = document.getElementById("username");
-  const passwordInput = document.getElementById("password");
-  const msg = document.getElementById("msg");
+let user={
+id:createId(),
+username:username.value,
+password:password.value,
+score:100,
+streak:0,
+times:10
+};
 
-  if(!usernameInput.value || !passwordInput.value){
-    msg.innerText = "请输入账号和密码";
-    return;
-  }
+users.push(user);
+saveUsers(users);
 
-  if(users.find(u => u.username === usernameInput.value)){
-    msg.innerText = "账号已存在";
-    return;
-  }
-
-  let user = {
-    id: createId(),
-    username: usernameInput.value,
-    password: passwordInput.value,
-    score: 100,
-    streak: 0,
-    times: 10
-  };
-
-  users.push(user);
-  saveUsers(users);
-
-  msg.innerText = "注册成功，请登录";
+msg.innerText="注册成功";
 }
 
-/* ===== 登录 ===== */
 function login(){
-  let users = getUsers();
+let users=getUsers();
 
-  const usernameInput = document.getElementById("username");
-  const passwordInput = document.getElementById("password");
-  const msg = document.getElementById("msg");
+let user=users.find(u=>u.username==username.value && u.password==password.value);
 
-  let user = users.find(u => 
-    u.username === usernameInput.value &&
-    u.password === passwordInput.value
-  );
-
-  if(!user){
-    msg.innerText = "账号或密码错误";
-    return;
-  }
-
-  currentUser = user.username;
-
-  // 🔥 切换页面（关键）
-  document.getElementById("loginBox").style.display = "none";
-  document.getElementById("gameBox").classList.remove("hidden");
-
-  updateUI();
+if(!user){
+msg.innerText="账号错误";
+return;
 }
 
-/* ===== 退出 ===== */
+currentUser=user.username;
+
+loginBox.style.display="none";
+gameBox.classList.remove("hidden");
+
+updateUI();
+}
+
 function logout(){
-  currentUser = null;
-
-  document.getElementById("loginBox").style.display = "block";
-  document.getElementById("gameBox").classList.add("hidden");
+loginBox.style.display="block";
+gameBox.classList.add("hidden");
 }
 
-/* ===== 获取当前用户 ===== */
-function getCurrentUser(){
-  let users = getUsers();
-  return users.find(u => u.username === currentUser);
-}
-
-/* ===== 更新当前用户 ===== */
-function updateCurrentUser(user){
-  let users = getUsers();
-  let index = users.findIndex(u => u.username === currentUser);
-  users[index] = user;
-  saveUsers(users);
-}
-
-/* ===== 游戏核心 ===== */
 function play(choice){
-  let user = getCurrentUser();
+let users=getUsers();
+let user=users.find(u=>u.username==currentUser);
 
-  if(user.times <= 0){
-    document.getElementById("result").innerText = "今日次数已用完";
-    return;
-  }
+let coin=document.getElementById("coin");
+let coinImg=document.getElementById("coinImg");
 
-  const coin = document.getElementById("coin");
-  const coinImg = document.getElementById("coinImg");
-  const coinText = document.getElementById("coinText");
-  const resultBox = document.getElementById("result");
+coin.classList.add("flip");
 
-  // 动画触发
-  coin.classList.remove("flip");
-  void coin.offsetWidth;
-  coin.classList.add("flip");
+setTimeout(()=>{
 
-  coinText.innerText = "...";
-  resultBox.innerText = "翻转中...";
+let result=Math.random()<0.5?"正面":"反面";
 
-  setTimeout(() => {
-
-    let flipResult = Math.random() < 0.5 ? "正面" : "反面";
-
-    // 切换图片
-    if(flipResult === "正面"){
-      coinImg.src = "coin.png.PNG";
-    }else{
-      coinImg.src = "coin.png2.PNG";
-    }
-
-    coinText.innerText = flipResult;
-
-    // 结果判定
-    if(choice === flipResult){
-      user.score += 10;
-      user.streak++;
-      resultBox.innerText = "💰 赢了！+10";
-    }else{
-      user.score -= 5;
-      user.streak = 0;
-      resultBox.innerText = "😌 惜败：" + flipResult;
-    }
-
-    user.times--;
-
-    updateCurrentUser(user);
-    updateUI();
-
-    coin.classList.remove("flip");
-
-  }, 700);
+if(result=="正面"){
+coinImg.src="coin.png.PNG";
+}else{
+coinImg.src="coin.png2.PNG";
 }
 
-/* ===== UI更新 ===== */
-function updateUI(){
-  let user = getCurrentUser();
-  if(!user) return;
+coinText.innerText=result;
 
-  document.getElementById("name").innerText = user.username;
-  document.getElementById("userId").innerText = user.id;
-  document.getElementById("score").innerText = user.score;
-  document.getElementById("streak").innerText = user.streak;
-  document.getElementById("times").innerText = user.times;
+if(choice==result){
+user.score+=10;
+user.streak++;
+result.innerText="赢了";
+}else{
+user.score-=5;
+user.streak=0;
+result.innerText="输了";
+}
+
+user.times--;
+
+saveUsers(users);
+updateUI();
+
+coin.classList.remove("flip");
+
+},700);
+}
+
+function updateUI(){
+let user=getUsers().find(u=>u.username==currentUser);
+
+name.innerText=user.username;
+userId.innerText=user.id;
+score.innerText=user.score;
+streak.innerText=user.streak;
+times.innerText=user.times;
 }
