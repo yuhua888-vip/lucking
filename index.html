@@ -9,67 +9,53 @@
 
 <body>
 
-<!-- 💰 金色粒子 -->
-<div class="gold-bg"></div>
-
 <div class="app">
 
-<!-- ================= 登录页 ================= -->
-<div id="loginBox" class="card">
+<!-- 登录页 -->
+<div id="loginBox">
 
-<div class="logo">💰</div>
-<h1 class="title">硬币狂欢</h1>
-<p class="subtitle">财富从一次选择开始</p>
+<h1>硬币狂欢</h1>
 
-<!-- 🔥 主视觉硬币 -->
-<div class="coin-hero">
-  <div class="coin-inner">
-    <img src="coin.png.PNG" class="coin-face front">
-    <img src="coin.png2.PNG" class="coin-face back">
+<!-- ✅ 正确旋转硬币 -->
+<div class="home-coin-3d">
+  <div class="home-coin-inner">
+    <img src="coin.png.PNG" class="home-coin-face front">
+    <img src="coin.png2.PNG" class="home-coin-face back">
   </div>
 </div>
 
-<div class="tagline">贪婪 · 运气 · 爆发</div>
+<input id="username" placeholder="账号">
+<input id="password" type="password" placeholder="密码">
 
-<input id="username" placeholder="输入账号">
-<input id="password" type="password" placeholder="输入密码">
-
-<button onclick="login()">进入赌局</button>
-<button class="ghost" onclick="register()">创建账号</button>
+<button onclick="login()">登录</button>
+<button onclick="register()">注册</button>
 
 <p id="msg"></p>
 
 </div>
 
-<!-- ================= 游戏页 ================= -->
-<div id="gameBox" class="card hidden">
+<!-- 游戏页 -->
+<div id="gameBox" class="hidden">
 
-<div class="top">
-  <div>
-    玩家：<span id="name"></span><br>
-    ID：<span id="userId"></span>
-  </div>
-  <button onclick="logout()">退出</button>
-</div>
+<div>玩家：<span id="name"></span></div>
+<div>ID：<span id="userId"></span></div>
+
+<button onclick="logout()">退出</button>
 
 <div class="coin" id="coin">
-  <img id="coinImg" src="coin.png.PNG">
+<img id="coinImg" src="coin.png.PNG">
 </div>
 
 <div id="coinText">准备开始</div>
 
-<div class="btns">
-  <button onclick="play('正面')">正面</button>
-  <button onclick="play('反面')">反面</button>
-</div>
+<button onclick="play('正面')">正面</button>
+<button onclick="play('反面')">反面</button>
 
 <div id="result"></div>
 
-<div class="stats">
-  <div>积分<br><b id="score"></b></div>
-  <div>连胜<br><b id="streak"></b></div>
-  <div>次数<br><b id="times"></b></div>
-</div>
+<div>积分：<span id="score"></span></div>
+<div>连胜：<span id="streak"></span></div>
+<div>次数：<span id="times"></span></div>
 
 </div>
 
