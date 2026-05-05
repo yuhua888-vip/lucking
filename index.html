@@ -9,55 +9,54 @@
 
 <body>
 
+<div id="coinExplosion"></div>
+
 <div class="app">
 
-<!-- 登录页 -->
-<div id="loginBox">
+  <div id="loginBox">
 
-<h1>硬币狂欢</h1>
+    <h1>硬币狂欢</h1>
 
-<!-- ✅ 正确旋转硬币 -->
-<div class="home-coin-3d">
-  <div class="home-coin-inner">
-    <img src="coin.png.PNG" class="home-coin-face front">
-    <img src="coin.png2.PNG" class="home-coin-face back">
+    <div class="home-coin-3d">
+      <div class="home-coin-inner">
+        <img src="coin.png.PNG" class="home-coin-face front">
+        <img src="coin.png2.PNG" class="home-coin-face back">
+      </div>
+    </div>
+
+    <input id="username" placeholder="账号">
+    <input id="password" type="password" placeholder="密码">
+
+    <button onclick="login()">进入狂欢</button>
+    <button onclick="register()">创建账号</button>
+
+    <p id="msg"></p>
+
   </div>
-</div>
 
-<input id="username" placeholder="账号">
-<input id="password" type="password" placeholder="密码">
+  <div id="gameBox" class="hidden">
 
-<button onclick="login()">登录</button>
-<button onclick="register()">注册</button>
+    <div>玩家：<span id="name"></span></div>
+    <div>ID：<span id="userId"></span></div>
 
-<p id="msg"></p>
+    <button onclick="logout()">退出</button>
 
-</div>
+    <div class="coin" id="coin">
+      <img id="coinImg" src="coin.png.PNG">
+    </div>
 
-<!-- 游戏页 -->
-<div id="gameBox" class="hidden">
+    <div id="coinText">准备开始</div>
 
-<div>玩家：<span id="name"></span></div>
-<div>ID：<span id="userId"></span></div>
+    <button onclick="play('正面')">正面</button>
+    <button onclick="play('反面')">反面</button>
 
-<button onclick="logout()">退出</button>
+    <div id="result">准备开始</div>
 
-<div class="coin" id="coin">
-<img id="coinImg" src="coin.png.PNG">
-</div>
+    <div>积分：<span id="score"></span></div>
+    <div>连胜：<span id="streak"></span></div>
+    <div>次数：<span id="times"></span></div>
 
-<div id="coinText">准备开始</div>
-
-<button onclick="play('正面')">正面</button>
-<button onclick="play('反面')">反面</button>
-
-<div id="result"></div>
-
-<div>积分：<span id="score"></span></div>
-<div>连胜：<span id="streak"></span></div>
-<div>次数：<span id="times"></span></div>
-
-</div>
+  </div>
 
 </div>
 
