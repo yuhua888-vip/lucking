@@ -128,3 +128,6 @@ function updateHeatBar(){
     hotText.innerText = "⚖️ 当前盘口均衡";
   }
 }
+function updateFakeTotals(){
+  document.getElementById("fakeFrontTotal").innerText = fakeFrontAmount;
+  document.get
