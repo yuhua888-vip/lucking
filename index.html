@@ -1,91 +1,63 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>硬币狂欢</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>硬币狂欢</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="gold-rain"></div>
-<div class="light light1"></div>
-<div class="light light2"></div>
-
 <div class="app">
 
-  <!-- 登录页 -->
-  <div id="loginBox" class="casino-card">
+<!-- 登录页 -->
+<div id="loginBox" class="card">
 
-    <div class="badge">LUCK COIN PARTY</div>
+<h1 class="title">硬币狂欢</h1>
+<p class="sub">Good luck！今晚看你的运气</p>
 
-    <h1 class="title gold-title">硬币狂欢</h1>
-    <p class="sub">Good luck！今晚看你的运气</p>
-
-    <!-- 旋转硬币 -->
-    <div class="home-coin-3d">
-      <div class="home-coin-inner">
-        <img class="home-coin-face front" src="coin.png.PNG">
-        <img class="home-coin-face back" src="coin.png2.PNG">
-      </div>
-    </div>
-
-    <!-- 内容区 -->
-    <div class="promo-box">
-      <div class="promo-title">今晚目标：冲击 5 连胜</div>
-      <div class="promo-desc">猜中加分，惜败扣分，连胜越高，越刺激。</div>
-    </div>
-
-    <div class="feature-grid">
-      <div>🎰 金币翻转</div>
-      <div>🔥 连胜挑战</div>
-      <div>💎 幸运积分</div>
-    </div>
-
-    <input id="username" placeholder="请输入用户名">
-    <input id="password" type="password" placeholder="请输入密码">
-
-    <button onclick="login()">进入狂欢</button>
-    <button class="ghost" onclick="register()">创建账号</button>
-
-    <p id="msg"></p>
-
+<!-- ✅ 修复后的旋转硬币 -->
+<div class="home-coin-3d">
+  <div class="home-coin-inner">
+    <img class="coin-face front" src="coin.png.PNG">
+    <img class="coin-face back" src="coin.png2.PNG">
   </div>
+</div>
 
-  <!-- 游戏页 -->
-  <div id="gameBox" class="casino-card game-hidden">
+<input id="username" placeholder="请输入用户名">
+<input id="password" type="password" placeholder="请输入密码">
 
-    <div class="top">
-      <div class="player-info">
-        <div class="avatar" id="avatarShow">🪙</div>
-        <div>
-          <div class="player-name" id="name"></div>
-          <div class="player-id">ID：<span id="userId"></span></div>
-        </div>
-      </div>
-      <button class="mini-btn" onclick="logout()">退出</button>
-    </div>
+<button onclick="login()">进入狂欢</button>
+<button onclick="register()">创建账号</button>
 
-    <div class="coin" id="coin">
-      <img id="coinImg" src="coin.png.PNG">
-    </div>
+<p id="msg"></p>
 
-    <div class="coin-label" id="coinText">等待开始</div>
+</div>
 
-    <div class="btns">
-      <button onclick="play('正面')">猜正面</button>
-      <button onclick="play('反面')">猜反面</button>
-    </div>
+<!-- 游戏页 -->
+<div id="gameBox" class="card game-hidden">
 
-    <div id="result">准备开始</div>
+<div>玩家：<span id="name"></span></div>
+<div>ID：<span id="userId"></span></div>
 
-    <div class="stats">
-      <div>积分<br><strong id="score">0</strong></div>
-      <div>连胜<br><strong id="streak">0</strong></div>
-      <div>次数<br><strong id="times">0</strong></div>
-    </div>
+<button onclick="logout()">退出</button>
 
-  </div>
+<div class="coin" id="coin">
+<img id="coinImg" src="coin.png.PNG">
+</div>
+
+<div id="coinText">等待开始</div>
+
+<button onclick="play('正面')">猜正面</button>
+<button onclick="play('反面')">猜反面</button>
+
+<div id="result">准备开始</div>
+
+<div>积分：<span id="score"></span></div>
+<div>连胜：<span id="streak"></span></div>
+<div>次数：<span id="times"></span></div>
+
+</div>
 
 </div>
 
