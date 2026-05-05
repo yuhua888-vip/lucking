@@ -1,40 +1,92 @@
-<div id="gameBox" class="hidden">
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>硬币狂欢</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
-  <div id="entertainmentPanel">
-    <div>玩家：<span id="name"></span></div>
-    <div>ID：<span id="userId"></span></div>
+<body>
 
-    <div class="coin" id="coin">
-      <img id="coinImg" src="coin.png.PNG">
+<div id="coinExplosion"></div>
+
+<div class="app">
+
+  <div id="loginBox">
+    <h1>硬币狂欢</h1>
+
+    <div class="home-coin-3d">
+      <div class="home-coin-inner">
+        <img src="coin.png.PNG" class="home-coin-face front">
+        <img src="coin.png2.PNG" class="home-coin-face back">
+      </div>
     </div>
 
-    <div id="coinText">准备开始</div>
+    <input id="username" placeholder="账号：5位字母数字混合">
+    <input id="password" type="password" placeholder="密码：5位字母数字混合">
 
-    <button onclick="play('正面')">正面</button>
-    <button onclick="play('反面')">反面</button>
+    <button onclick="login()">进入狂欢</button>
+    <button onclick="register()">创建账号</button>
 
-    <div id="result">准备开始</div>
-
-    <div class="road-title">正反路子</div>
-    <div id="roadMap" class="road-map"></div>
-
-    <div class="road-title">输赢路子</div>
-    <div id="winRoadMap" class="road-map"></div>
-
-    <div>积分：<span id="score"></span></div>
-    <div>连胜：<span id="streak"></span></div>
-    <div>次数：<span id="times"></span></div>
+    <p id="msg"></p>
   </div>
 
-  <div id="servicePanel" class="hidden">
-    <h2>客服中心</h2>
-    <p>在线客服：24小时为你服务</p>
-    <p>如遇到问题，请联系客服处理。</p>
+  <div id="gameBox" class="hidden">
+
+    <div id="entertainmentPanel">
+      <div>玩家：<span id="name"></span></div>
+      <div>ID：<span id="userId"></span></div>
+
+      <div class="coin" id="coin">
+        <img id="coinImg" src="coin.png.PNG">
+      </div>
+
+      <div id="coinText">准备开始</div>
+
+      <button onclick="play('正面')">正面</button>
+      <button onclick="play('反面')">反面</button>
+
+      <div id="result">准备开始</div>
+
+      <div class="road-title">正反路子</div>
+      <div id="roadMap" class="road-map"></div>
+
+      <div class="road-title">输赢路子</div>
+      <div id="winRoadMap" class="road-map"></div>
+
+      <div>积分：<span id="score"></span></div>
+      <div>连胜：<span id="streak"></span></div>
+      <div>次数：<span id="times"></span></div>
+    </div>
+
+    <div id="servicePanel" class="hidden">
+      <h2>客服中心</h2>
+      <p>在线客服：24小时为你服务</p>
+      <p>如遇到问题，请联系客服处理。</p>
+      <button>联系客服</button>
+    </div>
+
+    <div id="settingsPanel" class="hidden">
+      <h2>设置</h2>
+      <p>账号：<span id="settingName"></span></p>
+      <p>ID：<span id="settingId"></span></p>
+      <p>积分：<span id="settingScore"></span></p>
+      <p>连胜：<span id="settingStreak"></span></p>
+      <p>次数：<span id="settingTimes"></span></p>
+      <button onclick="logout()">退出登录</button>
+    </div>
+
+    <div class="tabbar">
+      <div id="tabEntertainment" class="active" onclick="switchTab('entertainment')">🎰<br>娱乐</div>
+      <div id="tabService" onclick="switchTab('service')">🎧<br>客服</div>
+      <div id="tabSettings" onclick="switchTab('settings')">⚙️<br>设置</div>
+    </div>
+
   </div>
 
-  <div id="settingsPanel" class="hidden">
-    <h2>设置</h2>
-    <p>账号：<span id="settingName"></span></p>
-    <p>ID：<span id="settingId"></span></p>
-    <p>积分：<span id="settingScore"></span></p>
-    <button onclick="logout()">退出登录</
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
