@@ -98,3 +98,33 @@ function settle(resultSide){
 
   setTimeout(startRound,2000);
 }
+function updateHeatBar(){
+  const total = fakeFrontAmount + fakeBackAmount;
+
+  const frontEl = document.getElementById("frontHeat");
+  const backEl = document.getElementById("backHeat");
+  const hotText = document.getElementById("hotText");
+
+  if(!frontEl || !backEl || !hotText) return;
+
+  if(total <= 0){
+    frontEl.style.width = "50%";
+    backEl.style.width = "50%";
+    hotText.innerText = "盘口正在变化...";
+    return;
+  }
+
+  let frontPercent = Math.round((fakeFrontAmount / total) * 100);
+  let backPercent = 100 - frontPercent;
+
+  frontEl.style.width = frontPercent + "%";
+  backEl.style.width = backPercent + "%";
+
+  if(frontPercent > backPercent){
+    hotText.innerText = "🔥 当前热门：正面 " + frontPercent + "%";
+  }else if(backPercent > frontPercent){
+    hotText.innerText = "🔥 当前热门：反面 " + backPercent + "%";
+  }else{
+    hotText.innerText = "⚖️ 当前盘口均衡";
+  }
+}
