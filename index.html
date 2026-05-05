@@ -14,15 +14,12 @@
 
 <div class="app">
 
-  <!-- 登录页 -->
   <div id="loginBox" class="casino-card">
-
     <div class="badge">LUCK COIN PARTY</div>
 
     <h1 class="title">硬币狂欢</h1>
     <p class="sub">Good luck！今晚看你的运气</p>
 
-    <!-- 🔥 旋转硬币（不动） -->
     <div class="home-coin-3d">
       <div class="home-coin-inner">
         <img class="home-coin-face front" src="coin.png.PNG">
@@ -30,7 +27,6 @@
       </div>
     </div>
 
-    <!-- 🎯 新增内容区 -->
     <div class="promo-box">
       <div class="promo-title">今晚目标：冲击 5 连胜</div>
       <div class="promo-desc">猜中加分，惜败扣分，连胜越高，越刺激。</div>
@@ -42,7 +38,6 @@
       <div>💎 幸运积分</div>
     </div>
 
-    <!-- 登录 -->
     <input id="username" placeholder="请输入用户名">
     <input id="password" type="password" placeholder="请输入密码">
 
@@ -50,21 +45,20 @@
     <button class="ghost" onclick="register()">创建账号</button>
 
     <p id="msg"></p>
-
   </div>
 
-  <!-- 游戏页（保持原样） -->
-  <div id="gameBox" class="casino-card" style="display:none">
+  <div id="gameBox" class="casino-card game-hidden">
 
     <div class="top">
-      玩家：<span id="name"></span>
+      <span>玩家：<b id="name"></b></span>
       <button class="mini-btn" onclick="logout()">退出</button>
     </div>
 
     <div class="coin" id="coin">
       <img id="coinImg" src="coin.png.PNG">
-      <span id="coinText">...</span>
     </div>
+
+    <div class="coin-label" id="coinText">等待开始</div>
 
     <div class="btns">
       <button onclick="play('正面')">猜正面</button>
