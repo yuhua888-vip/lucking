@@ -15,7 +15,6 @@ body {
     linear-gradient(135deg, #050008, #160018 45%, #2b0505);
 }
 
-/* 背景金光 */
 body::before {
   content: "";
   position: fixed;
@@ -39,7 +38,6 @@ body::before {
   }
 }
 
-/* 金色星光雨 */
 body::after {
   content: "✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧";
   position: fixed;
@@ -70,7 +68,6 @@ body::after {
   padding: 26px 16px;
 }
 
-/* 登录页 / 游戏页统一豪华卡片 */
 #loginBox,
 #gameBox {
   position: relative;
@@ -106,7 +103,6 @@ body::after {
   display: none;
 }
 
-/* 标题 */
 h1 {
   margin: 8px 0 8px;
   font-size: 46px;
@@ -129,7 +125,6 @@ h1 {
   }
 }
 
-/* 主页双面旋转硬币：保持稳定结构 */
 .home-coin-3d {
   width: 170px;
   height: 170px;
@@ -172,7 +167,6 @@ h1 {
   }
 }
 
-/* 输入框 */
 input {
   width: 100%;
   padding: 15px;
@@ -192,7 +186,6 @@ input::placeholder {
   color: #d6d3d1;
 }
 
-/* 按钮 */
 button {
   width: 100%;
   padding: 14px;
@@ -239,7 +232,6 @@ button::after {
   }
 }
 
-/* 游戏页 */
 #gameBox > div {
   margin-bottom: 10px;
 }
@@ -250,7 +242,6 @@ button::after {
   font-weight: bold;
 }
 
-/* 退出按钮别太大 */
 #gameBox > button:first-of-type {
   width: auto;
   padding: 8px 16px;
@@ -259,7 +250,6 @@ button::after {
   margin-bottom: 12px;
 }
 
-/* 游戏硬币 */
 .coin {
   width: 165px;
   height: 165px;
@@ -302,7 +292,6 @@ button::after {
   font-weight: bold;
 }
 
-/* 正反按钮排版 */
 #gameBox button[onclick="play('正面')"],
 #gameBox button[onclick="play('反面')"] {
   width: calc(50% - 6px);
@@ -310,7 +299,6 @@ button::after {
   margin: 8px 3px;
 }
 
-/* 结果框 */
 #result {
   margin: 18px 0;
   padding: 14px;
@@ -325,11 +313,63 @@ button::after {
   justify-content: center;
 }
 
-/* 数据文字 */
 #score,
 #streak,
 #times {
   color: #facc15;
   font-size: 22px;
   font-weight: 900;
+}
+
+/* 爆金币容器 */
+#coinExplosion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 999;
+}
+
+/* 单个金币粒子 */
+.coin-particle {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle, #fff7ad, #facc15, #f97316);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(250,204,21,0.9);
+  animation: explode 0.85s ease-out forwards;
+}
+
+@keyframes explode {
+  0% {
+    transform: translate(0,0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(0.2);
+    opacity: 0;
+  }
+}
+
+/* 金光闪屏 */
+.flash {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,215,0,0.32);
+  animation: flashAnim 0.4s forwards;
+  z-index: 998;
+  pointer-events: none;
+}
+
+@keyframes flashAnim {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
