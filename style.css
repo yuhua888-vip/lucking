@@ -6,11 +6,12 @@ body {
   font-family: Arial, "Microsoft YaHei", sans-serif;
   color: #fff;
   background:
-    radial-gradient(circle at top, rgba(99,102,241,0.35), transparent 34%),
-    linear-gradient(135deg, #020617, #0f172a 45%, #1e1b4b);
+    radial-gradient(circle at top, rgba(139,92,246,0.35), transparent 40%),
+    linear-gradient(135deg, #020617, #0f172a 50%, #1e1b4b);
   overflow-x: hidden;
 }
 
+/* ===== 背景光 ===== */
 .bg-light {
   position: fixed;
   border-radius: 50%;
@@ -22,13 +23,14 @@ body {
 
 .bg1 { width:240px;height:240px;background:#7c3aed;top:-60px;left:-80px; }
 .bg2 { width:220px;height:220px;background:#2563eb;right:-90px;top:220px; }
-.bg3 { width:160px;height:160px;background:#b87333;bottom:40px;left:32%; }
+.bg3 { width:160px;height:160px;background:#facc15;bottom:40px;left:32%; }
 
 @keyframes floatBg {
   from { transform: translateY(0) scale(1); }
   to { transform: translateY(30px) scale(1.1); }
 }
 
+/* ===== 主体 ===== */
 .app {
   max-width: 430px;
   margin: auto;
@@ -36,7 +38,7 @@ body {
   text-align: center;
 }
 
-/* 登录页 */
+/* ===== 标题 ===== */
 .brand {
   padding: 6px 14px;
   border-radius: 999px;
@@ -48,106 +50,172 @@ body {
 .main-title {
   font-size: 38px;
   margin: 10px 0 0;
+  letter-spacing: 2px;
 }
 
 .subtitle {
-  color: #aaa;
+  color: #cbd5e1;
+  margin-bottom: 10px;
 }
 
-/* 铜钱 */
-.coin-core {
-  width: 120px;
-  height: 120px;
-  margin: 20px auto;
-  border-radius: 50%;
-  position: relative;
-  background: radial-gradient(circle, #d9a35f, #6f421f);
-  box-shadow: 0 0 40px rgba(184,115,51,0.8);
-  animation: spin 6s linear infinite;
-}
-
-.coin-core::after {
-  content: "";
-  width: 30px;
-  height: 30px;
-  background: #020617;
-  position: absolute;
-  top:50%;left:50%;
-  transform: translate(-50%,-50%);
-}
-
-.coin-char {
-  position:absolute;
-  font-family: KaiTi;
-  font-weight:bold;
-}
-
-.coin-char.top { top:10px; left:50%; transform:translateX(-50%); }
-.coin-char.bottom { bottom:10px; left:50%; transform:translateX(-50%); }
-.coin-char.left { left:10px; top:50%; transform:translateY(-50%); }
-.coin-char.right { right:10px; top:50%; transform:translateY(-50%); }
-
-@keyframes spin {
-  0% { transform: rotateY(0); }
-  100% { transform: rotateY(360deg); }
-}
-
-/* 卡片 */
-.login-card,.game-card {
+/* ===== 登录卡片 ===== */
+.login-card {
   background: rgba(255,255,255,0.08);
-  padding:20px;
-  border-radius:20px;
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 10px;
 }
 
 input {
-  width:100%;
-  padding:12px;
-  margin:6px 0;
-  border-radius:10px;
-  border:none;
+  width: 100%;
+  padding: 12px;
+  margin: 6px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
 }
 
-.primary-btn,.secondary-btn {
-  width:100%;
-  padding:12px;
-  margin-top:8px;
-  border-radius:10px;
-  border:none;
+/* 按钮 */
+.primary-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg,#3b82f6,#7c3aed);
+  color: #fff;
+  margin-top: 10px;
 }
 
-.primary-btn { background:#3b82f6; }
-.secondary-btn { background:transparent; border:1px solid #fff; color:#fff; }
+.secondary-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  margin-top: 10px;
+}
 
-/* 游戏 */
+/* ===== 游戏卡片 ===== */
+.game-card {
+  background: rgba(255,255,255,0.08);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+/* ===== 🎯 游戏金币（核心升级） ===== */
 .coin {
-  width:120px;
-  height:120px;
-  margin:20px auto;
-  border-radius:50%;
-  background: radial-gradient(circle,#d9a35f,#6f421f);
+  width: 140px;
+  height: 140px;
+  margin: 20px auto;
+  border-radius: 50%;
+  position: relative;
+
+  background: radial-gradient(circle, #facc15, #b45309 60%, #78350f);
+
+  box-shadow:
+    0 0 20px #facc15,
+    0 0 60px rgba(250,204,21,0.8),
+    0 0 120px rgba(250,204,21,0.4);
+
+  animation: coinFloat 2s ease-in-out infinite;
 }
 
+/* 内层纹理 */
+.coin-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(circle, transparent 60%, rgba(255,255,255,0.2)),
+    repeating-radial-gradient(circle,
+      rgba(255,255,255,0.1) 0px,
+      rgba(255,255,255,0.1) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+}
+
+/* 中心符号 */
+#coinText {
+  font-size: 52px;
+  font-weight: bold;
+  color: #fff;
+
+  text-shadow:
+    0 0 10px #fff,
+    0 0 20px #facc15,
+    0 0 40px #facc15;
+}
+
+/* 漂浮动画 */
+@keyframes coinFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+/* ===== 按钮 ===== */
 .choice-row {
-  display:flex;
-  gap:10px;
+  display: flex;
+  gap: 10px;
 }
 
-.blue-btn,.purple-btn {
-  flex:1;
-  padding:12px;
-  border:none;
-  border-radius:10px;
+.blue-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg,#3b82f6,#2563eb);
+  color: #fff;
 }
 
-.blue-btn { background:#3b82f6; }
-.purple-btn { background:#7c3aed; }
+.purple-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg,#7c3aed,#9333ea);
+  color: #fff;
+}
 
+/* ===== 结果 ===== */
 .result {
-  margin-top:10px;
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
+.result.win {
+  background: rgba(34,197,94,0.2);
+}
+
+.result.lose {
+  background: rgba(239,68,68,0.2);
+}
+
+/* ===== 数据 ===== */
 .stats {
-  display:flex;
-  justify-content:space-between;
-  margin-top:10px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+.stats div {
+  flex: 1;
+}
+
+.stats strong {
+  font-size: 22px;
+}
+
+/* ===== 规则 ===== */
+.rule-text {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #94a3b8;
 }
