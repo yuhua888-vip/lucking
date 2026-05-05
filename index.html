@@ -8,33 +8,43 @@
 </head>
 <body>
 
+<div class="bg-orb orb-one"></div>
+<div class="bg-orb orb-two"></div>
+<div class="bg-orb orb-three"></div>
+
 <div class="app">
 
-  <!-- ===== 登录页（升级版） ===== -->
   <div id="loginBox" class="login-page">
+    <div class="brand-badge">LUCK COIN</div>
 
     <h1 class="title">数字概率硬币</h1>
-    <p class="subtitle">好运从第一枚硬币开始</p>
+    <p class="subtitle">开启你的幸运挑战</p>
 
-    <div class="coin-small">💰</div>
+    <div class="coin-stage">
+      <div class="ring"></div>
+      <div class="coin-small">￥</div>
+    </div>
 
     <div class="login-card">
+      <div class="card-title">进入游戏</div>
+      <div class="card-subtitle">注册或登录后开始挑战连胜</div>
+
       <input id="username" placeholder="输入用户名">
       <input id="password" type="password" placeholder="输入密码">
 
-      <button class="main-btn" onclick="login()">立即开始</button>
-      <button class="ghost-btn" onclick="register()">注册账号</button>
+      <button class="main-btn" onclick="login()">进入幸运挑战</button>
+      <button class="ghost-btn" onclick="register()">创建新账号</button>
 
       <p id="msg"></p>
     </div>
 
-    <div class="login-tip">
-      娱乐积分 · 连胜挑战 · 概率模拟
+    <div class="feature-row">
+      <span>🎯 概率模拟</span>
+      <span>🔥 连胜奖励</span>
+      <span>💎 娱乐积分</span>
     </div>
-
   </div>
 
-  <!-- ===== 游戏页 ===== -->
   <div id="gameBox" class="card game-card" style="display:none;">
 
     <div class="user-row">
