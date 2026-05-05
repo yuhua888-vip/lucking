@@ -1,137 +1,61 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: Arial;
-  background:
-    radial-gradient(circle at top, rgba(255,215,0,0.3), transparent 30%),
-    radial-gradient(circle at bottom, rgba(255,0,0,0.15), transparent 40%),
-    linear-gradient(135deg,#05010a,#1a051f 40%,#2b060d);
-  color: #fff;
+  margin:0;
+  font-family:Arial;
+  background:#0a0a0a;
+  color:#fff;
+  text-align:center;
 }
 
-/* 金币雨 */
-.gold-rain::before {
-  content: "✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧";
-  position: fixed;
-  width: 100%;
-  text-align: center;
-  font-size: 24px;
-  color: rgba(255,215,0,0.35);
-  animation: rain 6s linear infinite;
+.card {
+  padding:20px;
 }
 
-@keyframes rain {
-  from { transform: translateY(-50px); }
-  to { transform: translateY(110vh); }
+.game-hidden {
+  display:none;
 }
 
-/* 光 */
-.light {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(80px);
+/* ===== 主页硬币（修复核心） ===== */
+.home-coin-3d {
+  width:150px;
+  height:150px;
+  margin:20px auto;
+  perspective:1000px;
 }
 
-.light1 {
-  width: 260px;
-  height: 260px;
-  background: gold;
-  top: -80px;
-  left: -80px;
-}
-
-.light2 {
-  width: 300px;
-  height: 300px;
-  background: purple;
-  right: -100px;
-  top: 200px;
-}
-
-.app {
-  max-width: 420px;
-  margin: auto;
-  padding: 20px;
-}
-
-/* 卡片 */
-.casino-card {
-  padding: 20px;
-  border-radius: 24px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,215,0,0.4);
-  box-shadow: 0 0 40px rgba(255,215,0,0.3);
-  text-align: center;
-}
-
-/* 标题 */
-.gold-title {
-  font-size: 42px;
-  background: linear-gradient(#fff,#ffd700,#ffae00,#fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 3s infinite linear;
-}
-
-@keyframes shine {
-  0% { background-position: 0% }
-  100% { background-position: 200% }
-}
-
-/* 旋转硬币 */
 .home-coin-inner {
-  animation: spin 3s linear infinite;
+  width:100%;
+  height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  animation:spin 3s linear infinite;
+}
+
+.coin-face {
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  border-radius:50%;
+  backface-visibility:hidden;
+}
+
+.coin-face.back {
+  transform:rotateY(180deg);
 }
 
 @keyframes spin {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
+  0% { transform:rotateY(0deg); }
+  100% { transform:rotateY(360deg); }
 }
 
-.home-coin-face {
-  position: absolute;
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  backface-visibility: hidden;
-}
-
-.home-coin-face.back {
-  transform: rotateY(180deg);
-}
-
-/* 输入 */
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0;
+/* 游戏硬币 */
+.coin img {
+  width:150px;
 }
 
 /* 按钮 */
 button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  background: linear-gradient(#facc15,#9333ea);
-  color: #fff;
-  border: none;
-}
-
-/* 游戏 */
-.coin img {
-  width: 100%;
-}
-
-.btns {
-  display: flex;
-  gap: 10px;
-}
-
-.stats {
-  display: flex;
-  justify-content: space-around;
+  margin:5px;
+  padding:10px;
 }
