@@ -366,3 +366,16 @@ button {
   from { opacity: 1; }
   to { opacity: 0; }
 }
+/* 给底部导航留空间，防止挡住输赢路子 */
+.app {
+  padding-bottom: 170px !important;
+}
+
+#gameBox {
+  margin-bottom: 120px !important;
+}
+
+/* 底部Tab稍微下移一点 */
+.tabbar {
+  bottom: 8px !important;
+}
