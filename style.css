@@ -1,169 +1,95 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
-  min-height: 100vh;
-  font-family: Arial, "Microsoft YaHei", sans-serif;
+  font-family: Arial;
+  background: linear-gradient(135deg,#07010f,#1a051f,#2a0615);
   color: #fff;
   overflow-x: hidden;
-  background:
-    radial-gradient(circle at top, rgba(255, 215, 0, 0.26), transparent 30%),
-    linear-gradient(135deg, #07010f, #16051f 45%, #2a0615);
 }
 
-/* 动态金币雨背景 */
+/* 动态金币雨 */
 .gold-rain::before {
-  content: "✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧";
+  content: "✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧";
   position: fixed;
   top: -40px;
-  left: 0;
   width: 100%;
-  color: rgba(250, 204, 21, 0.45);
-  font-size: 28px;
-  letter-spacing: 18px;
+  text-align: center;
+  font-size: 24px;
+  color: rgba(255,215,0,0.4);
   animation: rain 6s linear infinite;
-  z-index: -1;
 }
 
 @keyframes rain {
-  from { transform: translateY(-80px); }
+  from { transform: translateY(-50px); }
   to { transform: translateY(110vh); }
 }
 
-/* 背景灯光 */
+/* 背景光 */
 .light {
   position: fixed;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.55;
-  z-index: -2;
-  animation: floatLight 5s infinite alternate ease-in-out;
+  opacity: 0.5;
+  z-index: -1;
 }
 
 .light1 {
   width: 260px;
   height: 260px;
-  background: #facc15;
+  background: gold;
   top: -80px;
-  left: -70px;
+  left: -80px;
 }
 
 .light2 {
   width: 300px;
   height: 300px;
-  background: #9333ea;
+  background: purple;
   right: -100px;
-  top: 230px;
-  animation-delay: 1s;
-}
-
-.light3 {
-  width: 220px;
-  height: 220px;
-  background: #ef4444;
-  left: 25%;
-  bottom: -80px;
-  animation-delay: 2s;
-}
-
-@keyframes floatLight {
-  from { transform: translateY(0) scale(1); }
-  to { transform: translateY(40px) scale(1.15); }
+  top: 200px;
 }
 
 .app {
-  max-width: 430px;
+  max-width: 420px;
   margin: auto;
-  padding: 24px 16px;
+  padding: 20px;
 }
 
-/* 奢华卡片 */
+/* 卡片 */
 .casino-card {
-  position: relative;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.08);
   text-align: center;
-  padding: 24px;
-  border-radius: 28px;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,0.13), rgba(255,255,255,0.04));
-  border: 1px solid rgba(250,204,21,0.35);
-  box-shadow:
-    0 0 35px rgba(250,204,21,0.18),
-    inset 0 0 25px rgba(255,255,255,0.05);
-  backdrop-filter: blur(18px);
-  animation: cardFloat 3.5s infinite ease-in-out;
 }
 
-@keyframes cardFloat {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-.badge {
-  display: inline-block;
-  padding: 7px 14px;
-  border-radius: 999px;
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: #fde68a;
-  background: rgba(250,204,21,0.12);
-  border: 1px solid rgba(250,204,21,0.35);
-}
-
+/* 标题 */
 .title {
-  font-size: 42px;
-  margin: 14px 0 4px;
-  background: linear-gradient(180deg, #fff7ad, #facc15, #b45309);
+  font-size: 36px;
+  background: linear-gradient(#fff,#ffd700);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 30px rgba(250,204,21,0.6);
-  animation: titleGlow 2s infinite alternate;
 }
 
-@keyframes titleGlow {
-  from { filter: drop-shadow(0 0 8px rgba(250,204,21,0.4)); }
-  to { filter: drop-shadow(0 0 22px rgba(250,204,21,0.9)); }
-}
-
-.sub {
-  color: #fef3c7;
-  margin: 8px 0 12px;
-}
-
-.slogan {
-  margin: 8px 0 18px;
-  color: #fde68a;
-  font-size: 14px;
-}
-
-/* 主页双面旋转硬币：保留并加强光效 */
+/* 旋转硬币 */
 .home-coin-3d {
-  width: 160px;
-  height: 160px;
-  margin: 24px auto;
+  width: 140px;
+  height: 140px;
+  margin: 20px auto;
   perspective: 1000px;
-  filter:
-    drop-shadow(0 0 25px rgba(250,204,21,0.95))
-    drop-shadow(0 0 70px rgba(250,204,21,0.55));
 }
 
 .home-coin-inner {
   width: 100%;
   height: 100%;
-  position: relative;
   transform-style: preserve-3d;
-  animation: homeCoinSpin 3s linear infinite;
+  animation: spin 3s linear infinite;
 }
 
 .home-coin-face {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
   position: absolute;
-  left: 0;
-  top: 0;
+  border-radius: 50%;
   backface-visibility: hidden;
 }
 
@@ -171,155 +97,53 @@ body {
   transform: rotateY(180deg);
 }
 
-@keyframes homeCoinSpin {
-  0% { transform: rotateY(0deg); }
-  100% { transform: rotateY(360deg); }
+@keyframes spin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
 }
 
-/* 输入框 */
+/* 新增内容 */
+.promo-box {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255,215,0,0.1);
+}
+
+.feature-grid {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+/* 输入 */
 input {
   width: 100%;
-  padding: 14px;
-  margin: 9px 0;
-  border-radius: 16px;
-  border: 1px solid rgba(250,204,21,0.3);
-  background: rgba(15, 23, 42, 0.72);
-  color: #fff;
-  outline: none;
-  font-size: 15px;
-}
-
-input::placeholder {
-  color: #d1d5db;
+  padding: 10px;
+  margin: 5px 0;
 }
 
 /* 按钮 */
 button {
   width: 100%;
-  padding: 14px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #facc15, #f97316, #9333ea);
+  padding: 10px;
+  margin-top: 5px;
+  background: linear-gradient(#facc15,#9333ea);
   color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 25px rgba(250,204,21,0.25);
+  border: none;
 }
 
-button::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 80%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
-  animation: shine 2.6s infinite;
-}
-
-@keyframes shine {
-  0% { left: -120%; }
-  55% { left: 140%; }
-  100% { left: 140%; }
-}
-
-button:active {
-  transform: scale(0.97);
-}
-
-.ghost {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(250,204,21,0.45);
-}
-
-/* 游戏页 */
-.top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.mini-btn {
-  width: auto;
-  padding: 7px 14px;
-  font-size: 13px;
-  border-radius: 999px;
-}
-
-.coin {
-  width: 150px;
-  height: 150px;
-  margin: 24px auto;
-  position: relative;
-  filter:
-    drop-shadow(0 0 25px rgba(250,204,21,0.95))
-    drop-shadow(0 0 60px rgba(250,204,21,0.45));
-}
-
+/* 游戏 */
 .coin img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  display: block;
-}
-
-.coin.flip {
-  animation: spin 0.75s ease-in-out;
-}
-
-@keyframes spin {
-  0% { transform: rotateY(0deg) scale(1); }
-  50% { transform: rotateY(720deg) scale(1.12); }
-  100% { transform: rotateY(1440deg) scale(1); }
-}
-
-.coin span {
-  display: block;
-  text-align: center;
-  margin-top: 6px;
-  font-size: 16px;
-  color: #fde68a;
 }
 
 .btns {
   display: flex;
-  gap: 12px;
-}
-
-.btns button {
-  flex: 1;
-}
-
-#result {
-  margin: 18px 0;
-  padding: 14px;
-  border-radius: 18px;
-  text-align: center;
-  background: rgba(0,0,0,0.28);
-  border: 1px solid rgba(250,204,21,0.22);
-  color: #fde68a;
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 
-.stats div {
-  padding: 12px 6px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(250,204,21,0.18);
-  text-align: center;
-}
-
-.stats strong {
-  font-size: 24px;
-  color: #facc15;
+.stats {
+  display: flex;
+  justify-content: space-around;
 }
