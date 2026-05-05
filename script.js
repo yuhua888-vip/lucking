@@ -9,8 +9,14 @@ let userBet = { front: 0, back: 0 };
 let fakeFrontTotal = 0;
 let fakeBackTotal = 0;
 let fakeTimer = null;
-
-const fakeNames = ["龙哥", "阿豪", "金手", "财神", "小王", "豹子", "辉少", "阿强"];
+const fakeNames = [
+  "龙哥","阿豪","金手","财神","小王","豹子","辉少","阿强",
+  "老K","黑桃A","金链哥","赌神","小六","阿飞","东哥","凯哥",
+  "小虎","夜王","大飞","火哥","阿超","老七","林少","虎哥",
+  "三爷","亮哥","飞哥","九哥","赵总","陈哥","阿彪","阿俊",
+  "周总","江哥","小龙","黑龙","财神爷","阿勇","胖虎","鬼手",
+  "豹子王","冷锋","猎人","阿文","阿杰","金老板","夜行者"
+];
 
 function getUsers(){
   return JSON.parse(localStorage.getItem("users") || "[]");
@@ -161,7 +167,50 @@ function switchTab(tab){
   updateUI();
 }
 
-function startRound(){
+function startFakePlayers(){
+  clearInterval(fakeTimer);
+
+  fakeFrontTotal = 0;
+  fakeBackTotal = 0;
+
+  updateFakeTotals();
+
+  fakeFeed.innerText = "模拟玩家正在入场...";
+
+  fakeTimer = setInterval(() => {
+    if(!betting) return;
+
+    let side;
+
+    // 热门盘口倾向：哪边多，偶尔继续追哪边
+    if(fakeFrontTotal > fakeBackTotal && Math.random() < 0.58){
+      side = "正面";
+    }else if(fakeBackTotal > fakeFrontTotal && Math.random() < 0.58){
+      side = "反面";
+    }else{
+      side = Math.random() < 0.5 ? "正面" : "反面";
+    }
+
+    let amountList = [10,20,30,50,80,100,150,200,300,500,800];
+    let amount = amountList[Math.floor(Math.random() * amountList.length)];
+    let fakeName = fakeNames[Math.floor(Math.random() * fakeNames.length)];
+
+    if(side === "正面"){
+      fakeFrontTotal += amount;
+    }else{
+      fakeBackTotal += amount;
+    }
+
+    updateFakeTotals();
+
+    let hotSide = fakeFrontTotal >= fakeBackTotal ? "正面" : "反面";
+    let hotAmount = Math.max(fakeFrontTotal, fakeBackTotal);
+
+    fakeFeed.innerText =
+      fakeName + "：" + side + " " + amount + " 💰｜热门：" + hotSide + " " + hotAmount;
+
+  }, Math.random() * 700 + 400);
+}
   clearInterval(roundTimer);
   stopFakePlayers();
 
