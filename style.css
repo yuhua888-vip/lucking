@@ -379,3 +379,24 @@ button {
 .tabbar {
   bottom: 8px !important;
 }
+/* ===== 彻底修复底部Tab遮挡问题 ===== */
+.tabbar {
+  position: static !important;
+  transform: none !important;
+  width: 100% !important;
+  height: 68px !important;
+  margin-top: 22px !important;
+  margin-bottom: 20px !important;
+}
+
+.app {
+  padding-bottom: 30px !important;
+}
+
+#gameBox {
+  margin-bottom: 0 !important;
+}
+
+.road-map {
+  margin-bottom: 18px !important;
+}
