@@ -1,5 +1,10 @@
 let currentUser = null;
 
+// ===== 音效系统 =====
+const clickSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3");
+const winSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3");
+const loseSound = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-losing-bleeps-2026.mp3");
+
 function getUsers(){
   return JSON.parse(localStorage.getItem("users") || "[]");
 }
@@ -71,9 +76,14 @@ function logout(){
 }
 
 function play(choice){
+
+  clickSound.currentTime = 0;
+  clickSound.play().catch(()=>{});
+
   if (navigator.vibrate) {
     navigator.vibrate(50);
   }
+
   let users = getUsers();
   let user = users.find(u => u.username === currentUser);
 
@@ -83,7 +93,7 @@ function play(choice){
 
   if(user.times <= 0){
     resultBox.className = "result lose";
-    resultBox.innerText = "今日挑战次数用完了，明天再战！";
+    resultBox.innerText = "次数用尽，请联系上级！";
     coinText.innerText = "?";
     return;
   }
@@ -91,6 +101,7 @@ function play(choice){
   resultBox.className = "result";
   resultBox.innerText = "硬币正在翻转...";
   coinText.innerText = "？";
+
   coin.classList.remove("flip");
   void coin.offsetWidth;
   coin.classList.add("flip");
@@ -103,6 +114,10 @@ function play(choice){
     coinText.innerText = result;
 
     if(choice === result){
+
+      winSound.currentTime = 0;
+      winSound.play().catch(()=>{});
+
       user.streak++;
       user.score += 10;
 
@@ -137,11 +152,15 @@ function play(choice){
       }
 
     }else{
+
+      loseSound.currentTime = 0;
+      loseSound.play().catch(()=>{});
+
       user.score -= 5;
       user.streak = 0;
 
       resultBox.className = "result lose";
-      resultBox.innerText = `😅 可惜！结果是${result}，再来一次！-5积分`;
+      resultBox.innerText = `😌 惜败！结果是${result}`;
     }
 
     saveUsers(users);
