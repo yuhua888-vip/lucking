@@ -8,74 +8,59 @@
 </head>
 <body>
 
-<div class="bg-orb orb-one"></div>
-<div class="bg-orb orb-two"></div>
-<div class="bg-orb orb-three"></div>
-
 <div class="app">
 
+  <!-- 登录页 -->
   <div id="loginBox" class="login-page">
-    <div class="brand-badge">LUCK COIN</div>
 
-    <h1 class="title">数字概率硬币</h1>
-    <p class="subtitle">开启你的幸运挑战</p>
+    <div class="logo">LUCK COIN</div>
 
-    <div class="coin-stage">
-      <div class="ring"></div>
+    <h1>数字概率硬币</h1>
+    <p class="subtitle">你能连胜几次？</p>
+
+    <div class="coin-wrap">
       <div class="coin-small">￥</div>
     </div>
 
     <div class="login-card">
-      <div class="card-title">进入游戏</div>
-      <div class="card-subtitle">注册或登录后开始挑战连胜</div>
+      <input id="username" placeholder="用户名">
+      <input id="password" type="password" placeholder="密码">
 
-      <input id="username" placeholder="输入用户名">
-      <input id="password" type="password" placeholder="输入密码">
-
-      <button class="main-btn" onclick="login()">进入幸运挑战</button>
-      <button class="ghost-btn" onclick="register()">创建新账号</button>
+      <button class="main-btn" onclick="login()">进入挑战</button>
+      <button class="ghost-btn" onclick="register()">注册账号</button>
 
       <p id="msg"></p>
     </div>
 
-    <div class="feature-row">
-      <span>🎯 概率模拟</span>
-      <span>🔥 连胜奖励</span>
-      <span>💎 娱乐积分</span>
+    <div class="tip">
+      🎯 概率模拟 · 🔥 连胜挑战 · 💎 娱乐积分
     </div>
+
   </div>
 
-  <div id="gameBox" class="card game-card" style="display:none;">
+  <!-- 游戏页 -->
+  <div id="gameBox" class="card" style="display:none;">
 
-    <div class="user-row">
+    <div class="top">
       <span>玩家：<b id="name"></b></span>
-      <button class="small-btn" onclick="logout()">退出</button>
+      <button onclick="logout()">退出</button>
     </div>
 
     <div class="coin" id="coin">
       <span id="coinText">?</span>
     </div>
 
-    <div class="choice-row">
-      <button class="blue-btn" onclick="play('正面')">猜正面</button>
-      <button class="purple-btn" onclick="play('反面')">猜反面</button>
+    <div class="btns">
+      <button class="blue" onclick="play('正面')">正面</button>
+      <button class="purple" onclick="play('反面')">反面</button>
     </div>
 
-    <div id="result" class="result">等待开始</div>
+    <div id="result" class="result">准备开始</div>
 
     <div class="stats">
-      <div>
-        <p>积分</p>
-        <strong id="score">0</strong>
-      </div>
-      <div>
-        <p>连胜</p>
-        <strong id="streak">0</strong>
-      </div>
-      <div>
-        <p>次数</p>
-        <strong id="times">10</strong>
-      </div>
+      <div><p>积分</p><strong id="score">0</strong></div>
+      <div><p>连胜</p><strong id="streak">0</strong></div>
+      <div><p>次数</p><strong id="times">10</strong></div>
     </div>
 
   </div>
