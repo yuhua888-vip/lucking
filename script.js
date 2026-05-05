@@ -135,3 +135,6 @@ function explodeCoins(){
     box.appendChild(c);
   }
 }
+c);
+  }
+}
