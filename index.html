@@ -2,39 +2,63 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>数字概率硬币</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
+<div class="app">
 
-  <h1>数字概率硬币</h1>
+  <div class="hero">
+    <h1>数字概率硬币</h1>
+    <p>概率模拟 · 娱乐积分 · 连胜挑战</p>
+  </div>
 
-  <!-- 登录注册 -->
-  <div id="loginBox">
+  <div class="card" id="loginBox">
     <h2>注册 / 登录</h2>
-    <input id="username" placeholder="用户名">
-    <input id="password" type="password" placeholder="密码">
-    <button onclick="register()">注册</button>
-    <button onclick="login()">登录</button>
+    <input id="username" placeholder="请输入用户名">
+    <input id="password" type="password" placeholder="请输入密码">
+    <button class="main-btn" onclick="register()">注册账号</button>
+    <button class="second-btn" onclick="login()">立即登录</button>
     <p id="msg"></p>
   </div>
 
-  <!-- 游戏区 -->
-  <div id="gameBox" style="display:none;">
-    <h2>欢迎：<span id="name"></span></h2>
+  <div class="card game-card" id="gameBox" style="display:none;">
+    <div class="user-row">
+      <span>玩家：<b id="name"></b></span>
+      <button class="small-btn" onclick="logout()">退出</button>
+    </div>
 
-    <p>积分：<span id="score">0</span></p>
-    <p>连胜：<span id="streak">0</span></p>
-    <p>剩余次数：<span id="times">10</span></p>
+    <div class="coin" id="coin">
+      <span id="coinText">?</span>
+    </div>
 
-    <button onclick="play('正面')">猜正面</button>
-    <button onclick="play('反面')">猜反面</button>
+    <div class="choice-row">
+      <button class="blue-btn" onclick="play('正面')">猜正面</button>
+      <button class="purple-btn" onclick="play('反面')">猜反面</button>
+    </div>
 
-    <h3 id="result">等待开始</h3>
+    <div id="result" class="result">等待开始</div>
 
-    <button onclick="logout()">退出登录</button>
+    <div class="stats">
+      <div>
+        <p>积分</p>
+        <strong id="score">0</strong>
+      </div>
+      <div>
+        <p>连胜</p>
+        <strong id="streak">0</strong>
+      </div>
+      <div>
+        <p>次数</p>
+        <strong id="times">10</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="rules">
+    <p>本网站仅为概率模拟娱乐，积分不涉及真实金钱、充值或提现。</p>
   </div>
 
 </div>
