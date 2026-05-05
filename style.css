@@ -1,74 +1,24 @@
 body{
 margin:0;
 font-family:Arial;
-background:#050008;
+background:#111;
 color:#fff;
 text-align:center;
-overflow:hidden;
 }
 
-/* 💰 金色粒子背景 */
-.gold-bg{
-position:fixed;
-width:100%;
-height:100%;
-background:
-radial-gradient(circle at 30% 30%,rgba(255,215,0,0.3),transparent),
-radial-gradient(circle at 70% 70%,rgba(255,100,0,0.2),transparent);
-animation:moveBg 6s infinite alternate;
+.hidden{
+display:none;
 }
 
-@keyframes moveBg{
-from{transform:scale(1);}
-to{transform:scale(1.2);}
-}
-
-.app{
-padding:20px;
-max-width:420px;
-margin:auto;
-}
-
-/* 卡片 */
-.card{
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,215,0,0.3);
-padding:20px;
-border-radius:20px;
-box-shadow:0 0 40px rgba(255,215,0,0.3);
-}
-
-/* 标题 */
-.title{
-font-size:40px;
-background:linear-gradient(#fff,#ffd700,#ff9900);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:shine 3s infinite linear;
-}
-
-@keyframes shine{
-from{background-position:0%;}
-to{background-position:200%;}
-}
-
-.subtitle{
-color:#ffd700;
-}
-
-.logo{
-font-size:30px;
-}
-
-/* 主硬币 */
-.coin-hero{
-width:150px;
-height:150px;
-margin:20px auto;
+/* ===== 核心：稳定旋转硬币 ===== */
+.home-coin-3d{
+width:160px;
+height:160px;
+margin:30px auto;
 perspective:1000px;
 }
 
-.coin-inner{
+.home-coin-inner{
 width:100%;
 height:100%;
 position:relative;
@@ -76,71 +26,34 @@ transform-style:preserve-3d;
 animation:spin 3s linear infinite;
 }
 
-.coin-face{
+.home-coin-face{
 position:absolute;
+top:0;
+left:0;
 width:100%;
 height:100%;
 border-radius:50%;
 backface-visibility:hidden;
+-webkit-backface-visibility:hidden;
+object-fit:cover;
 }
 
-.coin-face.back{
+.home-coin-face.back{
 transform:rotateY(180deg);
 }
 
 @keyframes spin{
-from{transform:rotateY(0);}
+from{transform:rotateY(0deg);}
 to{transform:rotateY(360deg);}
 }
 
-.tagline{
-color:#ffcc00;
-margin-bottom:10px;
-}
-
-/* 输入 */
-input{
-width:100%;
-padding:10px;
-margin:5px 0;
-border-radius:10px;
-border:none;
-}
-
-/* 按钮 */
-button{
-width:100%;
-padding:10px;
-margin-top:5px;
-background:linear-gradient(#ffd700,#ff9900);
-border:none;
-color:#000;
-font-weight:bold;
-border-radius:10px;
-}
-
-.ghost{
-background:transparent;
-color:#fff;
-border:1px solid gold;
-}
-
-/* 游戏 */
-.hidden{
-display:none;
-}
-
+/* 游戏硬币 */
 .coin img{
 width:150px;
 }
 
-.btns{
-display:flex;
-gap:10px;
-}
-
-.stats{
-display:flex;
-justify-content:space-around;
-margin-top:10px;
+/* 按钮 */
+button{
+margin:5px;
+padding:10px;
 }
