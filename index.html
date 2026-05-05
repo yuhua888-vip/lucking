@@ -8,60 +8,88 @@
 </head>
 <body>
 
+<div class="bg-light bg1"></div>
+<div class="bg-light bg2"></div>
+<div class="bg-light bg3"></div>
+
 <div class="app">
 
   <!-- 登录页 -->
   <div id="loginBox" class="login-page">
 
-    <div class="logo">LUCK COIN</div>
+    <div class="brand">LUCK COIN</div>
 
-    <h1>数字概率硬币</h1>
-    <p class="subtitle">你能连胜几次？</p>
+    <h1 class="main-title">数字概率硬币</h1>
+    <p class="subtitle">看看你的运气能走多远</p>
 
-    <div class="coin-wrap">
-      <div class="coin-small">￥</div>
+    <div class="hero-coin">
+      <div class="coin-ring"></div>
+      <div class="coin-core">￥</div>
     </div>
 
     <div class="login-card">
-      <input id="username" placeholder="用户名">
-      <input id="password" type="password" placeholder="密码">
+      <div class="login-title">进入幸运挑战</div>
+      <div class="login-desc">注册或登录，开始你的连胜之路</div>
 
-      <button class="main-btn" onclick="login()">进入挑战</button>
-      <button class="ghost-btn" onclick="register()">注册账号</button>
+      <input id="username" placeholder="请输入用户名">
+      <input id="password" type="password" placeholder="请输入密码">
+
+      <button class="primary-btn" onclick="login()">进入挑战</button>
+      <button class="secondary-btn" onclick="register()">创建账号</button>
 
       <p id="msg"></p>
     </div>
 
-    <div class="tip">
-      🎯 概率模拟 · 🔥 连胜挑战 · 💎 娱乐积分
+    <div class="tags">
+      <span>🎯 概率模拟</span>
+      <span>🔥 连胜奖励</span>
+      <span>💎 娱乐积分</span>
     </div>
 
   </div>
 
   <!-- 游戏页 -->
-  <div id="gameBox" class="card" style="display:none;">
+  <div id="gameBox" class="game-page" style="display:none;">
 
-    <div class="top">
-      <span>玩家：<b id="name"></b></span>
-      <button onclick="logout()">退出</button>
+    <div class="game-header">
+      <div>
+        <p class="label">当前玩家</p>
+        <h2 id="name"></h2>
+      </div>
+      <button class="logout-btn" onclick="logout()">退出</button>
     </div>
 
-    <div class="coin" id="coin">
-      <span id="coinText">?</span>
+    <div class="game-card">
+
+      <div class="coin" id="coin">
+        <span id="coinText">?</span>
+      </div>
+
+      <div class="choice-row">
+        <button class="blue-btn" onclick="play('正面')">猜正面</button>
+        <button class="purple-btn" onclick="play('反面')">猜反面</button>
+      </div>
+
+      <div id="result" class="result">准备开始</div>
+
+      <div class="stats">
+        <div>
+          <p>积分</p>
+          <strong id="score">0</strong>
+        </div>
+        <div>
+          <p>连胜</p>
+          <strong id="streak">0</strong>
+        </div>
+        <div>
+          <p>次数</p>
+          <strong id="times">10</strong>
+        </div>
+      </div>
+
     </div>
 
-    <div class="btns">
-      <button class="blue" onclick="play('正面')">正面</button>
-      <button class="purple" onclick="play('反面')">反面</button>
-    </div>
-
-    <div id="result" class="result">准备开始</div>
-
-    <div class="stats">
-      <div><p>积分</p><strong id="score">0</strong></div>
-      <div><p>连胜</p><strong id="streak">0</strong></div>
-      <div><p>次数</p><strong id="times">10</strong></div>
-    </div>
+    <p class="rule-text">本网站仅为概率模拟娱乐，积分不涉及真实金钱、充值或提现。</p>
 
   </div>
 
