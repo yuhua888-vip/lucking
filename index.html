@@ -14,12 +14,15 @@
 
 <div class="app">
 
+  <!-- 登录页 -->
   <div id="loginBox" class="casino-card">
+
     <div class="badge">LUCK COIN PARTY</div>
 
-    <h1 class="title">硬币狂欢</h1>
+    <h1 class="title gold-title">硬币狂欢</h1>
     <p class="sub">Good luck！今晚看你的运气</p>
 
+    <!-- 旋转硬币 -->
     <div class="home-coin-3d">
       <div class="home-coin-inner">
         <img class="home-coin-face front" src="coin.png.PNG">
@@ -27,6 +30,7 @@
       </div>
     </div>
 
+    <!-- 内容区 -->
     <div class="promo-box">
       <div class="promo-title">今晚目标：冲击 5 连胜</div>
       <div class="promo-desc">猜中加分，惜败扣分，连胜越高，越刺激。</div>
@@ -45,8 +49,10 @@
     <button class="ghost" onclick="register()">创建账号</button>
 
     <p id="msg"></p>
+
   </div>
 
+  <!-- 游戏页 -->
   <div id="gameBox" class="casino-card game-hidden">
 
     <div class="top">
@@ -58,22 +64,6 @@
         </div>
       </div>
       <button class="mini-btn" onclick="logout()">退出</button>
-    </div>
-
-    <div class="profile-box">
-      <div class="profile-title">个性资料</div>
-
-      <input id="displayNameInput" placeholder="修改你的昵称">
-
-      <div class="avatar-list">
-        <button onclick="changeAvatar('🪙')">🪙</button>
-        <button onclick="changeAvatar('👑')">👑</button>
-        <button onclick="changeAvatar('🔥')">🔥</button>
-        <button onclick="changeAvatar('💎')">💎</button>
-        <button onclick="changeAvatar('🎰')">🎰</button>
-      </div>
-
-      <button class="save-btn" onclick="saveProfile()">保存资料</button>
     </div>
 
     <div class="coin" id="coin">
