@@ -1,6 +1,4 @@
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -36,7 +34,7 @@ body::before {
   width: 100%;
   max-width: 430px;
   margin: 0 auto;
-  padding: 26px 16px 95px;
+  padding: 26px 16px 30px;
 }
 
 #loginBox,
@@ -53,9 +51,7 @@ body::before {
   backdrop-filter: blur(16px);
 }
 
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 
 h1 {
   margin: 8px 0;
@@ -104,9 +100,7 @@ h1 {
   object-fit: cover;
 }
 
-.home-coin-face.back {
-  transform: rotateY(180deg);
-}
+.home-coin-face.back { transform: rotateY(180deg); }
 
 @keyframes spin {
   from { transform: rotateY(0deg); }
@@ -173,9 +167,7 @@ button {
   display: block;
 }
 
-.coin.flip {
-  animation: coinFlip 1.35s ease-in-out;
-}
+.coin.flip { animation: coinFlip 1.35s ease-in-out; }
 
 @keyframes coinFlip {
   0% { transform: rotateY(0deg) scale(1); }
@@ -213,6 +205,36 @@ button {
 .bet-side button {
   padding: 11px;
   font-size: 14px;
+}
+
+.market-board {
+  margin: 16px 0;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.32);
+  border: 1px solid rgba(250,204,21,0.28);
+}
+
+.market-title {
+  color: #facc15;
+  font-weight: 900;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.market-row {
+  display: flex;
+  justify-content: space-between;
+  color: #fde68a;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.fake-feed {
+  margin-top: 10px;
+  color: #fff7ad;
+  font-size: 13px;
+  min-height: 22px;
 }
 
 #result {
@@ -285,12 +307,10 @@ button {
 }
 
 .tabbar {
-  position: fixed;
-  left: 50%;
-  bottom: 12px;
-  transform: translateX(-50%);
-  width: min(390px, calc(100% - 28px));
+  position: static;
+  width: 100%;
   height: 68px;
+  margin-top: 22px;
   border-radius: 24px;
   background: rgba(20,8,20,0.92);
   border: 1px solid rgba(250,204,21,0.35);
@@ -301,7 +321,6 @@ button {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  z-index: 999;
 }
 
 .tabbar div {
@@ -323,9 +342,7 @@ button {
 }
 
 #servicePanel h2,
-#settingsPanel h2 {
-  color: #facc15;
-}
+#settingsPanel h2 { color: #facc15; }
 
 #coinExplosion {
   position: fixed;
@@ -365,38 +382,4 @@ button {
 @keyframes flashAnim {
   from { opacity: 1; }
   to { opacity: 0; }
-}
-/* 给底部导航留空间，防止挡住输赢路子 */
-.app {
-  padding-bottom: 170px !important;
-}
-
-#gameBox {
-  margin-bottom: 120px !important;
-}
-
-/* 底部Tab稍微下移一点 */
-.tabbar {
-  bottom: 8px !important;
-}
-/* ===== 彻底修复底部Tab遮挡问题 ===== */
-.tabbar {
-  position: static !important;
-  transform: none !important;
-  width: 100% !important;
-  height: 68px !important;
-  margin-top: 22px !important;
-  margin-bottom: 20px !important;
-}
-
-.app {
-  padding-bottom: 30px !important;
-}
-
-#gameBox {
-  margin-bottom: 0 !important;
-}
-
-.road-map {
-  margin-bottom: 18px !important;
 }
