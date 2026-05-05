@@ -1,64 +1,23 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>硬币狂欢</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<div id="loginBox">
 
-<div class="app">
+  <h2 class="title">硬币狂欢</h2>
+  <p class="sub">Good luck!</p>
+
+  <!-- 🔥 双面旋转硬币 -->
+  <div class="home-coin-3d">
+    <div class="home-coin-inner">
+      <img class="home-coin-face front" src="coin.png.PNG">
+      <img class="home-coin-face back" src="coin.png2.PNG">
+    </div>
+  </div>
 
   <!-- 登录 -->
-  <div id="loginBox">
+  <input id="username" placeholder="请输入用户名">
+  <input id="password" type="password" placeholder="请输入密码">
 
-    <h2 class="title">硬币狂欢</h2>
-    <p class="sub">Good luck!</p>
+  <button onclick="login()">进入挑战</button>
+  <button class="ghost" onclick="register()">创建账号</button>
 
-    <!-- 金币 -->
-    <img class="login-coin-img" src="BE284FE9-C2E5-46E8-97D5-BD14A584BB4D.PNG">
-
-    <input id="username" placeholder="请输入用户名">
-    <input id="password" type="password" placeholder="请输入密码">
-
-    <button onclick="login()">进入挑战</button>
-    <button class="ghost" onclick="register()">创建账号</button>
-
-    <p id="msg"></p>
-  </div>
-
-  <!-- 游戏 -->
-  <div id="gameBox" style="display:none">
-
-    <div class="top">
-      当前玩家：<span id="name"></span>
-      <button onclick="logout()">退出</button>
-    </div>
-
-    <!-- 金币 -->
-    <div class="coin" id="coin">
-      <img src="BE284FE9-C2E5-46E8-97D5-BD14A584BB4D.PNG">
-      <span id="coinText">?</span>
-    </div>
-
-    <div class="btns">
-      <button onclick="play('正面')">猜正面</button>
-      <button onclick="play('反面')">猜反面</button>
-    </div>
-
-    <div id="result">准备开始</div>
-
-    <div class="stats">
-      <div>积分<br><strong id="score">0</strong></div>
-      <div>连胜<br><strong id="streak">0</strong></div>
-      <div>次数<br><strong id="times">0</strong></div>
-    </div>
-
-  </div>
+  <p id="msg"></p>
 
 </div>
-
-<script src="script.js"></script>
-</body>
-</html>
