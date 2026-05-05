@@ -6,59 +6,98 @@
 <title>硬币狂欢</title>
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div id="coinExplosion"></div>
 
 <div class="app">
 
-<div id="loginBox">
-<h1>硬币狂欢</h1>
+  <div id="loginBox">
+    <h1>硬币狂欢</h1>
 
-<input id="username" placeholder="账号：5位字母+数字">
-<input id="password" type="password" placeholder="密码：5位字母+数字">
+    <div class="home-coin-3d">
+      <div class="home-coin-inner">
+        <img src="coin.png.PNG" class="home-coin-face front">
+        <img src="coin.png2.PNG" class="home-coin-face back">
+      </div>
+    </div>
 
-<button onclick="login()">进入</button>
-<button onclick="register()">注册</button>
-<p id="msg"></p>
-</div>
+    <input id="username" placeholder="账号：5位字母数字混合">
+    <input id="password" type="password" placeholder="密码：5位字母数字混合">
 
-<div id="gameBox" class="hidden">
+    <button onclick="login()">进入狂欢</button>
+    <button onclick="register()">创建账号</button>
 
-<div id="entertainmentPanel">
-
-<div>玩家：<span id="name"></span></div>
-<div>积分：<span id="score"></span></div>
-
-<h2 id="countdown">倒计时：8</h2>
-
-<div class="coin" id="coin">
-<img id="coinImg" src="coin.png.PNG">
-</div>
-
-<div class="bet-area">
-  <div class="bet-side">
-    <h3>反面</h3>
-    <button onclick="bet('反面',10)">+10</button>
-    <button onclick="bet('反面',50)">+50</button>
+    <p id="msg"></p>
   </div>
 
-  <div class="bet-side">
-    <h3>正面</h3>
-    <button onclick="bet('正面',10)">+10</button>
-    <button onclick="bet('正面',50)">+50</button>
+  <div id="gameBox" class="hidden">
+
+    <div id="entertainmentPanel">
+      <div class="user-row">
+        <div>
+          玩家：<span id="name"></span><br>
+          ID：<span id="userId"></span>
+        </div>
+        <div>
+          积分：<span id="score"></span>
+        </div>
+      </div>
+
+      <h2 id="countdown">倒计时：8</h2>
+
+      <div class="coin" id="coin">
+        <img id="coinImg" src="coin.png.PNG">
+      </div>
+
+      <div id="coinText">等待下注</div>
+
+      <div class="bet-area">
+        <div class="bet-side">
+          <h3>反面</h3>
+          <div>下注：<span id="backBet">0</span></div>
+          <button onclick="bet('反面',10)">+10</button>
+          <button onclick="bet('反面',50)">+50</button>
+        </div>
+
+        <div class="bet-side">
+          <h3>正面</h3>
+          <div>下注：<span id="frontBet">0</span></div>
+          <button onclick="bet('正面',10)">+10</button>
+          <button onclick="bet('正面',50)">+50</button>
+        </div>
+      </div>
+
+      <div id="result">等待下注...</div>
+
+      <div class="road-title">正反路子</div>
+      <div id="roadMap" class="road-map"></div>
+
+      <div class="road-title">输赢路子</div>
+      <div id="winRoadMap" class="road-map"></div>
+    </div>
+
+    <div id="servicePanel" class="hidden">
+      <h2>客服中心</h2>
+      <p>在线客服：24小时为你服务</p>
+      <p>如遇到问题，请联系客服处理。</p>
+    </div>
+
+    <div id="settingsPanel" class="hidden">
+      <h2>设置</h2>
+      <p>账号：<span id="settingName"></span></p>
+      <p>ID：<span id="settingId"></span></p>
+      <p>积分：<span id="settingScore"></span></p>
+      <button onclick="logout()">退出登录</button>
+    </div>
+
+    <div class="tabbar">
+      <div id="tabEntertainment" class="active" onclick="switchTab('entertainment')">🎰<br>娱乐</div>
+      <div id="tabService" onclick="switchTab('service')">🎧<br>客服</div>
+      <div id="tabSettings" onclick="switchTab('settings')">⚙️<br>设置</div>
+    </div>
+
   </div>
-</div>
-
-<div id="result">等待下注...</div>
-
-<div class="road-title">路子</div>
-<div id="roadMap" class="road-map"></div>
-
-</div>
-
-</div>
 
 </div>
 
