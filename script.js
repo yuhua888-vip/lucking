@@ -6,9 +6,10 @@ let betting = false;
 
 let userBet = { front: 0, back: 0 };
 
-let fakeFrontTotal = 0;
-let fakeBackTotal = 0;
+let fakeFrontAmount = 0;
+let fakeBackAmount = 0;
 let fakeTimer = null;
+
 const fakeNames = [
   "龙哥","阿豪","金手","财神","小王","豹子","辉少","阿强",
   "老K","黑桃A","金链哥","赌神","小六","阿飞","东哥","凯哥",
@@ -44,22 +45,27 @@ function playTone(freq, duration, type = "sine", volume = 0.12){
   initAudio();
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
+
   osc.type = type;
   osc.frequency.value = freq;
   gain.gain.value = volume;
+
   osc.connect(gain);
   gain.connect(audioCtx.destination);
+
   osc.start();
   gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
   osc.stop(audioCtx.currentTime + duration);
 }
 
 function soundClick(){ playTone(520, 0.08, "square", 0.08); }
+
 function soundWin(){
   playTone(660, 0.1, "sine", 0.13);
   setTimeout(() => playTone(880, 0.12, "sine", 0.15), 100);
   setTimeout(() => playTone(1200, 0.18, "sine", 0.18), 230);
 }
+
 function soundLose(){
   playTone(260, 0.18, "sawtooth", 0.1);
   setTimeout(() => playTone(180, 0.2, "sawtooth", 0.08), 180);
@@ -167,50 +173,7 @@ function switchTab(tab){
   updateUI();
 }
 
-function startFakePlayers(){
-  clearInterval(fakeTimer);
-
-  fakeFrontTotal = 0;
-  fakeBackTotal = 0;
-
-  updateFakeTotals();
-
-  fakeFeed.innerText = "模拟玩家正在入场...";
-
-  fakeTimer = setInterval(() => {
-    if(!betting) return;
-
-    let side;
-
-    // 热门盘口倾向：哪边多，偶尔继续追哪边
-    if(fakeFrontTotal > fakeBackTotal && Math.random() < 0.58){
-      side = "正面";
-    }else if(fakeBackTotal > fakeFrontTotal && Math.random() < 0.58){
-      side = "反面";
-    }else{
-      side = Math.random() < 0.5 ? "正面" : "反面";
-    }
-
-    let amountList = [10,20,30,50,80,100,150,200,300,500,800];
-    let amount = amountList[Math.floor(Math.random() * amountList.length)];
-    let fakeName = fakeNames[Math.floor(Math.random() * fakeNames.length)];
-
-    if(side === "正面"){
-      fakeFrontTotal += amount;
-    }else{
-      fakeBackTotal += amount;
-    }
-
-    updateFakeTotals();
-
-    let hotSide = fakeFrontTotal >= fakeBackTotal ? "正面" : "反面";
-    let hotAmount = Math.max(fakeFrontTotal, fakeBackTotal);
-
-    fakeFeed.innerText =
-      fakeName + "：" + side + " " + amount + " 💰｜热门：" + hotSide + " " + hotAmount;
-
-  }, Math.random() * 700 + 400);
-}
+function startRound(){
   clearInterval(roundTimer);
   stopFakePlayers();
 
@@ -221,6 +184,7 @@ function startFakePlayers(){
   countdown.innerText = "倒计时：" + timer;
   result.innerText = "开始下注";
   coinText.innerText = "等待下注";
+
   frontBet.innerText = "0";
   backBet.innerText = "0";
   frontAmount.value = "";
@@ -298,8 +262,10 @@ function roll(){
 
   setTimeout(() => {
     let resultSide = Math.random() < 0.5 ? "正面" : "反面";
+
     coinImg.src = resultSide === "正面" ? "coin.png.PNG" : "coin.png2.PNG";
     coinText.innerText = resultSide;
+
     settle(resultSide);
     coin.classList.remove("flip");
   }, 1350);
@@ -386,30 +352,45 @@ function renderWinRoad(road){
 function startFakePlayers(){
   clearInterval(fakeTimer);
 
-  fakeFrontTotal = 0;
-  fakeBackTotal = 0;
+  fakeFrontAmount = 0;
+  fakeBackAmount = 0;
 
   updateFakeTotals();
 
-  fakeFeed.innerText = "等待玩家下注...";
+  fakeFeed.innerText = "模拟玩家正在入场...";
 
   fakeTimer = setInterval(() => {
     if(!betting) return;
 
-    let side = Math.random() < 0.5 ? "正面" : "反面";
-    let amountList = [10, 20, 30, 50, 80, 100, 150, 200];
+    let side;
+
+    if(fakeFrontAmount > fakeBackAmount && Math.random() < 0.58){
+      side = "正面";
+    }else if(fakeBackAmount > fakeFrontAmount && Math.random() < 0.58){
+      side = "反面";
+    }else{
+      side = Math.random() < 0.5 ? "正面" : "反面";
+    }
+
+    let amountList = [10,20,30,50,80,100,150,200,300,500,800];
     let amount = amountList[Math.floor(Math.random() * amountList.length)];
     let fakeName = fakeNames[Math.floor(Math.random() * fakeNames.length)];
 
     if(side === "正面"){
-      fakeFrontTotal += amount;
+      fakeFrontAmount += amount;
     }else{
-      fakeBackTotal += amount;
+      fakeBackAmount += amount;
     }
 
     updateFakeTotals();
-    fakeFeed.innerText = fakeName + " 押了 " + side + " " + amount + " 积分";
-  }, 900);
+
+    let hotSide = fakeFrontAmount >= fakeBackAmount ? "正面" : "反面";
+    let hotAmount = Math.max(fakeFrontAmount, fakeBackAmount);
+
+    fakeFeed.innerText =
+      fakeName + "：" + side + " " + amount + " 💰｜热门：" + hotSide + " " + hotAmount;
+
+  }, Math.random() * 700 + 400);
 }
 
 function stopFakePlayers(){
@@ -417,8 +398,8 @@ function stopFakePlayers(){
 }
 
 function updateFakeTotals(){
-  fakeFrontTotal.innerText = fakeFrontTotal;
-  fakeBackTotal.innerText = fakeBackTotal;
+  document.getElementById("fakeFrontTotal").innerText = fakeFrontAmount;
+  document.getElementById("fakeBackTotal").innerText = fakeBackAmount;
 }
 
 function explodeCoins(){
