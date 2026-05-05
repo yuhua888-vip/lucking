@@ -200,3 +200,12 @@ button {
   text-align: center;
   color: #facc15;
 }
+.coin.flip {
+  animation: coinFlip 0.75s ease-in-out;
+}
+
+@keyframes coinFlip {
+  0% { transform: rotateY(0deg) scale(1); }
+  50% { transform: rotateY(720deg) scale(1.12); }
+  100% { transform: rotateY(1440deg) scale(1); }
+}
