@@ -1,23 +1,70 @@
-<div id="loginBox">
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>硬币狂欢</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  <h2 class="title">硬币狂欢</h2>
-  <p class="sub">Good luck!</p>
+<div class="app">
 
-  <!-- 🔥 双面旋转硬币 -->
-  <div class="home-coin-3d">
-    <div class="home-coin-inner">
-      <img class="home-coin-face front" src="coin.png.PNG">
-      <img class="home-coin-face back" src="coin.png2.PNG">
+  <!-- 登录页 -->
+  <div id="loginBox">
+
+    <h2 class="title">硬币狂欢</h2>
+    <p class="sub">Good luck!</p>
+
+    <!-- 🔥 双面旋转硬币 -->
+    <div class="home-coin-3d">
+      <div class="home-coin-inner">
+        <img class="home-coin-face front" src="coin.png.PNG">
+        <img class="home-coin-face back" src="coin.png2.PNG">
+      </div>
     </div>
+
+    <input id="username" placeholder="请输入用户名">
+    <input id="password" type="password" placeholder="请输入密码">
+
+    <button onclick="login()">进入挑战</button>
+    <button class="ghost" onclick="register()">创建账号</button>
+
+    <p id="msg"></p>
+
   </div>
 
-  <!-- 登录 -->
-  <input id="username" placeholder="请输入用户名">
-  <input id="password" type="password" placeholder="请输入密码">
+  <!-- 游戏页 -->
+  <div id="gameBox" style="display:none">
 
-  <button onclick="login()">进入挑战</button>
-  <button class="ghost" onclick="register()">创建账号</button>
+    <div class="top">
+      当前玩家：<span id="name"></span>
+      <button onclick="logout()">退出</button>
+    </div>
 
-  <p id="msg"></p>
+    <!-- 游戏金币 -->
+    <div class="coin" id="coin">
+      <img src="coin.png.PNG">
+      <span id="coinText">...</span>
+    </div>
+
+    <div class="btns">
+      <button onclick="play('正面')">猜正面</button>
+      <button onclick="play('反面')">猜反面</button>
+    </div>
+
+    <div id="result">准备开始</div>
+
+    <div class="stats">
+      <div>积分<br><strong id="score">0</strong></div>
+      <div>连胜<br><strong id="streak">0</strong></div>
+      <div>次数<br><strong id="times">0</strong></div>
+    </div>
+
+  </div>
 
 </div>
+
+<script src="script.js"></script>
+</body>
+</html>
