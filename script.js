@@ -31,7 +31,8 @@ function register(){
     password: password.value,
     score: 100,
     streak: 0,
-    times: 10
+    times: 10,
+    road: []
   };
 
   users.push(user);
@@ -48,6 +49,11 @@ function login(){
   if(!user){
     msg.innerText = "账号错误";
     return;
+  }
+
+  if(!user.road){
+    user.road = [];
+    saveUsers(users);
   }
 
   currentUser = user.username;
@@ -93,6 +99,11 @@ function play(choice){
 
     coinText.innerText = flipResult;
 
+    user.road.push(flipResult);
+    if(user.road.length > 30){
+      user.road.shift();
+    }
+
     if(choice === flipResult){
       user.score += 10;
       user.streak++;
@@ -123,6 +134,22 @@ function updateUI(){
   score.innerText = user.score;
   streak.innerText = user.streak;
   times.innerText = user.times;
+
+  renderRoad(user.road || []);
+}
+
+function renderRoad(road){
+  const roadMap = document.getElementById("roadMap");
+  if(!roadMap) return;
+
+  roadMap.innerHTML = "";
+
+  road.forEach(item => {
+    const dot = document.createElement("div");
+    dot.className = item === "正面" ? "road-dot front" : "road-dot back";
+    dot.innerText = item === "正面" ? "正" : "反";
+    roadMap.appendChild(dot);
+  });
 }
 
 function explodeCoins(){
