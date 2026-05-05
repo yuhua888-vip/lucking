@@ -1,7 +1,6 @@
 let currentUser = null;
 let audioCtx = null;
 
-/* ===== 用户数据 ===== */
 function getUsers(){
   return JSON.parse(localStorage.getItem("users") || "[]");
 }
@@ -14,7 +13,7 @@ function createId(){
   return Math.floor(10000 + Math.random() * 90000);
 }
 
-/* ===== 音效系统 ===== */
+/* 音效 */
 function initAudio(){
   if(!audioCtx){
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -29,7 +28,6 @@ function playTone(freq, duration, type = "sine", volume = 0.12){
 
   osc.type = type;
   osc.frequency.value = freq;
-
   gain.gain.value = volume;
 
   osc.connect(gain);
@@ -60,7 +58,6 @@ function soundLose(){
   setTimeout(() => playTone(180, 0.2, "sawtooth", 0.08), 180);
 }
 
-/* ===== 注册 ===== */
 function register(){
   let users = getUsers();
 
@@ -81,7 +78,8 @@ function register(){
     score: 100,
     streak: 0,
     times: 10,
-    road: []
+    road: [],
+    winRoad: []
   };
 
   users.push(user);
@@ -90,7 +88,6 @@ function register(){
   msg.innerText = "注册成功";
 }
 
-/* ===== 登录 ===== */
 function login(){
   initAudio();
 
@@ -103,10 +100,10 @@ function login(){
     return;
   }
 
-  if(!user.road){
-    user.road = [];
-    saveUsers(users);
-  }
+  if(!user.road) user.road = [];
+  if(!user.winRoad) user.winRoad = [];
+
+  saveUsers(users);
 
   currentUser = user.username;
 
@@ -116,13 +113,11 @@ function login(){
   updateUI();
 }
 
-/* ===== 退出 ===== */
 function logout(){
   loginBox.style.display = "block";
   gameBox.classList.add("hidden");
 }
 
-/* ===== 游戏 ===== */
 function play(choice){
   soundClick();
 
@@ -142,49 +137,55 @@ function play(choice){
   void coin.offsetWidth;
   coin.classList.add("flip");
 
-  coinText.innerText = "翻转中...";
+  coinText.innerText = "命运正在选择...";
   result.innerText = "硬币正在翻转...";
 
   setTimeout(() => {
+
     let flipResult = Math.random() < 0.5 ? "正面" : "反面";
 
-    if(flipResult === "正面"){
-      coinImg.src = "coin.png.PNG";
-    }else{
-      coinImg.src = "coin.png2.PNG";
+    /* 差一点赢演出 */
+    if(Math.random() < 0.35 && choice !== flipResult){
+      coinText.innerText = choice;
     }
 
-    coinText.innerText = flipResult;
+    setTimeout(() => {
 
-    user.road.push(flipResult);
-    if(user.road.length > 30){
-      user.road.shift();
-    }
+      coinImg.src = flipResult === "正面" ? "coin.png.PNG" : "coin.png2.PNG";
+      coinText.innerText = flipResult;
 
-    if(choice === flipResult){
-      user.score += 10;
-      user.streak++;
-      result.innerText = "💰 赢了！+10";
-      soundWin();
-      explodeCoins();
-    }else{
-      user.score -= 5;
-      user.streak = 0;
-      result.innerText = "😌 惜败：" + flipResult;
-      soundLose();
-    }
+      user.road.push(flipResult);
+      if(user.road.length > 30) user.road.shift();
 
-    user.times--;
+      if(choice === flipResult){
+        user.score += 10;
+        user.streak++;
+        result.innerText = "💰 赢了！+10";
+        soundWin();
+        explodeCoins();
+        user.winRoad.push("win");
+      }else{
+        user.score -= 5;
+        user.streak = 0;
+        result.innerText = "😌 惜败：" + flipResult;
+        soundLose();
+        user.winRoad.push("lose");
+      }
 
-    saveUsers(users);
-    updateUI();
+      if(user.winRoad.length > 30) user.winRoad.shift();
 
-    coin.classList.remove("flip");
+      user.times--;
 
-  }, 1350);
+      saveUsers(users);
+      updateUI();
+
+      coin.classList.remove("flip");
+
+    }, 250);
+
+  }, 1100);
 }
 
-/* ===== 更新界面 ===== */
 function updateUI(){
   let user = getUsers().find(u => u.username === currentUser);
   if(!user) return;
@@ -196,9 +197,9 @@ function updateUI(){
   times.innerText = user.times;
 
   renderRoad(user.road || []);
+  renderWinRoad(user.winRoad || []);
 }
 
-/* ===== 路子表 ===== */
 function renderRoad(road){
   let map = document.getElementById("roadMap");
   if(!map) return;
@@ -213,7 +214,20 @@ function renderRoad(road){
   });
 }
 
-/* ===== 爆金币 ===== */
+function renderWinRoad(road){
+  let map = document.getElementById("winRoadMap");
+  if(!map) return;
+
+  map.innerHTML = "";
+
+  road.forEach(r => {
+    let dot = document.createElement("div");
+    dot.className = "road-dot " + (r === "win" ? "win" : "lose");
+    dot.innerText = r === "win" ? "赢" : "输";
+    map.appendChild(dot);
+  });
+}
+
 function explodeCoins(){
   let box = document.getElementById("coinExplosion");
   if(!box) return;
