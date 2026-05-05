@@ -177,3 +177,28 @@ button {
     opacity: 0;
   }
 }
+/* ===== 强制修复硬币图案显示 ===== */
+.home-coin-face,
+.coin img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+  display: block !important;
+}
+
+/* 主页旋转硬币固定尺寸 */
+.home-coin-3d,
+.home-coin-inner {
+  width: 170px !important;
+  height: 170px !important;
+  position: relative !important;
+}
+
+/* 游戏硬币固定尺寸 */
+.coin {
+  width: 165px !important;
+  height: 165px !important;
+  margin: 25px auto 12px !important;
+  position: relative !important;
+}
