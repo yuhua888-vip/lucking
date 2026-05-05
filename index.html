@@ -1,45 +1,8 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>硬币狂欢</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<div id="gameBox" class="hidden">
 
-<body>
-
-<div id="coinExplosion"></div>
-
-<div class="app">
-
-  <div id="loginBox">
-
-    <h1>硬币狂欢</h1>
-
-    <div class="home-coin-3d">
-      <div class="home-coin-inner">
-        <img src="coin.png.PNG" class="home-coin-face front">
-        <img src="coin.png2.PNG" class="home-coin-face back">
-      </div>
-    </div>
-
-    <input id="username" placeholder="账号">
-    <input id="password" type="password" placeholder="密码">
-
-    <button onclick="login()">进入狂欢</button>
-    <button onclick="register()">创建账号</button>
-
-    <p id="msg"></p>
-
-  </div>
-
-  <div id="gameBox" class="hidden">
-
+  <div id="entertainmentPanel">
     <div>玩家：<span id="name"></span></div>
     <div>ID：<span id="userId"></span></div>
-
-    <button onclick="logout()">退出</button>
 
     <div class="coin" id="coin">
       <img id="coinImg" src="coin.png.PNG">
@@ -61,11 +24,17 @@
     <div>积分：<span id="score"></span></div>
     <div>连胜：<span id="streak"></span></div>
     <div>次数：<span id="times"></span></div>
-
   </div>
 
-</div>
+  <div id="servicePanel" class="hidden">
+    <h2>客服中心</h2>
+    <p>在线客服：24小时为你服务</p>
+    <p>如遇到问题，请联系客服处理。</p>
+  </div>
 
-<script src="script.js"></script>
-</body>
-</html>
+  <div id="settingsPanel" class="hidden">
+    <h2>设置</h2>
+    <p>账号：<span id="settingName"></span></p>
+    <p>ID：<span id="settingId"></span></p>
+    <p>积分：<span id="settingScore"></span></p>
+    <button onclick="logout()">退出登录</
