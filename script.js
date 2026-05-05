@@ -1,188 +1,103 @@
-let currentUser = null;
+let currentUser=null;
 
 function getUsers(){
-  return JSON.parse(localStorage.getItem("users") || "[]");
+return JSON.parse(localStorage.getItem("users")||"[]");
 }
 
-function saveUsers(users){
-  localStorage.setItem("users", JSON.stringify(users));
+function saveUsers(u){
+localStorage.setItem("users",JSON.stringify(u));
 }
 
-function createUserId(){
-  let users = getUsers();
-  let id;
-
-  do {
-    id = String(Math.floor(10000 + Math.random() * 90000));
-  } while(users.find(u => u.id === id));
-
-  return id;
+function createId(){
+return Math.floor(10000+Math.random()*90000);
 }
 
 function register(){
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
+let users=getUsers();
 
-  if(!username || !password){
-    document.getElementById("msg").innerText = "请输入用户名和密码";
-    return;
-  }
+let u={
+id:createId(),
+username:username.value,
+password:password.value,
+score:100,
+streak:0,
+times:10
+};
 
-  let users = getUsers();
-
-  if(users.find(u => u.username === username)){
-    document.getElementById("msg").innerText = "用户名已存在";
-    return;
-  }
-
-  let newUser = {
-    id: createUserId(),
-    username,
-    password,
-    displayName: username,
-    avatar: "🪙",
-    score: 100,
-    streak: 0,
-    times: 10
-  };
-
-  users.push(newUser);
-  saveUsers(users);
-
-  document.getElementById("msg").innerText = "注册成功！请登录";
+users.push(u);
+saveUsers(users);
+msg.innerText="注册成功";
 }
 
 function login(){
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
+let users=getUsers();
+let user=users.find(x=>x.username==username.value && x.password==password.value);
 
-  let users = getUsers();
-  let user = users.find(u => u.username === username && u.password === password);
+if(!user){
+msg.innerText="错误";
+return;
+}
 
-  if(!user){
-    document.getElementById("msg").innerText = "账号或密码错误";
-    return;
-  }
+currentUser=user.username;
 
-  if(!user.id){
-    user.id = createUserId();
-  }
+loginBox.style.display="none";
+gameBox.classList.remove("hidden");
 
-  if(!user.displayName){
-    user.displayName = user.username;
-  }
-
-  if(!user.avatar){
-    user.avatar = "🪙";
-  }
-
-  saveUsers(users);
-
-  currentUser = user.username;
-
-  document.getElementById("loginBox").style.display = "none";
-  document.getElementById("gameBox").classList.remove("game-hidden");
-  document.getElementById("gameBox").style.display = "block";
-
-  updateUI();
+updateUI();
 }
 
 function logout(){
-  currentUser = null;
-
-  document.getElementById("loginBox").style.display = "block";
-  document.getElementById("gameBox").style.display = "none";
-}
-
-function getCurrentUser(){
-  let users = getUsers();
-  return users.find(u => u.username === currentUser);
-}
-
-function updateCurrentUser(user){
-  let users = getUsers();
-  let index = users.findIndex(u => u.username === currentUser);
-  users[index] = user;
-  saveUsers(users);
-}
-
-function changeAvatar(avatar){
-  let user = getCurrentUser();
-  user.avatar = avatar;
-  updateCurrentUser(user);
-  updateUI();
-}
-
-function saveProfile(){
-  let user = getCurrentUser();
-  const newName = document.getElementById("displayNameInput").value.trim();
-
-  if(newName){
-    user.displayName = newName;
-  }
-
-  updateCurrentUser(user);
-  updateUI();
-
-  document.getElementById("result").innerText = "资料已更新";
+loginBox.style.display="block";
+gameBox.classList.add("hidden");
 }
 
 function play(choice){
-  let user = getCurrentUser();
+let users=getUsers();
+let user=users.find(u=>u.username==currentUser);
 
-  const coin = document.getElementById("coin");
-  const coinImg = document.getElementById("coinImg");
-  const coinText = document.getElementById("coinText");
-  const resultBox = document.getElementById("result");
+let coin=document.getElementById("coin");
+let coinImg=document.getElementById("coinImg");
 
-  if(user.times <= 0){
-    resultBox.innerText = "今日次数已用完";
-    return;
-  }
+coin.classList.add("flip");
 
-  coin.classList.remove("flip");
-  void coin.offsetWidth;
-  coin.classList.add("flip");
+setTimeout(()=>{
 
-  coinText.innerText = "翻转中...";
-  resultBox.innerText = "硬币正在翻转...";
+let result=Math.random()<0.5?"正面":"反面";
 
-  setTimeout(() => {
-    let result = Math.random() < 0.5 ? "正面" : "反面";
+if(result=="正面"){
+coinImg.src="coin.png.PNG";
+}else{
+coinImg.src="coin.png2.PNG";
+}
 
-    if(result === "正面"){
-      coinImg.src = "coin.png.PNG";
-    }else{
-      coinImg.src = "coin.png2.PNG";
-    }
+coinText.innerText=result;
 
-    coinText.innerText = result;
-    user.times--;
+if(choice==result){
+user.score+=10;
+user.streak++;
+result.innerText="💰 赢了！";
+}else{
+user.score-=5;
+user.streak=0;
+result.innerText="输了";
+}
 
-    if(choice === result){
-      user.score += 10;
-      user.streak++;
-      resultBox.innerText = "🎉 猜中了！+10积分";
-    }else{
-      user.score -= 5;
-      user.streak = 0;
-      resultBox.innerText = "😌 惜败！结果是" + result;
-    }
+user.times--;
 
-    updateCurrentUser(user);
-    updateUI();
-  }, 750);
+saveUsers(users);
+updateUI();
+
+coin.classList.remove("flip");
+
+},700);
 }
 
 function updateUI(){
-  let user = getCurrentUser();
-  if(!user) return;
+let user=getUsers().find(u=>u.username==currentUser);
 
-  document.getElementById("avatarShow").innerText = user.avatar;
-  document.getElementById("name").innerText = user.displayName;
-  document.getElementById("userId").innerText = user.id;
-  document.getElementById("score").innerText = user.score;
-  document.getElementById("streak").innerText = user.streak;
-  document.getElementById("times").innerText = user.times;
-  document.getElementById("displayNameInput").value = user.displayName;
+name.innerText=user.username;
+userId.innerText=user.id;
+score.innerText=user.score;
+streak.innerText=user.streak;
+times.innerText=user.times;
 }
