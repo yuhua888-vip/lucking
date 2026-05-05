@@ -56,15 +56,15 @@
         <div class="bet-side">
           <h3>反面</h3>
           <div>下注：<span id="backBet">0</span></div>
-          <button onclick="bet('反面',10)">+10</button>
-          <button onclick="bet('反面',50)">+50</button>
+          <input id="backAmount" type="number" placeholder="输入下注额">
+          <button onclick="betCustom('反面')">下注反面</button>
         </div>
 
         <div class="bet-side">
           <h3>正面</h3>
           <div>下注：<span id="frontBet">0</span></div>
-          <button onclick="bet('正面',10)">+10</button>
-          <button onclick="bet('正面',50)">+50</button>
+          <input id="frontAmount" type="number" placeholder="输入下注额">
+          <button onclick="betCustom('正面')">下注正面</button>
         </div>
       </div>
 
