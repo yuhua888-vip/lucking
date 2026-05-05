@@ -1,12 +1,10 @@
 let currentUser = null;
-let audioCtx = null;
 let timer = 8;
 let roundTimer = null;
 let betting = false;
 
 let userBet = { front: 0, back: 0 };
 
-// 假玩家数据
 let fakeFrontAmount = 0;
 let fakeBackAmount = 0;
 let fakeTimer = null;
@@ -14,13 +12,14 @@ let fakeTimer = null;
 const fakeNames = [
   "龙哥","阿豪","金手","财神","小王","豹子","辉少","阿强",
   "老K","黑桃A","金链哥","赌神","小六","阿飞","东哥","凯哥",
-  "小虎","夜王","大飞","火哥","阿超","老七","林少","虎哥",
-  "三爷","亮哥","飞哥","九哥","赵总","陈哥","阿彪","阿俊",
-  "周总","江哥","小龙","黑龙","财神爷","阿勇","胖虎","鬼手",
-  "豹子王","冷锋","猎人","阿文","阿杰","金老板","夜行者"
+  "小虎","夜王","大飞","火哥","阿超","老七","林少","虎哥"
 ];
 
-// ========= 工具 =========
+function formatMoney(n){
+  return Number(n || 0).toFixed(2);
+}
+
+/* ===== 用户 ===== */
 function getUsers(){
   return JSON.parse(localStorage.getItem("users") || "[]");
 }
@@ -29,97 +28,24 @@ function saveUsers(users){
   localStorage.setItem("users", JSON.stringify(users));
 }
 
-function createId(){
-  return Math.floor(10000 + Math.random() * 90000);
-}
-
-function isValidAccount(value){
-  return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5}$/.test(value);
-}
-
-// ========= 音效 =========
-function initAudio(){
-  if(!audioCtx){
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
-}
-
-function playTone(freq, duration){
-  initAudio();
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-
-  osc.frequency.value = freq;
-  gain.gain.value = 0.1;
-
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-
-  osc.start();
-  osc.stop(audioCtx.currentTime + duration);
-}
-
-function soundClick(){ playTone(520, 0.08); }
-function soundWin(){ playTone(880, 0.2); }
-function soundLose(){ playTone(220, 0.2); }
-
-// ========= 注册 / 登录 =========
-function register(){
-  let users = getUsers();
-  let account = username.value.trim();
-  let pass = password.value.trim();
-
-  if(!isValidAccount(account) || !isValidAccount(pass)){
-    msg.innerText = "账号密码必须5位字母+数字";
-    return;
-  }
-
-  if(users.find(u => u.username === account)){
-    msg.innerText = "账号已存在";
-    return;
-  }
-
-  users.push({
-    id: createId(),
-    username: account,
-    password: pass,
-    score: 500,
-    road: [],
-    winRoad: []
-  });
-
-  saveUsers(users);
-  msg.innerText = "注册成功";
-}
-
+/* ===== 登录 ===== */
 function login(){
   let users = getUsers();
-  let account = username.value.trim();
-  let pass = password.value.trim();
-
-  let user = users.find(u => u.username === account && u.password === pass);
+  let user = users.find(u => u.username === username.value && u.password === password.value);
 
   if(!user){
-    msg.innerText = "账号或密码错误";
+    msg.innerText = "账号错误";
     return;
   }
 
   currentUser = user.username;
-
   loginBox.style.display = "none";
   gameBox.classList.remove("hidden");
 
-  updateUI();
   startRound();
 }
 
-function logout(){
-  currentUser = null;
-  loginBox.style.display = "block";
-  gameBox.classList.add("hidden");
-}
-
-// ========= 游戏 =========
+/* ===== 开局 ===== */
 function startRound(){
   clearInterval(roundTimer);
   stopFakePlayers();
@@ -133,6 +59,9 @@ function startRound(){
 
   frontBet.innerText = "0";
   backBet.innerText = "0";
+
+  coinText.innerText = "等待下注";
+  result.innerText = "开始下注";
 
   startFakePlayers();
   updateFakeTotals();
@@ -149,6 +78,7 @@ function startRound(){
   },1000);
 }
 
+/* ===== 下注 ===== */
 function betCustom(side){
   let amount = side === "正面"
     ? Number(frontAmount.value)
@@ -163,8 +93,6 @@ function betCustom(side){
 }
 
 function bet(side, amount){
-  soundClick();
-
   if(!betting){
     result.innerText = "已停止下注";
     return;
@@ -182,22 +110,29 @@ function bet(side, amount){
 
   if(side === "正面"){
     userBet.front += amount;
-    frontBet.innerText = userBet.front;
+    frontBet.innerText = formatMoney(userBet.front);
   }else{
     userBet.back += amount;
-    backBet.innerText = userBet.back;
+    backBet.innerText = formatMoney(userBet.back);
   }
 
   saveUsers(users);
   updateUI();
 
-  result.innerText = `正面 ${userBet.front} | 反面 ${userBet.back}`;
+  result.innerText = `正 ${userBet.front} | 反 ${userBet.back}`;
 }
 
+/* ===== 开奖（重点修复）===== */
 function roll(){
-  stopFakePlayers();
 
+  coinText.innerText = "旋转中...";
   result.innerText = "开奖中...";
+
+  let coin = document.getElementById("coin");
+
+  coin.classList.remove("flip");
+  void coin.offsetWidth;
+  coin.classList.add("flip");
 
   setTimeout(()=>{
     let resultSide = Math.random() < 0.5 ? "正面" : "反面";
@@ -206,10 +141,16 @@ function roll(){
       ? "coin.png.PNG"
       : "coin.png2.PNG";
 
+    coinText.innerText = resultSide;
+
     settle(resultSide);
-  },1200);
+
+    coin.classList.remove("flip");
+
+  },1300); // ← 关键延迟
 }
 
+/* ===== 结算 ===== */
 function settle(resultSide){
   let users = getUsers();
   let user = users.find(u => u.username === currentUser);
@@ -218,20 +159,21 @@ function settle(resultSide){
   let loseAmount = resultSide === "正面" ? userBet.back : userBet.front;
 
   if(winAmount > 0){
-    let payout = winAmount * 1.9;
-    let profit = payout - winAmount - loseAmount;
+    let payout = Number((winAmount * 1.9).toFixed(2));
+    let profit = Number((payout - winAmount - loseAmount).toFixed(2));
 
     user.score += payout;
 
-    result.innerText = "赢 +" + profit;
-    soundWin();
+    result.innerText = "💰 赢 +" + profit;
   }else{
-    result.innerText = "输 -" + loseAmount;
-    soundLose();
+    result.innerText = "😌 输 -" + formatMoney(loseAmount);
   }
 
   user.road.push(resultSide);
   user.winRoad.push(winAmount > 0 ? "win" : "lose");
+
+  if(user.road.length > 30) user.road.shift();
+  if(user.winRoad.length > 30) user.winRoad.shift();
 
   saveUsers(users);
   updateUI();
@@ -239,13 +181,13 @@ function settle(resultSide){
   setTimeout(startRound,2000);
 }
 
-// ========= 假玩家 =========
+/* ===== 假玩家 ===== */
 function startFakePlayers(){
   fakeTimer = setInterval(()=>{
     if(!betting) return;
 
     let side = Math.random() < 0.5 ? "正面" : "反面";
-    let amount = [10,20,50,100,200,500][Math.floor(Math.random()*6)];
+    let amount = [10,20,50,100,200][Math.floor(Math.random()*5)];
     let name = fakeNames[Math.floor(Math.random()*fakeNames.length)];
 
     if(side === "正面"){
@@ -257,7 +199,7 @@ function startFakePlayers(){
     fakeFeed.innerText = `${name} 押 ${side} ${amount}`;
     updateFakeTotals();
 
-  }, Math.random()*800 + 300);
+  },500);
 }
 
 function stopFakePlayers(){
@@ -270,37 +212,61 @@ function updateFakeTotals(){
   updateHeatBar();
 }
 
-// ========= 热度条 =========
+/* ===== 热度 ===== */
 function updateHeatBar(){
   let total = fakeFrontAmount + fakeBackAmount;
 
-  let front = document.getElementById("frontHeat");
-  let back = document.getElementById("backHeat");
-  let text = document.getElementById("hotText");
+  let f = document.getElementById("frontHeat");
+  let b = document.getElementById("backHeat");
+  let t = document.getElementById("hotText");
 
-  if(!front || !back) return;
+  if(!f || !b) return;
 
   if(total <= 0){
-    front.style.width = "50%";
-    back.style.width = "50%";
+    f.style.width = "50%";
+    b.style.width = "50%";
     return;
   }
 
-  let f = Math.round(fakeFrontAmount / total * 100);
-  let b = 100 - f;
+  let fp = Math.round(fakeFrontAmount / total * 100);
+  let bp = 100 - fp;
 
-  front.style.width = f + "%";
-  back.style.width = b + "%";
+  f.style.width = fp + "%";
+  b.style.width = bp + "%";
 
-  text.innerText = f > b ? `🔥热门：正面 ${f}%` : `🔥热门：反面 ${b}%`;
+  t.innerText = fp > bp ? `🔥热门 正面 ${fp}%` : `🔥热门 反面 ${bp}%`;
 }
 
-// ========= UI =========
+/* ===== UI ===== */
 function updateUI(){
   let user = getUsers().find(u => u.username === currentUser);
   if(!user) return;
 
   name.innerText = user.username;
   userId.innerText = user.id;
-  score.innerText = user.score;
+  score.innerText = formatMoney(user.score);
+
+  renderRoad(user.road || []);
+  renderWinRoad(user.winRoad || []);
+}
+
+/* ===== 路子 ===== */
+function renderRoad(road){
+  roadMap.innerHTML = "";
+  road.forEach(r=>{
+    let d = document.createElement("div");
+    d.className = "road-dot " + (r === "正面" ? "front" : "back");
+    d.innerText = r === "正面" ? "正" : "反";
+    roadMap.appendChild(d);
+  });
+}
+
+function renderWinRoad(road){
+  winRoadMap.innerHTML = "";
+  road.forEach(r=>{
+    let d = document.createElement("div");
+    d.className = "road-dot " + (r === "win" ? "win" : "lose");
+    d.innerText = r === "win" ? "赢" : "输";
+    winRoadMap.appendChild(d);
+  });
 }
