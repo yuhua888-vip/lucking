@@ -429,3 +429,22 @@ function explodeCoins(){
     flash.remove();
   }, 400);
 }
+function vibrate(type){
+  if(!navigator.vibrate) return;
+
+  if(type === "click"){
+    navigator.vibrate(20);
+  }
+
+  if(type === "win"){
+    navigator.vibrate([50, 30, 80]);
+  }
+
+  if(type === "lose"){
+    navigator.vibrate([100]);
+  }
+
+  if(type === "result"){
+    navigator.vibrate([30, 50, 30]);
+  }
+}
