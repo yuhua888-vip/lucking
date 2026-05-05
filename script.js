@@ -339,3 +339,20 @@ function explodeCoins(){
     flash.remove();
   }, 400);
 }
+function betCustom(side){
+  let amount = 0;
+
+  if(side === "正面"){
+    amount = Number(document.getElementById("frontAmount").value);
+  }else{
+    amount = Number(document.getElementById("backAmount").value);
+  }
+
+  if(!amount || amount <= 0){
+    result.innerText = "请输入正确的下注金额";
+    soundLose();
+    return;
+  }
+
+  bet(side, amount);
+}
