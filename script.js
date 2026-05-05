@@ -29,6 +29,7 @@ function register(){
     password,
     score: 100,
     streak: 0,
+    bestStreak: 0,
     times: 10
   });
 
@@ -46,6 +47,11 @@ function login(){
   if(!user){
     document.getElementById("msg").innerText = "账号或密码错误";
     return;
+  }
+
+  if(user.bestStreak === undefined){
+    user.bestStreak = user.streak || 0;
+    saveUsers(users);
   }
 
   currentUser = username;
@@ -69,39 +75,75 @@ function play(choice){
   let user = users.find(u => u.username === currentUser);
 
   const resultBox = document.getElementById("result");
+  const coin = document.getElementById("coin");
   const coinText = document.getElementById("coinText");
 
+  if(user.times <= 0){
+    resultBox.className = "result lose";
+    resultBox.innerText = "今日挑战次数用完了，明天再战！";
+    coinText.innerText = "?";
+    return;
+  }
+
   resultBox.className = "result";
-  resultBox.innerText = "硬币飞起来了...";
-  coinText.innerText = "…";
+  resultBox.innerText = "硬币正在翻转...";
+  coinText.innerText = "？";
+  coin.classList.remove("flip");
+  void coin.offsetWidth;
+  coin.classList.add("flip");
 
   setTimeout(() => {
-    if(user.times <= 0){
-      resultBox.innerText = "今日次数用完";
-      coinText.innerText = "?";
-      return;
-    }
-
     let result = Math.random() < 0.5 ? "正面" : "反面";
+    let bonus = 0;
 
     user.times--;
     coinText.innerText = result;
 
     if(choice === result){
-      user.score += 10;
       user.streak++;
+      user.score += 10;
+
+      if(user.streak >= 3){
+        bonus += 10;
+      }
+
+      if(user.streak >= 5){
+        bonus += 20;
+      }
+
+      if(user.streak >= 8){
+        bonus += 50;
+      }
+
+      user.score += bonus;
+
+      if(user.streak > user.bestStreak){
+        user.bestStreak = user.streak;
+      }
+
       resultBox.className = "result win";
-      resultBox.innerText = "🎉 猜中了！+10积分";
+
+      if(user.streak >= 8){
+        resultBox.innerText = `👑 硬币之王！连胜${user.streak}次，+${10 + bonus}积分`;
+      }else if(user.streak >= 5){
+        resultBox.innerText = `🚀 运气爆棚！连胜${user.streak}次，+${10 + bonus}积分`;
+      }else if(user.streak >= 3){
+        resultBox.innerText = `🔥 手感来了！连胜${user.streak}次，+${10 + bonus}积分`;
+      }else{
+        resultBox.innerText = `🎉 猜中了！连胜${user.streak}次，+10积分`;
+      }
+
     }else{
       user.score -= 5;
       user.streak = 0;
+
       resultBox.className = "result lose";
-      resultBox.innerText = "😅 猜错了！-5积分";
+      resultBox.innerText = `😅 可惜！结果是${result}，再来一次！-5积分`;
     }
 
     saveUsers(users);
     updateUI();
-  }, 700);
+  }, 750);
 }
 
 function updateUI(){
