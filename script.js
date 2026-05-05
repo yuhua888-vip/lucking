@@ -1,105 +1,156 @@
-let currentUser=null;
+let currentUser = null;
 
 function getUsers(){
-return JSON.parse(localStorage.getItem("users")||"[]");
+  return JSON.parse(localStorage.getItem("users") || "[]");
 }
 
-function saveUsers(u){
-localStorage.setItem("users",JSON.stringify(u));
+function saveUsers(users){
+  localStorage.setItem("users", JSON.stringify(users));
 }
 
 function createId(){
-return Math.floor(10000+Math.random()*90000);
+  return Math.floor(10000 + Math.random() * 90000);
 }
 
 function register(){
-let users=getUsers();
+  let users = getUsers();
 
-let user={
-id:createId(),
-username:username.value,
-password:password.value,
-score:100,
-streak:0,
-times:10
-};
+  if(!username.value || !password.value){
+    msg.innerText = "请输入账号和密码";
+    return;
+  }
 
-users.push(user);
-saveUsers(users);
+  if(users.find(u => u.username === username.value)){
+    msg.innerText = "账号已存在";
+    return;
+  }
 
-msg.innerText="注册成功";
+  let user = {
+    id: createId(),
+    username: username.value,
+    password: password.value,
+    score: 100,
+    streak: 0,
+    times: 10
+  };
+
+  users.push(user);
+  saveUsers(users);
+
+  msg.innerText = "注册成功";
 }
 
 function login(){
-let users=getUsers();
+  let users = getUsers();
 
-let user=users.find(u=>u.username==username.value && u.password==password.value);
+  let user = users.find(u => u.username === username.value && u.password === password.value);
 
-if(!user){
-msg.innerText="账号错误";
-return;
-}
+  if(!user){
+    msg.innerText = "账号错误";
+    return;
+  }
 
-currentUser=user.username;
+  currentUser = user.username;
 
-loginBox.style.display="none";
-gameBox.classList.remove("hidden");
+  loginBox.style.display = "none";
+  gameBox.classList.remove("hidden");
 
-updateUI();
+  updateUI();
 }
 
 function logout(){
-loginBox.style.display="block";
-gameBox.classList.add("hidden");
+  loginBox.style.display = "block";
+  gameBox.classList.add("hidden");
 }
 
 function play(choice){
-let users=getUsers();
-let user=users.find(u=>u.username==currentUser);
+  let users = getUsers();
+  let user = users.find(u => u.username === currentUser);
 
-let coin=document.getElementById("coin");
-let coinImg=document.getElementById("coinImg");
+  if(user.times <= 0){
+    result.innerText = "今日次数已用完";
+    return;
+  }
 
-coin.classList.add("flip");
+  let coin = document.getElementById("coin");
+  let coinImg = document.getElementById("coinImg");
 
-setTimeout(()=>{
+  coin.classList.remove("flip");
+  void coin.offsetWidth;
+  coin.classList.add("flip");
 
-let result=Math.random()<0.5?"正面":"反面";
+  coinText.innerText = "翻转中...";
+  result.innerText = "硬币正在翻转...";
 
-if(result=="正面"){
-coinImg.src="coin.png.PNG";
-}else{
-coinImg.src="coin.png2.PNG";
-}
+  setTimeout(() => {
+    let flipResult = Math.random() < 0.5 ? "正面" : "反面";
 
-coinText.innerText=result;
+    if(flipResult === "正面"){
+      coinImg.src = "coin.png.PNG";
+    }else{
+      coinImg.src = "coin.png2.PNG";
+    }
 
-if(choice==result){
-user.score+=10;
-user.streak++;
-result.innerText="赢了";
-}else{
-user.score-=5;
-user.streak=0;
-result.innerText="输了";
-}
+    coinText.innerText = flipResult;
 
-user.times--;
+    if(choice === flipResult){
+      user.score += 10;
+      user.streak++;
+      result.innerText = "💰 赢了！+10";
+      explodeCoins();
+    }else{
+      user.score -= 5;
+      user.streak = 0;
+      result.innerText = "😌 惜败：" + flipResult;
+    }
 
-saveUsers(users);
-updateUI();
+    user.times--;
 
-coin.classList.remove("flip");
+    saveUsers(users);
+    updateUI();
 
-},700);
+    coin.classList.remove("flip");
+
+  }, 750);
 }
 
 function updateUI(){
-let user=getUsers().find(u=>u.username==currentUser);
+  let user = getUsers().find(u => u.username === currentUser);
+  if(!user) return;
 
-name.innerText=user.username;
-userId.innerText=user.id;
-score.innerText=user.score;
-streak.innerText=user.streak;
-times.innerText=user.times;
+  name.innerText = user.username;
+  userId.innerText = user.id;
+  score.innerText = user.score;
+  streak.innerText = user.streak;
+  times.innerText = user.times;
+}
+
+function explodeCoins(){
+  const container = document.getElementById("coinExplosion");
+  if(!container) return;
+
+  container.innerHTML = "";
+
+  for(let i = 0; i < 34; i++){
+    let coin = document.createElement("div");
+    coin.className = "coin-particle";
+
+    let x = (Math.random() - 0.5) * 420 + "px";
+    let y = (Math.random() - 0.5) * 420 + "px";
+
+    coin.style.setProperty("--x", x);
+    coin.style.setProperty("--y", y);
+    coin.style.left = "50%";
+    coin.style.top = "45%";
+
+    container.appendChild(coin);
+  }
+
+  let flash = document.createElement("div");
+  flash.className = "flash";
+  document.body.appendChild(flash);
+
+  setTimeout(() => {
+    flash.remove();
+  }, 400);
 }
