@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>数字概率硬币</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h1>数字概率硬币</h1>
+
+  <!-- 登录注册 -->
+  <div id="loginBox">
+    <h2>注册 / 登录</h2>
+    <input id="username" placeholder="用户名">
+    <input id="password" type="password" placeholder="密码">
+    <button onclick="register()">注册</button>
+    <button onclick="login()">登录</button>
+    <p id="msg"></p>
+  </div>
+
+  <!-- 游戏区 -->
+  <div id="gameBox" style="display:none;">
+    <h2>欢迎：<span id="name"></span></h2>
+
+    <p>积分：<span id="score">0</span></p>
+    <p>连胜：<span id="streak">0</span></p>
+    <p>剩余次数：<span id="times">10</span></p>
+
+    <button onclick="play('正面')">猜正面</button>
+    <button onclick="play('反面')">猜反面</button>
+
+    <h3 id="result">等待开始</h3>
+
+    <button onclick="logout()">退出登录</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
