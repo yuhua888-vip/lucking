@@ -10,21 +10,33 @@
 
 <div class="app">
 
-  <div class="hero">
-    <h1>数字概率硬币</h1>
-    <p>概率模拟 · 娱乐积分 · 连胜挑战</p>
+  <!-- ===== 登录页（升级版） ===== -->
+  <div id="loginBox" class="login-page">
+
+    <h1 class="title">数字概率硬币</h1>
+    <p class="subtitle">好运从第一枚硬币开始</p>
+
+    <div class="coin-small">💰</div>
+
+    <div class="login-card">
+      <input id="username" placeholder="输入用户名">
+      <input id="password" type="password" placeholder="输入密码">
+
+      <button class="main-btn" onclick="login()">立即开始</button>
+      <button class="ghost-btn" onclick="register()">注册账号</button>
+
+      <p id="msg"></p>
+    </div>
+
+    <div class="login-tip">
+      娱乐积分 · 连胜挑战 · 概率模拟
+    </div>
+
   </div>
 
-  <div class="card" id="loginBox">
-    <h2>注册 / 登录</h2>
-    <input id="username" placeholder="请输入用户名">
-    <input id="password" type="password" placeholder="请输入密码">
-    <button class="main-btn" onclick="register()">注册账号</button>
-    <button class="second-btn" onclick="login()">立即登录</button>
-    <p id="msg"></p>
-  </div>
+  <!-- ===== 游戏页 ===== -->
+  <div id="gameBox" class="card game-card" style="display:none;">
 
-  <div class="card game-card" id="gameBox" style="display:none;">
     <div class="user-row">
       <span>玩家：<b id="name"></b></span>
       <button class="small-btn" onclick="logout()">退出</button>
@@ -55,10 +67,7 @@
         <strong id="times">10</strong>
       </div>
     </div>
-  </div>
 
-  <div class="rules">
-    <p>本网站仅为概率模拟娱乐，积分不涉及真实金钱、充值或提现。</p>
   </div>
 
 </div>
