@@ -13,6 +13,10 @@ function createId(){
   return Math.floor(10000 + Math.random() * 90000);
 }
 
+function isValidAccount(value){
+  return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5}$/.test(value);
+}
+
 /* 音效 */
 function initAudio(){
   if(!audioCtx){
@@ -61,20 +65,28 @@ function soundLose(){
 function register(){
   let users = getUsers();
 
-  if(!username.value || !password.value){
-    msg.innerText = "请输入账号和密码";
+  const account = username.value.trim();
+  const pass = password.value.trim();
+
+  if(!isValidAccount(account)){
+    msg.innerText = "账号必须是5位字母+数字混合";
     return;
   }
 
-  if(users.find(u => u.username === username.value)){
+  if(!isValidAccount(pass)){
+    msg.innerText = "密码必须是5位字母+数字混合";
+    return;
+  }
+
+  if(users.find(u => u.username === account)){
     msg.innerText = "账号已存在";
     return;
   }
 
   let user = {
     id: createId(),
-    username: username.value,
-    password: password.value,
+    username: account,
+    password: pass,
     score: 100,
     streak: 0,
     times: 10,
@@ -85,7 +97,7 @@ function register(){
   users.push(user);
   saveUsers(users);
 
-  msg.innerText = "注册成功";
+  msg.innerText = "注册成功，请登录";
 }
 
 function login(){
@@ -93,10 +105,13 @@ function login(){
 
   let users = getUsers();
 
-  let user = users.find(u => u.username === username.value && u.password === password.value);
+  const account = username.value.trim();
+  const pass = password.value.trim();
+
+  let user = users.find(u => u.username === account && u.password === pass);
 
   if(!user){
-    msg.innerText = "账号错误";
+    msg.innerText = "账号或密码错误";
     return;
   }
 
@@ -110,12 +125,41 @@ function login(){
   loginBox.style.display = "none";
   gameBox.classList.remove("hidden");
 
+  switchTab("entertainment");
   updateUI();
 }
 
 function logout(){
+  currentUser = null;
   loginBox.style.display = "block";
   gameBox.classList.add("hidden");
+}
+
+function switchTab(tab){
+  entertainmentPanel.classList.add("hidden");
+  servicePanel.classList.add("hidden");
+  settingsPanel.classList.add("hidden");
+
+  tabEntertainment.classList.remove("active");
+  tabService.classList.remove("active");
+  tabSettings.classList.remove("active");
+
+  if(tab === "entertainment"){
+    entertainmentPanel.classList.remove("hidden");
+    tabEntertainment.classList.add("active");
+  }
+
+  if(tab === "service"){
+    servicePanel.classList.remove("hidden");
+    tabService.classList.add("active");
+  }
+
+  if(tab === "settings"){
+    settingsPanel.classList.remove("hidden");
+    tabSettings.classList.add("active");
+  }
+
+  updateUI();
 }
 
 function play(choice){
@@ -144,7 +188,6 @@ function play(choice){
 
     let flipResult = Math.random() < 0.5 ? "正面" : "反面";
 
-    /* 差一点赢演出 */
     if(Math.random() < 0.35 && choice !== flipResult){
       coinText.innerText = choice;
     }
@@ -195,6 +238,12 @@ function updateUI(){
   score.innerText = user.score;
   streak.innerText = user.streak;
   times.innerText = user.times;
+
+  settingName.innerText = user.username;
+  settingId.innerText = user.id;
+  settingScore.innerText = user.score;
+  settingStreak.innerText = user.streak;
+  settingTimes.innerText = user.times;
 
   renderRoad(user.road || []);
   renderWinRoad(user.winRoad || []);
