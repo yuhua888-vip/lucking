@@ -364,3 +364,51 @@ button::after {
   from { opacity: 1; }
   to { opacity: 0; }
 }
+/* ===== 底部 Tab 栏 ===== */
+.tabbar {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  width: min(390px, calc(100% - 28px));
+  height: 68px;
+  border-radius: 24px;
+  background: rgba(20, 8, 20, 0.92);
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  box-shadow:
+    0 0 28px rgba(250,204,21,0.35),
+    inset 0 0 18px rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 999;
+}
+
+.tabbar div {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  color: #c9b27c;
+  font-weight: bold;
+}
+
+.tabbar .active {
+  color: #facc15;
+  text-shadow: 0 0 12px rgba(250,204,21,0.8);
+}
+
+.app {
+  padding-bottom: 95px;
+}
+
+#servicePanel,
+#settingsPanel {
+  min-height: 420px;
+  padding-top: 30px;
+}
+
+#servicePanel h2,
+#settingsPanel h2 {
+  color: #facc15;
+}
