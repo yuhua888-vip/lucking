@@ -158,7 +158,8 @@ function switchGame(type){
   updateUI();
 }
 
-/* 硬币盘口 */
+/* ================= 硬币盘口 ================= */
+
 function startRound(){
   clearInterval(roundTimer);
   stopFakePlayers();
@@ -307,7 +308,8 @@ function settle(resultSide){
   setTimeout(startRound, 2500);
 }
 
-/* 假玩家 + 热度 */
+/* ================= 假玩家 + 热度 ================= */
+
 function startFakePlayers(){
   clearInterval(fakeTimer);
 
@@ -382,7 +384,8 @@ function updateHeatBar(){
   }
 }
 
-/* 高级翻牌百家乐 */
+/* ================= 标准补牌版百家乐 V2 ================= */
+
 function drawCard(){
   const suits = ["♠", "♥", "♦", "♣"];
   const values = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
@@ -430,6 +433,33 @@ function revealCard(id){
   }
 }
 
+/* 标准百家乐补牌逻辑 */
+function shouldPlayerDraw(playerPoint){
+  return playerPoint <= 5;
+}
+
+function shouldBankerDraw(bankerPoint, playerThirdPoint, playerDrew){
+  if(!playerDrew){
+    return bankerPoint <= 5;
+  }
+
+  if(bankerPoint <= 2) return true;
+  if(bankerPoint === 3) return playerThirdPoint !== 8;
+  if(bankerPoint === 4) return playerThirdPoint >= 2 && playerThirdPoint <= 7;
+  if(bankerPoint === 5) return playerThirdPoint >= 4 && playerThirdPoint <= 7;
+  if(bankerPoint === 6) return playerThirdPoint === 6 || playerThirdPoint === 7;
+
+  return false;
+}
+
+async function dealBaccaratCard(target, card, id, text){
+  baccaratResult.innerText = text;
+  target.innerHTML += cardHTML(card, id);
+  await sleep(500);
+  revealCard(id);
+  await sleep(700);
+}
+
 async function playBaccarat(choice){
   let amount = Number(baccaratAmount.value);
 
@@ -452,7 +482,6 @@ async function playBaccarat(choice){
   }
 
   user.score = Number((user.score - amount).toFixed(2));
-
   saveUsers(users);
   updateUI();
 
@@ -472,53 +501,81 @@ async function playBaccarat(choice){
 
   await sleep(500);
 
-  baccaratResult.innerText = "发闲家第一张...";
   player.push(drawCard());
-  playerCards.innerHTML += cardHTML(player[0], "playerCard1");
+  await dealBaccaratCard(playerCards, player[0], "playerCard1", "发闲家第一张...");
 
-  await sleep(500);
-  revealCard("playerCard1");
-
-  await sleep(700);
-
-  baccaratResult.innerText = "发庄家第一张...";
   banker.push(drawCard());
-  bankerCards.innerHTML += cardHTML(banker[0], "bankerCard1");
+  await dealBaccaratCard(bankerCards, banker[0], "bankerCard1", "发庄家第一张...");
 
-  await sleep(500);
-  revealCard("bankerCard1");
-
-  await sleep(700);
-
-  baccaratResult.innerText = "发闲家第二张...";
   player.push(drawCard());
-  playerCards.innerHTML += cardHTML(player[1], "playerCard2");
+  await dealBaccaratCard(playerCards, player[1], "playerCard2", "发闲家第二张...");
 
-  await sleep(500);
-  revealCard("playerCard2");
-
-  await sleep(700);
-
-  baccaratResult.innerText = "发庄家第二张...";
   banker.push(drawCard());
-  bankerCards.innerHTML += cardHTML(banker[1], "bankerCard2");
+  await dealBaccaratCard(bankerCards, banker[1], "bankerCard2", "发庄家第二张...");
 
-  await sleep(500);
-  revealCard("bankerCard2");
-
-  await sleep(900);
-
-  let bankerP = handPoint(banker);
   let playerP = handPoint(player);
+  let bankerP = handPoint(banker);
+
+  playerPoint.innerText = playerP;
+  bankerPoint.innerText = bankerP;
+
+  await sleep(700);
+
+  let natural = playerP >= 8 || bankerP >= 8;
+  let playerDrew = false;
+  let playerThirdPoint = null;
+
+  if(natural){
+    baccaratResult.innerText = "天牌！不补牌，直接比点...";
+    await sleep(900);
+  }else{
+    if(shouldPlayerDraw(playerP)){
+      baccaratResult.innerText = "闲家补第三张...";
+      await sleep(500);
+
+      let third = drawCard();
+      player.push(third);
+      playerDrew = true;
+      playerThirdPoint = cardPoint(third);
+
+      await dealBaccaratCard(playerCards, third, "playerCard3", "闲家补牌...");
+      playerP = handPoint(player);
+      playerPoint.innerText = playerP;
+
+      await sleep(500);
+    }else{
+      baccaratResult.innerText = "闲家停牌...";
+      await sleep(700);
+    }
+
+    bankerP = handPoint(banker);
+
+    if(shouldBankerDraw(bankerP, playerThirdPoint, playerDrew)){
+      baccaratResult.innerText = "庄家补第三张...";
+      await sleep(500);
+
+      let third = drawCard();
+      banker.push(third);
+
+      await dealBaccaratCard(bankerCards, third, "bankerCard3", "庄家补牌...");
+      bankerP = handPoint(banker);
+      bankerPoint.innerText = bankerP;
+
+      await sleep(500);
+    }else{
+      baccaratResult.innerText = "庄家停牌...";
+      await sleep(700);
+    }
+  }
 
   baccaratResult.innerText = "正在比点...";
+  await sleep(800);
 
-  await sleep(700);
+  playerP = handPoint(player);
+  bankerP = handPoint(banker);
 
-  bankerPoint.innerText = bankerP;
   playerPoint.innerText = playerP;
-
-  await sleep(600);
+  bankerPoint.innerText = bankerP;
 
   let resultSide = "";
 
@@ -568,7 +625,8 @@ async function playBaccarat(choice){
   updateUI();
 }
 
-/* UI */
+/* ================= UI ================= */
+
 function updateUI(){
   let user = getUsers().find(u => u.username === currentUser);
   if(!user) return;
