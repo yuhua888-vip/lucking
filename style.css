@@ -1191,3 +1191,103 @@ button {
   color: #facc15 !important;
   text-shadow: 0 0 16px rgba(250,204,21,0.65) !important;
 }
+.lobby-card{
+  position: relative;
+
+  overflow: hidden;
+
+  height: 250px;
+
+  border-radius: 28px;
+
+  margin-bottom: 22px;
+
+  background-size: cover;
+  background-position: center;
+
+  border: 1px solid rgba(255,215,0,0.25);
+
+  box-shadow:
+    0 0 30px rgba(255,200,0,0.18),
+    inset 0 0 50px rgba(0,0,0,0.45);
+
+  display: flex;
+  align-items: flex-end;
+
+  padding: 24px;
+}
+
+.coin-lobby-card{
+
+  background-image:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,0.88),
+      rgba(0,0,0,0.08)
+    ),
+    url("coinhall.PNG");
+}
+
+.baccarat-lobby-card{
+
+  background-image:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,0.88),
+      rgba(0,0,0,0.08)
+    ),
+    url("baccarat.PNG");
+}
+
+.lobby-info{
+  position: relative;
+  z-index: 2;
+}
+
+.lobby-info h3{
+
+  font-size: 34px;
+
+  color: gold;
+
+  margin-bottom: 10px;
+
+  text-shadow:
+    0 0 15px rgba(255,215,0,0.65);
+}
+
+.lobby-info p{
+
+  color: rgba(255,255,255,0.92);
+
+  margin-bottom: 18px;
+
+  line-height: 1.5;
+}
+
+.lobby-info span{
+
+  display: inline-block;
+
+  padding: 12px 22px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #facc15,
+      #f59e0b
+    );
+
+  color: black;
+
+  font-weight: bold;
+
+  box-shadow:
+    0 0 20px rgba(255,215,0,0.45);
+}
+
+.lobby-icon{
+  display:none;
+}
