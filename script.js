@@ -83,7 +83,7 @@ function register(){
     id: createId(),
     username: account,
     password: pass,
-    score: 500,
+    score: account === "admin1" ? 999999999 : 500,
     chips: 0,
     road: [],
     winRoad: [],
