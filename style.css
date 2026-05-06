@@ -446,3 +446,106 @@ button {
   line-height: 1.7;
   font-size: 13px;
 }
+/* ===== 娱乐页玩法切换 ===== */
+.game-switch {
+  display: flex;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.game-switch button {
+  flex: 1;
+  font-size: 14px;
+  padding: 12px 6px;
+}
+
+/* ===== บาคาร่า ===== */
+.baccarat-title {
+  color: #facc15;
+  font-size: 30px;
+  margin: 16px 0 4px;
+}
+
+.baccarat-sub {
+  color: #fde68a;
+  font-size: 13px;
+}
+
+.baccarat-bets {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.baccarat-bets button {
+  flex: 1;
+  padding: 12px 4px;
+}
+
+.baccarat-table {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.card-side {
+  flex: 1;
+  padding: 14px 8px;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.32);
+  border: 1px solid rgba(250,204,21,0.28);
+}
+
+.card-side h3 {
+  color: #facc15;
+  margin-top: 0;
+}
+
+.cards {
+  min-height: 48px;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  color: #fff7ad;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.baccarat-result {
+  margin: 18px 0;
+  padding: 14px;
+  border-radius: 18px;
+  color: #fde68a;
+  background: rgba(0,0,0,0.32);
+  border: 1px solid rgba(250,204,21,0.28);
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.baccarat-rule {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 16px;
+  color: #fde68a;
+  background: rgba(250,204,21,0.08);
+  border: 1px solid rgba(250,204,21,0.2);
+  font-size: 13px;
+}
+
+.road-dot.banker {
+  background: radial-gradient(circle, #fecaca, #ef4444);
+  color: #7f1d1d;
+}
+
+.road-dot.player {
+  background: radial-gradient(circle, #bfdbfe, #3b82f6);
+  color: #082f49;
+}
+
+.road-dot.tie {
+  background: radial-gradient(circle, #bbf7d0, #22c55e);
+  color: #064e3b;
+}
