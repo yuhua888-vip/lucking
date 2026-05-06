@@ -1,4 +1,3 @@
-
 let currentUser = null;
 
 let timer = 8;
@@ -154,7 +153,8 @@ function switchGame(type){
   updateUI();
 }
 
-/* 硬币盘口 */
+/* ===== 硬币盘口 ===== */
+
 function startRound(){
   clearInterval(roundTimer);
   stopFakePlayers();
@@ -302,7 +302,8 @@ function settle(resultSide){
   setTimeout(startRound, 2500);
 }
 
-/* 假玩家 + 热度 */
+/* ===== 假玩家 + 热度 ===== */
+
 function startFakePlayers(){
   clearInterval(fakeTimer);
 
@@ -377,16 +378,22 @@ function updateHeatBar(){
   }
 }
 
-/* บาคาร่า */
+/* ===== 高级百家乐 ===== */
+
 function drawCard(){
-  let cards = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
-  return cards[Math.floor(Math.random() * cards.length)];
+  const suits = ["♠", "♥", "♦", "♣"];
+  const values = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+
+  return {
+    suit: suits[Math.floor(Math.random() * suits.length)],
+    value: values[Math.floor(Math.random() * values.length)]
+  };
 }
 
 function cardPoint(card){
-  if(card === "A") return 1;
-  if(["10","J","Q","K"].includes(card)) return 0;
-  return Number(card);
+  if(card.value === "A") return 1;
+  if(["10","J","Q","K"].includes(card.value)) return 0;
+  return Number(card.value);
 }
 
 function handPoint(cards){
@@ -394,7 +401,16 @@ function handPoint(cards){
   return total % 10;
 }
 
-function playBaccarat(choice){
+function cardHTML(card){
+  const red = card.suit === "♥" || card.suit === "♦";
+  return `<div class="playing-card ${red ? "red" : "black"}">${card.suit}${card.value}</div>`;
+}
+
+function sleep(ms){
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function playBaccarat(choice){
   let amount = Number(baccaratAmount.value);
 
   if(!amount || amount <= 0){
@@ -416,17 +432,52 @@ function playBaccarat(choice){
   }
 
   user.score = Number((user.score - amount).toFixed(2));
+  saveUsers(users);
+  updateUI();
 
-  let banker = [drawCard(), drawCard()];
-  let player = [drawCard(), drawCard()];
+  baccaratAmount.value = "";
+
+  bankerCards.innerHTML = "";
+  playerCards.innerHTML = "";
+  bankerPoint.innerText = "-";
+  playerPoint.innerText = "-";
+
+  baccaratResult.classList.add("dealing");
+  baccaratResult.innerText = "洗牌中...";
+
+  let banker = [];
+  let player = [];
+
+  await sleep(500);
+
+  baccaratResult.innerText = "发闲家第一张...";
+  player.push(drawCard());
+  playerCards.innerHTML = player.map(cardHTML).join("");
+  await sleep(650);
+
+  baccaratResult.innerText = "发庄家第一张...";
+  banker.push(drawCard());
+  bankerCards.innerHTML = banker.map(cardHTML).join("");
+  await sleep(650);
+
+  baccaratResult.innerText = "发闲家第二张...";
+  player.push(drawCard());
+  playerCards.innerHTML = player.map(cardHTML).join("");
+  await sleep(650);
+
+  baccaratResult.innerText = "发庄家第二张...";
+  banker.push(drawCard());
+  bankerCards.innerHTML = banker.map(cardHTML).join("");
+  await sleep(800);
 
   let bankerP = handPoint(banker);
   let playerP = handPoint(player);
 
-  bankerCards.innerText = banker.join("  ");
-  playerCards.innerText = player.join("  ");
   bankerPoint.innerText = bankerP;
   playerPoint.innerText = playerP;
+
+  baccaratResult.innerText = "正在比点...";
+  await sleep(800);
 
   let resultSide = "";
 
@@ -453,13 +504,15 @@ function playBaccarat(choice){
     user.score = Number((user.score + payout).toFixed(2));
 
     baccaratResult.innerText =
-      "💰 开奖：" + resultSide + "，返还 " + formatMoney(payout);
+      "💰 " + resultSide + "赢！返还 " + formatMoney(payout);
 
     explodeCoins();
   }else{
     baccaratResult.innerText =
-      "😌 开奖：" + resultSide + "，损失 " + formatMoney(amount);
+      "😌 " + resultSide + "赢，损失 " + formatMoney(amount);
   }
+
+  baccaratResult.classList.remove("dealing");
 
   if(!user.baccaratRoad) user.baccaratRoad = [];
 
@@ -468,11 +521,10 @@ function playBaccarat(choice){
 
   saveUsers(users);
   updateUI();
-
-  baccaratAmount.value = "";
 }
 
-/* UI */
+/* ===== UI ===== */
+
 function updateUI(){
   let user = getUsers().find(u => u.username === currentUser);
   if(!user) return;
