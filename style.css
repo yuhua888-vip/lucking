@@ -1291,3 +1291,74 @@ button {
 .lobby-icon{
   display:none;
 }
+/* ===== 大厅动态质感升级 ===== */
+
+.lobby-card {
+  animation: lobbyFloat 3.8s ease-in-out infinite;
+}
+
+.baccarat-lobby-card {
+  animation-delay: 0.45s;
+}
+
+@keyframes lobbyFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.lobby-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,0.18) 45%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  animation: lobbyLight 4.5s infinite;
+  pointer-events: none;
+}
+
+@keyframes lobbyLight {
+  0% {
+    transform: translateX(-120%);
+  }
+  45% {
+    transform: translateX(120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.lobby-info span {
+  animation: enterBreath 1.6s ease-in-out infinite;
+}
+
+@keyframes enterBreath {
+  0% {
+    box-shadow: 0 0 12px rgba(255,215,0,0.35);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255,215,0,0.75);
+    transform: scale(1.04);
+  }
+  100% {
+    box-shadow: 0 0 12px rgba(255,215,0,0.35);
+    transform: scale(1);
+  }
+}
+
+.lobby-card:active {
+  transform: scale(0.97);
+}
