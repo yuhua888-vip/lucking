@@ -1149,3 +1149,45 @@ button:active{
   line-height:1.7;
   font-size:13px;
 }
+/* ===== 强制平台UI覆盖版 ===== */
+
+body {
+  background:
+    radial-gradient(circle at top, #4a3205, #120805 45%, #020202 100%) !important;
+}
+
+#loginBox,
+#gameBox {
+  background:
+    linear-gradient(145deg, rgba(20,20,20,0.96), rgba(5,5,5,0.96)) !important;
+  border: 1px solid rgba(250,204,21,0.45) !important;
+  box-shadow:
+    0 0 45px rgba(250,204,21,0.22),
+    inset 0 0 35px rgba(255,255,255,0.04) !important;
+}
+
+.game-section,
+.market-board,
+.chip-exchange-box,
+.chip-bet-control,
+.rule-box {
+  background: rgba(0,0,0,0.45) !important;
+  border: 1px solid rgba(250,204,21,0.35) !important;
+  box-shadow: 0 0 22px rgba(250,204,21,0.14) !important;
+}
+
+button {
+  background: linear-gradient(135deg, #fff7ad, #facc15, #f97316) !important;
+  box-shadow:
+    0 0 24px rgba(250,204,21,0.45),
+    inset 0 0 14px rgba(255,255,255,0.45) !important;
+}
+
+.section-title,
+.hall-title div,
+.rule-title,
+.market-title,
+.exchange-title {
+  color: #facc15 !important;
+  text-shadow: 0 0 16px rgba(250,204,21,0.65) !important;
+}
