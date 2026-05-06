@@ -424,3 +424,25 @@ button {
   color: #facc15;
   font-weight: bold;
 }
+.rule-box{
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.32);
+  border: 1px solid rgba(250,204,21,0.25);
+  text-align: left;
+}
+
+.rule-title{
+  font-size: 18px;
+  font-weight: 900;
+  color: #facc15;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.rule-content{
+  color: #fde68a;
+  line-height: 1.7;
+  font-size: 13px;
+}
