@@ -51,6 +51,7 @@ function getCurrentUser(){
 function updateCurrentUser(user){
   let users = getUsers();
   let index = users.findIndex(u => u.username === currentUser);
+
   if(index >= 0){
     users[index] = user;
     saveUsers(users);
@@ -119,14 +120,15 @@ function login(){
   gameBox.classList.remove("hidden");
 
   switchTab("entertainment");
-  switchGame("coin");
+  switchGame("lobby");
 
   updateUI();
-  startRound();
 }
 
+/* 退出 */
 function logout(){
   currentUser = null;
+
   loginBox.style.display = "block";
   gameBox.classList.add("hidden");
 
@@ -134,7 +136,7 @@ function logout(){
   stopFakePlayers();
 }
 
-/* 底部Tab */
+/* 底部 Tab */
 function switchTab(tab){
   entertainmentPanel.classList.add("hidden");
   servicePanel.classList.add("hidden");
@@ -162,10 +164,18 @@ function switchTab(tab){
   updateUI();
 }
 
-/* 游戏切换 */
+/* 游戏大厅切换 */
 function switchGame(type){
+  gameLobby.classList.add("hidden");
   coinGamePanel.classList.add("hidden");
   baccaratPanel.classList.add("hidden");
+
+  clearInterval(roundTimer);
+  stopFakePlayers();
+
+  if(type === "lobby"){
+    gameLobby.classList.remove("hidden");
+  }
 
   if(type === "coin"){
     coinGamePanel.classList.remove("hidden");
@@ -174,16 +184,21 @@ function switchGame(type){
 
   if(type === "baccarat"){
     baccaratPanel.classList.remove("hidden");
-    clearInterval(roundTimer);
-    stopFakePlayers();
     updateBaccaratUI();
   }
 
   updateUI();
 }
 
-/* ================= 硬币盘口 ================= */
+function enterGame(type){
+  switchGame(type);
+}
 
+function backToLobby(){
+  switchGame("lobby");
+}
+
+/* 硬币盘口 */
 function startRound(){
   clearInterval(roundTimer);
   stopFakePlayers();
@@ -330,8 +345,7 @@ function settle(resultSide){
   setTimeout(startRound, 2500);
 }
 
-/* ================= 假玩家 + 热度 ================= */
-
+/* 假玩家 + 热度 */
 function startFakePlayers(){
   clearInterval(fakeTimer);
 
@@ -406,8 +420,7 @@ function updateHeatBar(){
   }
 }
 
-/* ================= 筹码版百家乐 V3 ================= */
-
+/* 筹码百家乐 */
 function updateBaccaratUI(){
   let user = getCurrentUser();
   if(!user) return;
@@ -567,6 +580,7 @@ function clearBaccaratBets(){
   baccaratResult.innerText = "已清空下注，筹码已退回";
 }
 
+/* 发牌规则 */
 function drawCard(){
   const suits = ["♠", "♥", "♦", "♣"];
   const values = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
@@ -795,8 +809,7 @@ async function startBaccaratRound(){
   updateBaccaratUI();
 }
 
-/* ================= UI ================= */
-
+/* UI */
 function updateUI(){
   let user = getCurrentUser();
   if(!user) return;
