@@ -660,3 +660,193 @@ button {
 .card-front.black {
   color: #111827;
 }
+/* ===== 筹码版百家乐 V3 ===== */
+
+.chip-wallet {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.chip-wallet div {
+  flex: 1;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.34);
+  border: 1px solid rgba(250,204,21,0.28);
+  color: #fde68a;
+}
+
+.chip-wallet b {
+  color: #facc15;
+  font-size: 22px;
+}
+
+.chip-exchange-box,
+.chip-bet-control {
+  margin: 16px 0;
+  padding: 14px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.34);
+  border: 1px solid rgba(250,204,21,0.28);
+}
+
+.exchange-title {
+  color: #facc15;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.baccarat-table-v3 {
+  display: grid;
+  grid-template-columns: 1fr 0.82fr 1fr;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.baccarat-bet-zone {
+  min-height: 130px;
+  padding: 14px 8px;
+  border-radius: 24px;
+  border: 1px solid rgba(250,204,21,0.32);
+  background: radial-gradient(circle at top, rgba(250,204,21,0.18), rgba(0,0,0,0.36));
+  box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: 0.18s ease;
+}
+
+.baccarat-bet-zone.selected {
+  transform: translateY(-4px) scale(1.03);
+  border-color: rgba(250,204,21,0.9);
+  box-shadow:
+    0 0 24px rgba(250,204,21,0.45),
+    inset 0 0 20px rgba(255,255,255,0.08);
+}
+
+.player-zone {
+  background:
+    radial-gradient(circle at top, rgba(59,130,246,0.35), rgba(0,0,0,0.42));
+}
+
+.banker-zone {
+  background:
+    radial-gradient(circle at top, rgba(239,68,68,0.35), rgba(0,0,0,0.42));
+}
+
+.tie-zone {
+  background:
+    radial-gradient(circle at top, rgba(34,197,94,0.35), rgba(0,0,0,0.42));
+}
+
+.zone-title {
+  font-size: 34px;
+  font-weight: 900;
+  color: #fff7ad;
+  text-shadow: 0 0 16px rgba(250,204,21,0.65);
+}
+
+.zone-odds {
+  margin: 5px 0 10px;
+  color: #fde68a;
+  font-size: 13px;
+}
+
+.deal-btn {
+  margin-top: 14px;
+  font-size: 18px;
+  padding: 16px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #fff7ad, #facc15, #f97316);
+}
+
+#selectedBetSide {
+  margin: 10px 0;
+  color: #facc15;
+  font-weight: 900;
+}
+
+.baccarat-card-table {
+  display: flex;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.baccarat-card-table .card-side {
+  flex: 1;
+  min-height: 170px;
+}
+
+/* 翻牌动画 */
+.playing-card {
+  width: 48px;
+  height: 66px;
+  perspective: 800px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.55s ease;
+}
+
+.playing-card.revealed .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.card-back {
+  background: linear-gradient(135deg,#7f1d1d,#dc2626,#facc15);
+  color: #fff7ad;
+  border: 1px solid rgba(250,204,21,0.6);
+  box-shadow: 0 0 16px rgba(250,204,21,0.35);
+}
+
+.card-front {
+  background: linear-gradient(145deg,#fff,#fef3c7);
+  color: #111827;
+  transform: rotateY(180deg);
+  box-shadow:
+    0 0 16px rgba(250,204,21,0.35),
+    inset 0 0 8px rgba(0,0,0,0.12);
+}
+
+.card-front.red {
+  color: #dc2626;
+}
+
+.card-front.black {
+  color: #111827;
+}
+
+.baccarat-result.dealing {
+  color: #facc15;
+  animation: pulseDeal 0.8s infinite alternate;
+}
+
+@keyframes pulseDeal {
+  from {
+    box-shadow: 0 0 10px rgba(250,204,21,0.2);
+  }
+  to {
+    box-shadow: 0 0 28px rgba(250,204,21,0.55);
+  }
+}
