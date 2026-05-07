@@ -7,7 +7,14 @@
 
 body{
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;
-  background:radial-gradient(circle at top,#3b0764,#000);
+
+  background:
+  radial-gradient(circle at top, rgba(255,215,0,.18), transparent 28%),
+  radial-gradient(circle at bottom, rgba(168,85,247,.22), transparent 35%),
+  linear-gradient(160deg,#120018,#050505 72%);
+
+  background-attachment:fixed;
+
   color:#fff;
   min-height:100vh;
   overflow-x:hidden;
@@ -29,7 +36,10 @@ body{
   border:1px solid rgba(255,215,0,.18);
   border-radius:34px;
   padding:18px;
-  box-shadow:0 0 45px rgba(255,215,0,.14);
+  box-shadow:
+    0 0 45px rgba(255,215,0,.14),
+    inset 0 0 40px rgba(255,255,255,.02);
+
   backdrop-filter:blur(18px);
 }
 
@@ -46,13 +56,18 @@ body{
   font-size:12px;
   margin-bottom:18px;
   letter-spacing:3px;
+
+  box-shadow:
+    0 0 20px rgba(255,215,0,.18);
 }
 
 .lucky-home h1{
   font-size:46px;
   margin-bottom:12px;
   color:#facc15;
-  text-shadow:0 0 20px rgba(255,215,0,.35);
+
+  text-shadow:
+    0 0 20px rgba(255,215,0,.35);
 }
 
 .brand-subtitle{
@@ -67,13 +82,19 @@ body{
   border-radius:34px;
   overflow:hidden;
   margin-bottom:24px;
+
   background-image:
     linear-gradient(to top,rgba(0,0,0,.42),rgba(0,0,0,.03)),
     url("lucky7hero.PNG");
+
   background-size:cover;
   background-position:center;
+
   border:1px solid rgba(255,215,0,.24);
-  box-shadow:0 0 36px rgba(255,215,0,.2);
+
+  box-shadow:
+    0 0 36px rgba(255,215,0,.2);
+
   animation:luckyFloat 4s ease-in-out infinite;
 }
 
@@ -81,7 +102,15 @@ body{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.14),transparent);
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent,
+      rgba(255,255,255,.14),
+      transparent
+    );
+
   transform:translateX(-120%);
   animation:lightMove 4.5s infinite;
 }
@@ -93,6 +122,8 @@ body{
   background:rgba(255,255,255,.07);
   color:#eee;
   font-size:13px;
+
+  border:1px solid rgba(255,255,255,.05);
 }
 
 .login-panel{
@@ -127,7 +158,9 @@ body{
   background:linear-gradient(90deg,#facc15,#f59e0b);
   color:black;
   font-weight:900;
-  box-shadow:0 0 20px rgba(255,215,0,.32);
+
+  box-shadow:
+    0 0 20px rgba(255,215,0,.32);
 }
 
 .login-panel button{
@@ -162,10 +195,21 @@ body{
   justify-content:space-between;
   align-items:flex-start;
   gap:12px;
+
   padding:22px;
+
   border-radius:28px;
+
   margin-bottom:20px;
-  background:linear-gradient(145deg,rgba(255,215,0,.12),rgba(0,0,0,.45));
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,215,0,.12),
+      rgba(0,0,0,.45)
+    );
+
+  border:1px solid rgba(255,215,0,.08);
 }
 
 .small-label{
@@ -191,7 +235,11 @@ body{
   border-radius:28px;
   text-align:center;
   margin-bottom:18px;
-  background:rgba(255,255,255,.05);
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:1px solid rgba(255,215,0,.08);
 }
 
 .hall-title div{
@@ -216,8 +264,13 @@ body{
   border-radius:999px;
   text-align:center;
   font-size:12px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,215,0,.15);
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid rgba(255,215,0,.15);
+
   color:#facc15;
 }
 
@@ -232,13 +285,21 @@ body{
   height:280px;
   border-radius:34px;
   overflow:hidden;
+
   background-size:cover;
   background-position:center;
+
   display:flex;
   align-items:flex-end;
+
   padding:26px;
+
   border:1px solid rgba(255,215,0,.28);
-  box-shadow:0 0 34px rgba(255,215,0,.18);
+
+  box-shadow:
+    0 0 34px rgba(255,215,0,.18);
+
+  animation:luckyFloat 4s ease-in-out infinite;
 }
 
 .coin-lobby-card{
@@ -253,6 +314,23 @@ body{
     url("baccarat.PNG");
 }
 
+.lobby-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent,
+      rgba(255,255,255,.14),
+      transparent
+    );
+
+  transform:translateX(-120%);
+  animation:lightMove 5s infinite;
+}
+
 .lobby-info{
   position:relative;
   z-index:2;
@@ -262,7 +340,9 @@ body{
   font-size:40px;
   margin-bottom:10px;
   color:#facc15;
-  text-shadow:0 0 18px rgba(255,215,0,.8);
+
+  text-shadow:
+    0 0 18px rgba(255,215,0,.8);
 }
 
 .lobby-info p{
@@ -275,10 +355,15 @@ body{
   display:inline-block;
   padding:14px 26px;
   border-radius:999px;
-  background:linear-gradient(90deg,#facc15,#f59e0b);
+
+  background:
+    linear-gradient(90deg,#facc15,#f59e0b);
+
   color:black;
   font-weight:900;
-  box-shadow:0 0 24px rgba(255,215,0,.45);
+
+  box-shadow:
+    0 0 24px rgba(255,215,0,.45);
 }
 
 .game-section{
@@ -299,7 +384,10 @@ body{
   border:none;
   padding:0 18px;
   border-radius:16px;
-  background:rgba(255,255,255,.08);
+
+  background:
+    rgba(255,255,255,.08);
+
   color:#facc15;
   font-weight:bold;
 }
@@ -326,8 +414,13 @@ body{
 .bet-side{
   padding:20px;
   border-radius:24px;
-  background:rgba(255,255,255,.06);
+
+  background:
+    rgba(255,255,255,.06);
+
   text-align:center;
+
+  border:1px solid rgba(255,215,0,.08);
 }
 
 .bet-side h3{
@@ -355,7 +448,11 @@ body{
   margin-top:24px;
   padding:22px;
   border-radius:26px;
-  background:rgba(255,255,255,.05);
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:1px solid rgba(255,215,0,.08);
 }
 
 .market-title{
@@ -431,8 +528,13 @@ body{
 .chip-wallet div{
   padding:18px;
   border-radius:22px;
+
   text-align:center;
-  background:rgba(255,255,255,.06);
+
+  background:
+    rgba(255,255,255,.06);
+
+  border:1px solid rgba(255,215,0,.08);
 }
 
 .chip-wallet b{
@@ -446,8 +548,13 @@ body{
 .chip-bet-control{
   padding:18px;
   border-radius:24px;
-  background:rgba(255,255,255,.06);
+
+  background:
+    rgba(255,255,255,.06);
+
   margin-bottom:20px;
+
+  border:1px solid rgba(255,215,0,.08);
 }
 
 .exchange-title{
@@ -488,23 +595,42 @@ body{
   border-radius:24px;
   text-align:center;
   background:rgba(255,255,255,.06);
+
+  border:1px solid rgba(255,215,0,.08);
 }
 
 .baccarat-bet-zone.selected{
   outline:2px solid #facc15;
-  box-shadow:0 0 20px rgba(250,204,21,.5);
+
+  box-shadow:
+    0 0 20px rgba(250,204,21,.5);
 }
 
 .player-zone{
-  background:linear-gradient(145deg,rgba(37,99,235,.32),rgba(0,0,0,.35));
+  background:
+    linear-gradient(
+      145deg,
+      rgba(37,99,235,.32),
+      rgba(0,0,0,.35)
+    );
 }
 
 .tie-zone{
-  background:linear-gradient(145deg,rgba(22,163,74,.32),rgba(0,0,0,.35));
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22,163,74,.32),
+      rgba(0,0,0,.35)
+    );
 }
 
 .banker-zone{
-  background:linear-gradient(145deg,rgba(220,38,38,.32),rgba(0,0,0,.35));
+  background:
+    linear-gradient(
+      145deg,
+      rgba(220,38,38,.32),
+      rgba(0,0,0,.35)
+    );
 }
 
 .zone-title{
@@ -535,8 +661,13 @@ body{
 .card-side{
   padding:18px;
   border-radius:24px;
+
   text-align:center;
-  background:rgba(255,255,255,.06);
+
+  background:
+    rgba(255,255,255,.06);
+
+  border:1px solid rgba(255,215,0,.08);
 }
 
 .card-side h3{
@@ -577,17 +708,23 @@ body{
   position:absolute;
   inset:0;
   border-radius:10px;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   backface-visibility:hidden;
+
   font-weight:900;
   font-size:18px;
 }
 
 .card-back{
-  background:linear-gradient(145deg,#7f1d1d,#111);
+  background:
+    linear-gradient(145deg,#7f1d1d,#111);
+
   color:#facc15;
+
   border:1px solid rgba(255,215,0,.5);
 }
 
@@ -607,10 +744,17 @@ body{
 .baccarat-result{
   padding:16px;
   border-radius:22px;
+
   text-align:center;
+
   color:#facc15;
-  background:rgba(255,255,255,.06);
+
+  background:
+    rgba(255,255,255,.06);
+
   margin-bottom:20px;
+
+  border:1px solid rgba(255,215,0,.08);
 }
 
 .baccarat-rule{
@@ -618,7 +762,11 @@ body{
   padding:16px;
   border-radius:20px;
   color:#ddd;
-  background:rgba(255,255,255,.05);
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:1px solid rgba(255,215,0,.08);
 }
 
 .road-title{
@@ -638,9 +786,11 @@ body{
   width:40px;
   height:40px;
   border-radius:50%;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   font-size:14px;
   font-weight:bold;
 }
@@ -672,10 +822,17 @@ body{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:10px;
+
   margin-top:26px;
+
   padding:14px;
+
   border-radius:24px;
-  background:rgba(255,255,255,.06);
+
+  background:
+    rgba(255,255,255,.06);
+
+  border:1px solid rgba(255,215,0,.08);
 }
 
 .tabbar div{
@@ -687,17 +844,29 @@ body{
 }
 
 .tabbar .active{
-  background:linear-gradient(90deg,#facc15,#f59e0b);
+  background:
+    linear-gradient(90deg,#facc15,#f59e0b);
+
   color:black;
   font-weight:bold;
 }
 
 @keyframes luckyFloat{
-  0%,100%{ transform:translateY(0) scale(1); }
-  50%{ transform:translateY(-5px) scale(1.01); }
+  0%,100%{
+    transform:translateY(0) scale(1);
+  }
+
+  50%{
+    transform:translateY(-5px) scale(1.01);
+  }
 }
 
 @keyframes lightMove{
-  0%{ transform:translateX(-120%); }
-  45%,100%{ transform:translateX(120%); }
+  0%{
+    transform:translateX(-120%);
+  }
+
+  45%,100%{
+    transform:translateX(120%);
+  }
 }
