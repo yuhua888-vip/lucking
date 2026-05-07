@@ -25,15 +25,13 @@ body{
 }
 
 .platform-card{
-  background:linear-gradient(145deg,rgba(255,215,0,.08),rgba(0,0,0,.82));
-  border:1px solid rgba(255,215,0,.15);
+  background:linear-gradient(145deg,rgba(255,215,0,.08),rgba(0,0,0,.84));
+  border:1px solid rgba(255,215,0,.18);
   border-radius:34px;
   padding:18px;
-  box-shadow:0 0 45px rgba(255,215,0,.12);
+  box-shadow:0 0 45px rgba(255,215,0,.14);
   backdrop-filter:blur(18px);
 }
-
-/* 登录页 */
 
 .lucky-home{
   text-align:center;
@@ -51,7 +49,7 @@ body{
 }
 
 .lucky-home h1{
-  font-size:48px;
+  font-size:46px;
   margin-bottom:12px;
   color:#facc15;
   text-shadow:0 0 20px rgba(255,215,0,.35);
@@ -70,31 +68,29 @@ body{
   overflow:hidden;
   margin-bottom:24px;
   background-image:
-    linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,.08)),
+    linear-gradient(to top,rgba(0,0,0,.42),rgba(0,0,0,.03)),
     url("lucky7hero.PNG");
   background-size:cover;
   background-position:center;
-  border:1px solid rgba(255,215,0,.22);
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  padding-bottom:28px;
-  box-shadow:0 0 35px rgba(255,215,0,.18);
+  border:1px solid rgba(255,215,0,.24);
+  box-shadow:0 0 36px rgba(255,215,0,.2);
+  animation:luckyFloat 4s ease-in-out infinite;
 }
 
-.lucky-glow-text{
-  color:#fff4b0;
-  font-size:20px;
-  font-weight:900;
-  letter-spacing:4px;
-  text-shadow:0 0 12px rgba(255,215,0,.7);
+#loginBox .lucky-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.14),transparent);
+  transform:translateX(-120%);
+  animation:lightMove 4.5s infinite;
 }
 
 .notice-bar{
   margin-bottom:18px;
   padding:14px;
   border-radius:18px;
-  background:rgba(255,255,255,.06);
+  background:rgba(255,255,255,.07);
   color:#eee;
   font-size:13px;
 }
@@ -106,25 +102,38 @@ body{
   margin-bottom:22px;
 }
 
+.login-panel input,
+.bet-side input,
+.chip-exchange-box input,
+.chip-bet-control input{
+  border:none;
+  outline:none;
+  color:white;
+  background:rgba(255,255,255,.09);
+}
+
 .login-panel input{
   height:56px;
-  border:none;
   border-radius:20px;
   padding:0 18px;
-  background:rgba(255,255,255,.08);
-  color:white;
   font-size:16px;
+}
+
+.login-panel button,
+.bet-side button,
+.chip-exchange-box button,
+.chip-bet-control button{
+  border:none;
+  background:linear-gradient(90deg,#facc15,#f59e0b);
+  color:black;
+  font-weight:900;
+  box-shadow:0 0 20px rgba(255,215,0,.32);
 }
 
 .login-panel button{
   height:56px;
-  border:none;
   border-radius:20px;
-  background:linear-gradient(90deg,#facc15,#f59e0b);
-  color:black;
-  font-weight:900;
   font-size:18px;
-  box-shadow:0 0 20px rgba(255,215,0,.35);
 }
 
 .rule-box{
@@ -148,12 +157,11 @@ body{
   font-size:15px;
 }
 
-/* 顶部 */
-
 .top-status{
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  align-items:flex-start;
+  gap:12px;
   padding:22px;
   border-radius:28px;
   margin-bottom:20px;
@@ -169,14 +177,14 @@ body{
 .id-line{
   margin-top:6px;
   color:#ddd;
+  font-size:14px;
 }
 
 .top-status b{
   color:#facc15;
-  font-size:28px;
+  font-size:26px;
+  word-break:break-all;
 }
-
-/* 大厅 */
 
 .hall-title{
   padding:26px;
@@ -187,7 +195,7 @@ body{
 }
 
 .hall-title div{
-  font-size:42px;
+  font-size:40px;
   font-weight:900;
   color:#facc15;
 }
@@ -251,7 +259,7 @@ body{
 }
 
 .lobby-info h3{
-  font-size:42px;
+  font-size:40px;
   margin-bottom:10px;
   color:#facc15;
   text-shadow:0 0 18px rgba(255,215,0,.8);
@@ -273,15 +281,13 @@ body{
   box-shadow:0 0 24px rgba(255,215,0,.45);
 }
 
-/* 游戏 */
-
 .game-section{
   margin-top:14px;
 }
 
 .section-title{
   text-align:center;
-  font-size:34px;
+  font-size:32px;
   margin-bottom:20px;
   color:#facc15;
   font-weight:900;
@@ -333,23 +339,16 @@ body{
 .bet-side input{
   width:100%;
   height:48px;
-  border:none;
   border-radius:14px;
   margin-top:14px;
   padding:0 12px;
-  background:rgba(255,255,255,.08);
-  color:white;
 }
 
 .bet-side button{
   width:100%;
   height:48px;
-  border:none;
   border-radius:14px;
   margin-top:14px;
-  background:linear-gradient(90deg,#facc15,#f59e0b);
-  color:black;
-  font-weight:900;
 }
 
 .market-board{
@@ -409,8 +408,6 @@ body{
   color:#ddd;
 }
 
-/* 百家乐 */
-
 .baccarat-title{
   text-align:center;
   font-size:44px;
@@ -464,11 +461,8 @@ body{
 .chip-bet-control input{
   width:100%;
   height:50px;
-  border:none;
   border-radius:16px;
   padding:0 14px;
-  background:rgba(255,255,255,.09);
-  color:white;
   font-size:15px;
   margin-bottom:12px;
 }
@@ -477,12 +471,8 @@ body{
 .chip-bet-control button{
   width:100%;
   height:50px;
-  border:none;
   border-radius:16px;
   margin-top:10px;
-  background:linear-gradient(90deg,#facc15,#f59e0b);
-  color:black;
-  font-weight:900;
 }
 
 .baccarat-table-v3{
@@ -498,6 +488,11 @@ body{
   border-radius:24px;
   text-align:center;
   background:rgba(255,255,255,.06);
+}
+
+.baccarat-bet-zone.selected{
+  outline:2px solid #facc15;
+  box-shadow:0 0 20px rgba(250,204,21,.5);
 }
 
 .player-zone{
@@ -521,6 +516,13 @@ body{
 .zone-odds{
   margin:6px 0;
   color:#ddd;
+}
+
+#selectedBetSide{
+  text-align:center;
+  color:#facc15;
+  font-weight:900;
+  margin:8px 0 12px;
 }
 
 .baccarat-card-table{
@@ -552,6 +554,56 @@ body{
   margin:12px 0;
 }
 
+.playing-card{
+  width:58px;
+  height:84px;
+  perspective:1000px;
+}
+
+.card-inner{
+  width:100%;
+  height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .6s;
+}
+
+.playing-card.revealed .card-inner{
+  transform:rotateY(180deg);
+}
+
+.card-front,
+.card-back{
+  position:absolute;
+  inset:0;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backface-visibility:hidden;
+  font-weight:900;
+  font-size:18px;
+}
+
+.card-back{
+  background:linear-gradient(145deg,#7f1d1d,#111);
+  color:#facc15;
+  border:1px solid rgba(255,215,0,.5);
+}
+
+.card-front{
+  background:white;
+  transform:rotateY(180deg);
+}
+
+.card-front.red{
+  color:#dc2626;
+}
+
+.card-front.black{
+  color:black;
+}
+
 .baccarat-result{
   padding:16px;
   border-radius:22px;
@@ -568,8 +620,6 @@ body{
   color:#ddd;
   background:rgba(255,255,255,.05);
 }
-
-/* 路子 */
 
 .road-title{
   margin:20px 0 12px;
@@ -618,8 +668,6 @@ body{
   background:#444;
 }
 
-/* 底部 */
-
 .tabbar{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -643,78 +691,13 @@ body{
   color:black;
   font-weight:bold;
 }
-/* ===== 首页 Lucky 7 动态效果 ===== */
 
-#loginBox .lucky-hero{
-  animation: luckyHeroFloat 4s ease-in-out infinite;
+@keyframes luckyFloat{
+  0%,100%{ transform:translateY(0) scale(1); }
+  50%{ transform:translateY(-5px) scale(1.01); }
 }
 
-#loginBox .lucky-hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 50% 42%, rgba(255,215,0,.32), transparent 38%);
-  animation:luckyPulse 2.2s ease-in-out infinite;
-  pointer-events:none;
-}
-
-#loginBox .lucky-hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      120deg,
-      transparent 0%,
-      rgba(255,255,255,.22) 45%,
-      transparent 70%
-    );
-  transform:translateX(-120%);
-  animation:luckyLight 3.8s infinite;
-  pointer-events:none;
-}
-
-.lucky-glow-text{
-  position:relative;
-  z-index:2;
-  animation:luckyTextBreath 1.8s ease-in-out infinite;
-}
-
-@keyframes luckyHeroFloat{
-  0%,100%{
-    transform:translateY(0) scale(1);
-  }
-  50%{
-    transform:translateY(-6px) scale(1.015);
-  }
-}
-
-@keyframes luckyPulse{
-  0%,100%{
-    opacity:.35;
-  }
-  50%{
-    opacity:.85;
-  }
-}
-
-@keyframes luckyLight{
-  0%{
-    transform:translateX(-120%);
-  }
-  45%,100%{
-    transform:translateX(120%);
-  }
-}
-
-@keyframes luckyTextBreath{
-  0%,100%{
-    text-shadow:0 0 10px rgba(255,215,0,.45);
-    transform:scale(1);
-  }
-  50%{
-    text-shadow:0 0 24px rgba(255,215,0,.9);
-    transform:scale(1.04);
-  }
+@keyframes lightMove{
+  0%{ transform:translateX(-120%); }
+  45%,100%{ transform:translateX(120%); }
 }
