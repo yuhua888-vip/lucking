@@ -1,730 +1,235 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
+/* ===== 修复百家乐界面 ===== */
 
-body{
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "PingFang SC",
-    sans-serif;
-
-  background:
-    radial-gradient(circle at top,#3b0764,#000);
-
-  color:white;
-
-  min-height:100vh;
-
-  overflow-x:hidden;
-}
-
-.hidden{
-  display:none !important;
-}
-
-.app{
-  width:100%;
-  max-width:520px;
-  margin:auto;
-  padding:18px;
-}
-
-.platform-card{
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,215,0,0.10),
-      rgba(0,0,0,0.82)
-    );
-
-  border:
-    1px solid rgba(255,215,0,0.22);
-
-  border-radius:34px;
-
-  padding:18px;
-
-  box-shadow:
-    0 0 45px rgba(255,215,0,0.15);
-
-  backdrop-filter:blur(18px);
-}
-
-/* 登录页 */
-
-.lucky-home{
+.baccarat-title{
   text-align:center;
-}
-
-.brand-badge{
-  display:inline-block;
-
-  padding:9px 18px;
-
-  border-radius:999px;
-
-  background:
-    rgba(255,215,0,0.14);
-
+  font-size:44px;
   color:#facc15;
-
-  font-size:12px;
-
-  margin-bottom:18px;
-
-  letter-spacing:3px;
+  margin-bottom:8px;
 }
 
-.lucky-home h1{
-  font-size:48px;
-  margin-bottom:12px;
-  color:#facc15;
-
-  text-shadow:
-    0 0 22px rgba(255,215,0,0.35);
-}
-
-.brand-subtitle{
+.baccarat-sub{
+  text-align:center;
   color:#ddd;
-  margin-bottom:24px;
-  font-size:17px;
-}
-
-#loginBox .lucky-hero{
-
-  position:relative;
-
-  height:420px;
-
-  border-radius:34px;
-
-  overflow:hidden;
-
-  margin-bottom:24px;
-
-  background-image:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,0.52),
-      rgba(0,0,0,0.08)
-    ),
-    url("lucky7hero.PNG");
-
-  background-size:cover;
-
-  background-position:center;
-
-  border:
-    1px solid rgba(255,215,0,0.25);
-
-  box-shadow:
-    0 0 35px rgba(255,215,0,0.18);
-
-  display:flex;
-
-  align-items:flex-end;
-
-  justify-content:center;
-
-  padding-bottom:26px;
-}
-
-.lucky-glow-text{
-
-  color:#fff4b0;
-
-  font-size:20px;
-
-  font-weight:bold;
-
-  letter-spacing:4px;
-
-  text-shadow:
-    0 0 12px rgba(255,215,0,0.7);
-}
-
-.notice-bar{
   margin-bottom:18px;
-
-  padding:14px;
-
-  border-radius:18px;
-
-  background:
-    rgba(255,255,255,0.07);
-
-  color:#eee;
-
-  font-size:13px;
 }
 
-.login-panel{
-  display:flex;
-  flex-direction:column;
+.chip-wallet{
+  display:grid;
+  grid-template-columns:1fr 1fr;
   gap:14px;
-
-  margin-bottom:22px;
+  margin-bottom:18px;
 }
 
-.login-panel input{
-  height:56px;
-
-  border:none;
-
-  border-radius:20px;
-
-  padding:0 18px;
-
-  background:
-    rgba(255,255,255,0.08);
-
-  color:white;
-
-  font-size:16px;
+.chip-wallet div{
+  padding:18px;
+  border-radius:22px;
+  text-align:center;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,215,0,0.16);
 }
 
-.login-panel button{
-  height:56px;
-
-  border:none;
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #facc15,
-      #f59e0b
-    );
-
-  color:black;
-
-  font-weight:900;
-
-  font-size:18px;
-
-  box-shadow:
-    0 0 20px rgba(255,215,0,0.35);
-}
-
-.rule-box{
-  text-align:left;
-
-  padding:20px;
-
-  border-radius:26px;
-
-  background:
-    rgba(255,255,255,0.05);
-
-  border:
-    1px solid rgba(255,255,255,0.08);
-}
-
-.rule-title{
+.chip-wallet b{
+  display:block;
+  margin-top:8px;
+  font-size:28px;
   color:#facc15;
-
-  font-size:22px;
-
-  margin-bottom:14px;
-
-  font-weight:bold;
 }
 
-.rule-content{
-  line-height:1.9;
+.chip-exchange-box,
+.chip-bet-control{
+  padding:18px;
+  border-radius:24px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,215,0,0.16);
+  margin-bottom:20px;
+}
 
-  color:#ddd;
+.exchange-title{
+  color:#facc15;
+  font-size:22px;
+  font-weight:900;
+  margin-bottom:12px;
+}
 
+.chip-exchange-box input,
+.chip-bet-control input{
+  width:100%;
+  height:50px;
+  border:none;
+  border-radius:16px;
+  padding:0 14px;
+  background:rgba(255,255,255,0.09);
+  color:white;
+  font-size:15px;
+  margin-bottom:12px;
+}
+
+.chip-exchange-box button,
+.chip-bet-control button{
+  width:100%;
+  height:50px;
+  border:none;
+  border-radius:16px;
+  margin-top:10px;
+  background:linear-gradient(90deg,#facc15,#f59e0b);
+  color:black;
+  font-weight:900;
   font-size:15px;
 }
 
-/* 顶部状态 */
-
-.top-status{
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  padding:22px;
-
-  border-radius:28px;
-
-  margin-bottom:20px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,215,0,0.12),
-      rgba(0,0,0,0.45)
-    );
-}
-
-.small-label{
-  color:#bbb;
-  font-size:12px;
-  margin-bottom:6px;
-}
-
-.id-line{
-  margin-top:6px;
-  color:#ddd;
-}
-
-.top-status b{
-  color:#facc15;
-  font-size:28px;
-}
-
-/* 大厅 */
-
-.hall-title{
-  padding:26px;
-
-  border-radius:28px;
-
-  text-align:center;
-
-  margin-bottom:18px;
-
-  background:
-    rgba(255,255,255,0.05);
-}
-
-.hall-title div{
-  font-size:42px;
-
-  font-weight:900;
-
-  color:#facc15;
-}
-
-.hall-title span{
-  color:#ddd;
-}
-
-.lobby-stats{
+.baccarat-table-v3{
   display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
+  grid-template-columns:1fr .8fr 1fr;
   gap:10px;
-
-  margin-bottom:18px;
-}
-
-.lobby-stats div{
-  padding:12px 6px;
-
-  border-radius:999px;
-
-  text-align:center;
-
-  font-size:12px;
-
-  background:
-    rgba(255,255,255,0.05);
-
-  border:
-    1px solid rgba(255,215,0,0.15);
-
-  color:#facc15;
-}
-
-.game-lobby{
-  display:flex;
-  flex-direction:column;
-  gap:24px;
-}
-
-.lobby-card{
-  position:relative;
-
-  height:280px;
-
-  border-radius:34px;
-
-  overflow:hidden;
-
-  background-size:cover;
-  background-position:center;
-
-  display:flex;
-
-  align-items:flex-end;
-
-  padding:26px;
-
-  border:
-    1px solid rgba(255,215,0,0.28);
-
-  box-shadow:
-    0 0 34px rgba(255,215,0,0.18);
-}
-
-.coin-lobby-card{
-  background-image:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,0.90),
-      rgba(0,0,0,0.08)
-    ),
-    url("coinhall.PNG");
-}
-
-.baccarat-lobby-card{
-  background-image:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,0.90),
-      rgba(0,0,0,0.08)
-    ),
-    url("baccarat.PNG");
-}
-
-.lobby-info{
-  position:relative;
-  z-index:2;
-}
-
-.lobby-info h3{
-  font-size:42px;
-
-  margin-bottom:10px;
-
-  color:#facc15;
-
-  text-shadow:
-    0 0 18px rgba(255,215,0,0.8);
-}
-
-.lobby-info p{
-  color:white;
-
-  margin-bottom:18px;
-
-  line-height:1.6;
-}
-
-.lobby-info span{
-  display:inline-block;
-
-  padding:14px 26px;
-
-  border-radius:999px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #facc15,
-      #f59e0b
-    );
-
-  color:black;
-
-  font-weight:900;
-
-  box-shadow:
-    0 0 24px rgba(255,215,0,0.45);
-}
-
-/* 游戏界面 */
-
-.game-section{
-  margin-top:14px;
-}
-
-.section-title{
-  text-align:center;
-
-  font-size:34px;
-
   margin-bottom:20px;
+}
 
+.baccarat-bet-zone{
+  min-height:130px;
+  padding:16px 8px;
+  border-radius:24px;
+  text-align:center;
+  background:rgba(255,255,255,0.06);
+  border:2px solid rgba(255,215,0,0.14);
+}
+
+.baccarat-bet-zone.selected{
+  border-color:#facc15;
+  box-shadow:0 0 24px rgba(255,215,0,0.45);
+  transform:scale(1.03);
+}
+
+.player-zone{
+  background:linear-gradient(145deg,rgba(37,99,235,.32),rgba(0,0,0,.35));
+}
+
+.tie-zone{
+  background:linear-gradient(145deg,rgba(22,163,74,.32),rgba(0,0,0,.35));
+}
+
+.banker-zone{
+  background:linear-gradient(145deg,rgba(220,38,38,.32),rgba(0,0,0,.35));
+}
+
+.zone-title{
+  font-size:34px;
   color:#facc15;
-
   font-weight:900;
 }
 
-.back-lobby-btn{
-  margin-bottom:18px;
+.zone-odds{
+  margin:6px 0;
+  color:#ddd;
+}
 
-  height:48px;
-
-  border:none;
-
-  padding:0 18px;
-
-  border-radius:16px;
-
-  background:
-    rgba(255,255,255,0.08);
-
+#selectedBetSide{
+  text-align:center;
   color:#facc15;
-
-  font-weight:bold;
+  font-weight:900;
+  margin:8px 0 12px;
 }
 
-.coin{
-  width:180px;
-  height:180px;
-
-  margin:24px auto;
+.deal-btn{
+  height:58px !important;
+  font-size:18px !important;
+  box-shadow:0 0 24px rgba(255,215,0,0.45);
 }
 
-.coin img{
+.baccarat-card-table{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.card-side{
+  padding:18px;
+  border-radius:24px;
+  text-align:center;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,215,0,0.16);
+}
+
+.card-side h3{
+  color:#facc15;
+  font-size:24px;
+  margin-bottom:10px;
+}
+
+.cards{
+  min-height:110px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin:12px 0;
+}
+
+.playing-card{
+  width:58px;
+  height:84px;
+  perspective:1000px;
+}
+
+.card-inner{
   width:100%;
   height:100%;
-  object-fit:contain;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .6s;
 }
 
-.bet-area{
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:16px;
-
-  margin-top:24px;
+.playing-card.revealed .card-inner{
+  transform:rotateY(180deg);
 }
 
-.bet-side{
-  padding:20px;
-
-  border-radius:24px;
-
-  background:
-    rgba(255,255,255,0.06);
-
-  text-align:center;
-}
-
-.bet-side h3{
-  margin-bottom:12px;
-
-  color:#facc15;
-
-  font-size:28px;
-}
-
-.bet-side input{
-  width:100%;
-
-  height:48px;
-
-  border:none;
-
-  border-radius:14px;
-
-  margin-top:14px;
-
-  padding:0 12px;
-
-  background:
-    rgba(255,255,255,0.08);
-
-  color:white;
-}
-
-.bet-side button{
-  width:100%;
-
-  height:48px;
-
-  border:none;
-
-  border-radius:14px;
-
-  margin-top:14px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #facc15,
-      #f59e0b
-    );
-
-  color:black;
-
-  font-weight:900;
-}
-
-.market-board{
-  margin-top:24px;
-
-  padding:22px;
-
-  border-radius:26px;
-
-  background:
-    rgba(255,255,255,0.05);
-}
-
-.market-title{
-  color:#facc15;
-
-  font-size:24px;
-
-  margin-bottom:16px;
-
-  font-weight:bold;
-}
-
-.market-row{
+.card-front,
+.card-back{
+  position:absolute;
+  inset:0;
+  border-radius:10px;
   display:flex;
-
-  justify-content:space-between;
-
-  margin-bottom:14px;
-}
-
-.heat-box{
-  margin-top:18px;
-}
-
-.heat-label{
-  display:flex;
-
-  justify-content:space-between;
-
-  margin-bottom:10px;
-}
-
-.heat-bar{
-  width:100%;
-
-  height:14px;
-
-  border-radius:999px;
-
-  overflow:hidden;
-
-  background:#111;
-
-  display:flex;
-}
-
-.heat-back{
-  background:#2563eb;
-}
-
-.heat-front{
-  background:#dc2626;
-}
-
-.hot-text{
-  margin-top:12px;
-
-  color:#facc15;
-}
-
-.fake-feed{
-  margin-top:16px;
-
-  color:#ddd;
-}
-
-.road-title{
-  margin:20px 0 12px;
-
-  color:#facc15;
-
-  font-size:22px;
-
-  font-weight:bold;
-}
-
-.road-map{
-  display:flex;
-
-  flex-wrap:wrap;
-
-  gap:10px;
-}
-
-.road-dot{
-  width:40px;
-  height:40px;
-
-  border-radius:50%;
-
-  display:flex;
-
   align-items:center;
-
   justify-content:center;
-
-  font-size:14px;
-
-  font-weight:bold;
+  backface-visibility:hidden;
+  font-weight:900;
+  font-size:18px;
 }
 
-.road-dot.front{
-  background:#dc2626;
+.card-back{
+  background:linear-gradient(145deg,#7f1d1d,#111);
+  color:#facc15;
+  border:1px solid rgba(255,215,0,.5);
 }
 
-.road-dot.back{
-  background:#2563eb;
+.card-front{
+  background:white;
+  transform:rotateY(180deg);
 }
 
-.road-dot.win{
-  background:#facc15;
+.card-front.red{
+  color:#dc2626;
+}
+
+.card-front.black{
   color:black;
 }
 
-.road-dot.lose{
-  background:#444;
-}
-
-/* 底部导航 */
-
-.tabbar{
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:10px;
-
-  margin-top:26px;
-
-  padding:14px;
-
-  border-radius:24px;
-
-  background:
-    rgba(255,255,255,0.06);
-}
-
-.tabbar div{
+.baccarat-result{
+  padding:16px;
+  border-radius:22px;
   text-align:center;
-
-  padding:14px 0;
-
-  border-radius:18px;
-
-  color:#bbb;
-
-  font-size:14px;
+  color:#facc15;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,215,0,0.16);
+  margin-bottom:20px;
 }
 
-.tabbar .active{
-  background:
-    linear-gradient(
-      90deg,
-      #facc15,
-      #f59e0b
-    );
-
-  color:black;
-
-  font-weight:bold;
+.baccarat-rule{
+  margin-top:18px;
+  padding:16px;
+  border-radius:20px;
+  color:#ddd;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,215,0,0.14);
 }
