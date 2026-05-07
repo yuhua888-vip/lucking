@@ -643,3 +643,78 @@ body{
   color:black;
   font-weight:bold;
 }
+/* ===== 首页 Lucky 7 动态效果 ===== */
+
+#loginBox .lucky-hero{
+  animation: luckyHeroFloat 4s ease-in-out infinite;
+}
+
+#loginBox .lucky-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255,215,0,.32), transparent 38%);
+  animation:luckyPulse 2.2s ease-in-out infinite;
+  pointer-events:none;
+}
+
+#loginBox .lucky-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255,255,255,.22) 45%,
+      transparent 70%
+    );
+  transform:translateX(-120%);
+  animation:luckyLight 3.8s infinite;
+  pointer-events:none;
+}
+
+.lucky-glow-text{
+  position:relative;
+  z-index:2;
+  animation:luckyTextBreath 1.8s ease-in-out infinite;
+}
+
+@keyframes luckyHeroFloat{
+  0%,100%{
+    transform:translateY(0) scale(1);
+  }
+  50%{
+    transform:translateY(-6px) scale(1.015);
+  }
+}
+
+@keyframes luckyPulse{
+  0%,100%{
+    opacity:.35;
+  }
+  50%{
+    opacity:.85;
+  }
+}
+
+@keyframes luckyLight{
+  0%{
+    transform:translateX(-120%);
+  }
+  45%,100%{
+    transform:translateX(120%);
+  }
+}
+
+@keyframes luckyTextBreath{
+  0%,100%{
+    text-shadow:0 0 10px rgba(255,215,0,.45);
+    transform:scale(1);
+  }
+  50%{
+    text-shadow:0 0 24px rgba(255,215,0,.9);
+    transform:scale(1.04);
+  }
+}
