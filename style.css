@@ -488,3 +488,34 @@ body{
     transform:translateX(120%);
   }
 }
+/* 图片后缀修复 */
+
+.coin-lobby-card{
+  background-image:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,0.88),
+      rgba(0,0,0,0.05)
+    ),
+    url("coinhall.png") !important;
+}
+
+.baccarat-lobby-card{
+  background-image:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,0.88),
+      rgba(0,0,0,0.05)
+    ),
+    url("baccarat.png") !important;
+}
+
+.lucky-hero{
+  background-image:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,0.45),
+      rgba(0,0,0,0.08)
+    ),
+    url("lucky7hero.png") !important;
+}
