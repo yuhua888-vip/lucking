@@ -509,13 +509,43 @@ body{
     ),
     url("baccarat.PNG") !important;
 }
+/* 首页7图 */
 
-.lucky-hero{
+#loginBox .lucky-hero{
+
+  position:relative;
+
+  height:420px;
+
+  border-radius:32px;
+
+  overflow:hidden;
+
+  margin-bottom:24px;
+
   background-image:
     linear-gradient(
       to top,
       rgba(0,0,0,0.45),
       rgba(0,0,0,0.08)
     ),
-    url("lucky7hero.PNG") !important;
+    url("lucky7hero.PNG");
+
+  background-size:cover;
+
+  background-position:center;
+
+  border:
+    1px solid rgba(255,215,0,0.25);
+
+  box-shadow:
+    0 0 35px rgba(255,215,0,0.18);
+
+  display:flex;
+
+  align-items:flex-end;
+
+  justify-content:center;
+
+  padding-bottom:28px;
 }
