@@ -488,7 +488,7 @@ body{
     transform:translateX(120%);
   }
 }
-/* 图片后缀修复 */
+/* 图片修复 */
 
 .coin-lobby-card{
   background-image:
@@ -497,7 +497,7 @@ body{
       rgba(0,0,0,0.88),
       rgba(0,0,0,0.05)
     ),
-    url("coinhall.png") !important;
+    url("coinhall.PNG") !important;
 }
 
 .baccarat-lobby-card{
@@ -507,7 +507,7 @@ body{
       rgba(0,0,0,0.88),
       rgba(0,0,0,0.05)
     ),
-    url("baccarat.png") !important;
+    url("baccarat.PNG") !important;
 }
 
 .lucky-hero{
@@ -517,5 +517,5 @@ body{
       rgba(0,0,0,0.45),
       rgba(0,0,0,0.08)
     ),
-    url("lucky7hero.png") !important;
+    url("lucky7hero.PNG") !important;
 }
