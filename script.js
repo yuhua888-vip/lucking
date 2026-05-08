@@ -1,997 +1,587 @@
+const loginBox = document.getElementById("loginBox");
+const gameBox = document.getElementById("gameBox");
+
+const entertainmentPanel = document.getElementById("entertainmentPanel");
+const servicePanel = document.getElementById("servicePanel");
+const settingsPanel = document.getElementById("settingsPanel");
+
+const coinGamePanel = document.getElementById("coinGamePanel");
+const baccaratPanel = document.getElementById("baccaratPanel");
+
+const score = document.getElementById("score");
+const baccaratScore = document.getElementById("baccaratScore");
+const baccaratChips = document.getElementById("baccaratChips");
+
+const nameText = document.getElementById("name");
+const userIdText = document.getElementById("userId");
+
+const settingName = document.getElementById("settingName");
+const settingId = document.getElementById("settingId");
+const settingScore = document.getElementById("settingScore");
+
+const msg = document.getElementById("msg");
+
+const coinImg = document.getElementById("coinImg");
+const coinText = document.getElementById("coinText");
+const result = document.getElementById("result");
+const countdown = document.getElementById("countdown");
+
+const frontBet = document.getElementById("frontBet");
+const backBet = document.getElementById("backBet");
+
 let currentUser = null;
 
-let timer = 8;
-let roundTimer = null;
-let betting = false;
+let currentScore = 500;
 
-let userBet = { front: 0, back: 0 };
+let chips = 0;
 
-let fakeFrontAmount = 0;
-let fakeBackAmount = 0;
-let fakeTimer = null;
+let countdownNum = 8;
 
-let baccaratSelectedSide = null;
-let baccaratBets = {
-  banker: 0,
-  player: 0,
-  tie: 0
+let userFrontBet = 0;
+let userBackBet = 0;
+
+let fakeFrontTotal = 0;
+let fakeBackTotal = 0;
+
+let baccaratSelected = null;
+
+let baccaratBetData = {
+  庄:0,
+  闲:0,
+  和:0
 };
 
-const fakeNames = [
-  "龙哥","阿豪","金手","财神","小王","豹子","辉少","阿强",
-  "老K","黑桃A","金链哥","赌神","小六","阿飞","东哥","凯哥",
-  "小虎","夜王","大飞","火哥","阿超","老七","林少","虎哥"
-];
+let baccaratRoadData = [];
 
-function formatMoney(n){
-  return Number(n || 0).toFixed(2);
-}
-
-function getUsers(){
-  return JSON.parse(localStorage.getItem("users") || "[]");
-}
-
-function saveUsers(users){
-  localStorage.setItem("users", JSON.stringify(users));
-}
-
-function createId(){
-  return Math.floor(10000 + Math.random() * 90000);
-}
-
-function isValidAccount(value){
-  return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5}$/.test(value);
-}
-
-function getCurrentUser(){
-  let users = getUsers();
-  return users.find(u => u.username === currentUser);
-}
-
-function updateCurrentUser(user){
-  let users = getUsers();
-  let index = users.findIndex(u => u.username === currentUser);
-
-  if(index >= 0){
-    users[index] = user;
-    saveUsers(users);
-  }
-}
-
-/* 注册 */
 function register(){
-  let users = getUsers();
-  let account = username.value.trim();
-  let pass = password.value.trim();
 
-  if(!isValidAccount(account)){
-    msg.innerText = "账号必须是5位字母+数字混合";
+  let username = document.getElementById("username").value.trim();
+  let password = document.getElementById("password").value.trim();
+
+  if(username.length < 5 || password.length < 5){
+    msg.innerText = "账号密码至少5位";
     return;
   }
 
-  if(!isValidAccount(pass)){
-    msg.innerText = "密码必须是5位字母+数字混合";
-    return;
-  }
+  localStorage.setItem(
+    "user_"+username,
+    JSON.stringify({
+      password,
+      score:500,
+      id:Math.floor(Math.random()*99999999)
+    })
+  );
 
-  if(users.find(u => u.username === account)){
-    msg.innerText = "账号已存在";
-    return;
-  }
-
-  users.push({
-    id: createId(),
-    username: account,
-    password: pass,
-    score: account === "adm11" ? 999999999 : 500,
-    chips: 0,
-    road: [],
-    winRoad: [],
-    baccaratRoad: []
-  });
-
-  saveUsers(users);
-  msg.innerText = "注册成功，请登录";
+  msg.innerText = "注册成功";
 }
 
-/* 登录 */
 function login(){
-  let users = getUsers();
-  let account = username.value.trim();
-  let pass = password.value.trim();
 
-  let user = users.find(u => u.username === account && u.password === pass);
+  let username = document.getElementById("username").value.trim();
+  let password = document.getElementById("password").value.trim();
+
+  let user = localStorage.getItem("user_"+username);
 
   if(!user){
-    msg.innerText = "账号或密码错误";
+    msg.innerText = "账号不存在";
     return;
   }
 
-  if(!user.road) user.road = [];
-  if(!user.winRoad) user.winRoad = [];
-  if(!user.baccaratRoad) user.baccaratRoad = [];
-  if(user.chips === undefined) user.chips = 0;
+  user = JSON.parse(user);
 
-  saveUsers(users);
+  if(user.password !== password){
+    msg.innerText = "密码错误";
+    return;
+  }
 
-  currentUser = user.username;
+  currentUser = username;
 
-  loginBox.style.display = "none";
+  currentScore = user.score || 500;
+
+  loginBox.classList.add("hidden");
   gameBox.classList.remove("hidden");
 
-  switchTab("entertainment");
-  switchGame("lobby");
-
-  updateUI();
+  updateUserInfo(user.id);
 }
 
-/* 退出 */
-function logout(){
-  currentUser = null;
+function updateUserInfo(id){
 
-  loginBox.style.display = "block";
-  gameBox.classList.add("hidden");
+  nameText.innerText = currentUser;
+  userIdText.innerText = id;
 
-  clearInterval(roundTimer);
-  stopFakePlayers();
+  score.innerText = currentScore.toFixed(2);
+
+  baccaratScore.innerText = currentScore.toFixed(2);
+  baccaratChips.innerText = chips.toFixed(2);
+
+  settingName.innerText = currentUser;
+  settingId.innerText = id;
+  settingScore.innerText = currentScore.toFixed(2);
 }
 
-/* 底部 Tab */
-function switchTab(tab){
+function saveUser(){
+
+  let old = JSON.parse(localStorage.getItem("user_"+currentUser));
+
+  old.score = currentScore;
+
+  localStorage.setItem(
+    "user_"+currentUser,
+    JSON.stringify(old)
+  );
+
+  updateUserInfo(old.id);
+}
+
+function enterGame(type){
+
+  document.getElementById("gameLobby").classList.add("hidden");
+
+  if(type==="coin"){
+    coinGamePanel.classList.remove("hidden");
+  }
+
+  if(type==="baccarat"){
+    baccaratPanel.classList.remove("hidden");
+  }
+}
+
+function backToLobby(){
+
+  coinGamePanel.classList.add("hidden");
+  baccaratPanel.classList.add("hidden");
+
+  document.getElementById("gameLobby").classList.remove("hidden");
+}
+
+function switchTab(type){
+
   entertainmentPanel.classList.add("hidden");
   servicePanel.classList.add("hidden");
   settingsPanel.classList.add("hidden");
 
-  tabEntertainment.classList.remove("active");
-  tabService.classList.remove("active");
-  tabSettings.classList.remove("active");
+  document.getElementById("tabEntertainment").classList.remove("active");
+  document.getElementById("tabService").classList.remove("active");
+  document.getElementById("tabSettings").classList.remove("active");
 
-  if(tab === "entertainment"){
+  if(type==="entertainment"){
     entertainmentPanel.classList.remove("hidden");
-    tabEntertainment.classList.add("active");
+    document.getElementById("tabEntertainment").classList.add("active");
   }
 
-  if(tab === "service"){
+  if(type==="service"){
     servicePanel.classList.remove("hidden");
-    tabService.classList.add("active");
+    document.getElementById("tabService").classList.add("active");
   }
 
-  if(tab === "settings"){
+  if(type==="settings"){
     settingsPanel.classList.remove("hidden");
-    tabSettings.classList.add("active");
+    document.getElementById("tabSettings").classList.add("active");
   }
-
-  updateUI();
 }
 
-/* 游戏大厅切换 */
-function switchGame(type){
-  gameLobby.classList.add("hidden");
-  coinGamePanel.classList.add("hidden");
-  baccaratPanel.classList.add("hidden");
-
-  clearInterval(roundTimer);
-  stopFakePlayers();
-
-  if(type === "lobby"){
-    gameLobby.classList.remove("hidden");
-  }
-
-  if(type === "coin"){
-    coinGamePanel.classList.remove("hidden");
-    startRound();
-  }
-
-  if(type === "baccarat"){
-    baccaratPanel.classList.remove("hidden");
-    updateBaccaratUI();
-  }
-
-  updateUI();
-}
-
-function enterGame(type){
-  switchGame(type);
-}
-
-function backToLobby(){
-  switchGame("lobby");
-}
-
-/* 硬币盘口 */
-function startRound(){
-  clearInterval(roundTimer);
-  stopFakePlayers();
-
-  timer = 8;
-  betting = true;
-
-  userBet = { front: 0, back: 0 };
-
-  fakeFrontAmount = 0;
-  fakeBackAmount = 0;
-
-  frontBet.innerText = "0";
-  backBet.innerText = "0";
-
-  if(frontAmount) frontAmount.value = "";
-  if(backAmount) backAmount.value = "";
-
-  countdown.innerText = "倒计时：" + timer;
-  coinText.innerText = "等待下注";
-  result.innerText = "开始下注";
-
-  updateFakeTotals();
-  startFakePlayers();
-
-  roundTimer = setInterval(() => {
-    timer--;
-    countdown.innerText = "倒计时：" + timer;
-
-    if(timer <= 0){
-      clearInterval(roundTimer);
-      betting = false;
-      roll();
-    }
-  }, 1000);
+function logout(){
+  location.reload();
 }
 
 function betCustom(side){
-  let amount = side === "正面"
-    ? Number(frontAmount.value)
-    : Number(backAmount.value);
 
-  if(!amount || amount <= 0){
-    result.innerText = "请输入正确的下注金额";
+  let amount = Number(
+    side==="正面"
+    ? document.getElementById("frontAmount").value
+    : document.getElementById("backAmount").value
+  );
+
+  if(amount <= 0) return;
+
+  if(currentScore < amount){
+    alert("积分不足");
     return;
   }
 
-  bet(side, amount);
-}
+  currentScore -= amount;
 
-function bet(side, amount){
-  if(!betting){
-    result.innerText = "已停止下注";
-    return;
-  }
-
-  let user = getCurrentUser();
-
-  if(!user){
-    result.innerText = "请重新登录";
-    return;
-  }
-
-  amount = Number(amount);
-
-  if(user.score < amount){
-    result.innerText = "积分不足";
-    return;
-  }
-
-  user.score = Number((user.score - amount).toFixed(2));
-
-  if(side === "正面"){
-    userBet.front = Number((userBet.front + amount).toFixed(2));
-    frontBet.innerText = formatMoney(userBet.front);
+  if(side==="正面"){
+    userFrontBet += amount;
   }else{
-    userBet.back = Number((userBet.back + amount).toFixed(2));
-    backBet.innerText = formatMoney(userBet.back);
+    userBackBet += amount;
   }
 
-  updateCurrentUser(user);
-  updateUI();
+  frontBet.innerText = userFrontBet.toFixed(2);
+  backBet.innerText = userBackBet.toFixed(2);
 
-  result.innerText =
-    "正面：" + formatMoney(userBet.front) +
-    " | 反面：" + formatMoney(userBet.back);
+  saveUser();
 }
+
+function updateFakeMarket(){
+
+  fakeFrontTotal += Math.random()*500;
+  fakeBackTotal += Math.random()*500;
+
+  document.getElementById("fakeFrontTotal").innerText =
+    fakeFrontTotal.toFixed(0);
+
+  document.getElementById("fakeBackTotal").innerText =
+    fakeBackTotal.toFixed(0);
+
+  let total = fakeFrontTotal + fakeBackTotal;
+
+  let frontPercent = total
+    ? (fakeFrontTotal / total)*100
+    : 50;
+
+  let backPercent = 100 - frontPercent;
+
+  document.getElementById("frontHeat").style.width =
+    frontPercent+"%";
+
+  document.getElementById("backHeat").style.width =
+    backPercent+"%";
+}
+
+setInterval(updateFakeMarket,1500);
 
 function roll(){
-  stopFakePlayers();
 
-  coinText.innerText = "旋转中...";
-  result.innerText = "停止下注，开奖中...";
+  coinText.innerText = "开奖中...";
+
+  result.innerText = "停止下注，硬币高速翻转中...";
 
   let coin = document.getElementById("coin");
 
-  if(coin){
-    coin.classList.remove("flip");
-    void coin.offsetWidth;
-    coin.classList.add("flip");
-  }
+  coin.classList.add("rolling");
 
-  setTimeout(() => {
-    let resultSide = Math.random() < 0.5 ? "正面" : "反面";
+  let tempTimer = setInterval(()=>{
 
-    coinImg.src = resultSide === "正面" ? "coin.png.PNG" : "coin.png2.PNG";
+    coinImg.src =
+      coinImg.src.includes("coin.png2.PNG")
+      ? "coin.png.PNG"
+      : "coin.png2.PNG";
+
+  },120);
+
+  setTimeout(()=>{
+
+    clearInterval(tempTimer);
+
+    let resultSide =
+      Math.random()<0.5
+      ? "正面"
+      : "反面";
+
+    coinImg.src =
+      resultSide==="正面"
+      ? "coin.png.PNG"
+      : "coin.png2.PNG";
+
+    coin.classList.remove("rolling");
+
     coinText.innerText = resultSide;
 
     settle(resultSide);
 
-    if(coin){
-      coin.classList.remove("flip");
-    }
-  }, 1350);
+  },1800);
 }
 
-function settle(resultSide){
-  let user = getCurrentUser();
-  if(!user) return;
+function settle(side){
 
-  let winAmount = resultSide === "正面" ? userBet.front : userBet.back;
-  let loseAmount = resultSide === "正面" ? userBet.back : userBet.front;
+  let win = 0;
 
-  if(winAmount > 0){
-    let payout = Number((winAmount * 1.9).toFixed(2));
-    let profit = Number((payout - winAmount - loseAmount).toFixed(2));
-
-    user.score = Number((user.score + payout).toFixed(2));
-    result.innerText = "💰 开奖：" + resultSide + "，本局盈亏：" + formatMoney(profit);
-    explodeCoins();
-  }else{
-    result.innerText = "😌 开奖：" + resultSide + "，损失：" + formatMoney(loseAmount);
+  if(side==="正面"){
+    win = userFrontBet*1.9;
   }
 
-  user.road.push(resultSide);
-  if(user.road.length > 30) user.road.shift();
-
-  user.winRoad.push(winAmount > 0 ? "win" : "lose");
-  if(user.winRoad.length > 30) user.winRoad.shift();
-
-  updateCurrentUser(user);
-  updateUI();
-
-  setTimeout(startRound, 2500);
-}
-
-/* 假玩家 + 热度 */
-function startFakePlayers(){
-  clearInterval(fakeTimer);
-
-  fakeTimer = setInterval(() => {
-    if(!betting) return;
-
-    let side = Math.random() < 0.5 ? "正面" : "反面";
-    let amountList = [10,20,30,50,80,100,150,200,300,500,800];
-    let amount = amountList[Math.floor(Math.random() * amountList.length)];
-    let fakeName = fakeNames[Math.floor(Math.random() * fakeNames.length)];
-
-    if(side === "正面"){
-      fakeFrontAmount += amount;
-    }else{
-      fakeBackAmount += amount;
-    }
-
-    updateFakeTotals();
-
-    let hotSide = fakeFrontAmount >= fakeBackAmount ? "正面" : "反面";
-    let hotAmount = Math.max(fakeFrontAmount, fakeBackAmount);
-
-    fakeFeed.innerText =
-      fakeName + "：" + side + " " + amount + " 💰｜热门：" + hotSide + " " + hotAmount;
-  }, 700);
-}
-
-function stopFakePlayers(){
-  clearInterval(fakeTimer);
-}
-
-function updateFakeTotals(){
-  if(document.getElementById("fakeFrontTotal")){
-    fakeFrontTotal.innerText = fakeFrontAmount;
+  if(side==="反面"){
+    win = userBackBet*1.9;
   }
 
-  if(document.getElementById("fakeBackTotal")){
-    fakeBackTotal.innerText = fakeBackAmount;
-  }
+  currentScore += win;
 
-  updateHeatBar();
+  result.innerText =
+    win>0
+    ? "恭喜获胜 +" + win.toFixed(2)
+    : "本局未中奖";
+
+  addRoad(side);
+
+  userFrontBet = 0;
+  userBackBet = 0;
+
+  frontBet.innerText = "0";
+  backBet.innerText = "0";
+
+  saveUser();
 }
 
-function updateHeatBar(){
-  let total = fakeFrontAmount + fakeBackAmount;
+function addRoad(side){
 
-  let front = document.getElementById("frontHeat");
-  let back = document.getElementById("backHeat");
-  let text = document.getElementById("hotText");
+  let map = document.getElementById("roadMap");
 
-  if(!front || !back || !text) return;
+  let dot = document.createElement("div");
 
-  if(total <= 0){
-    front.style.width = "50%";
-    back.style.width = "50%";
-    text.innerText = "盘口正在变化...";
-    return;
-  }
+  dot.className =
+    "road-dot " +
+    (side==="正面" ? "front" : "back");
 
-  let frontPercent = Math.round(fakeFrontAmount / total * 100);
-  let backPercent = 100 - frontPercent;
+  dot.innerText =
+    side==="正面"
+    ? "正"
+    : "反";
 
-  front.style.width = frontPercent + "%";
-  back.style.width = backPercent + "%";
+  map.prepend(dot);
 
-  if(frontPercent > backPercent){
-    text.innerText = "🔥 热门：正面 " + frontPercent + "%";
-  }else if(backPercent > frontPercent){
-    text.innerText = "🔥 热门：反面 " + backPercent + "%";
-  }else{
-    text.innerText = "⚖️ 当前盘口均衡";
+  if(map.children.length > 20){
+    map.removeChild(map.lastChild);
   }
 }
 
-/* 筹码百家乐 */
-function updateBaccaratUI(){
-  let user = getCurrentUser();
-  if(!user) return;
+setInterval(()=>{
 
-  if(user.chips === undefined) user.chips = 0;
+  countdownNum--;
 
-  baccaratScore.innerText = formatMoney(user.score);
-  baccaratChips.innerText = formatMoney(user.chips);
+  countdown.innerText =
+    "倒计时："+countdownNum;
 
-  playerBet.innerText = formatMoney(baccaratBets.player);
-  bankerBet.innerText = formatMoney(baccaratBets.banker);
-  tieBet.innerText = formatMoney(baccaratBets.tie);
+  if(countdownNum <= 0){
 
-  renderBaccaratRoad(user.baccaratRoad || []);
-}
+    countdownNum = 8;
+
+    roll();
+  }
+
+},1000);
 
 function exchangeToChips(){
-  let user = getCurrentUser();
-  if(!user) return;
 
-  let amount = Number(chipExchangeAmount.value);
+  let amount =
+    Number(
+      document.getElementById("chipExchangeAmount").value
+    );
 
-  if(!amount || amount <= 0){
-    baccaratResult.innerText = "请输入兑换积分";
+  if(amount <= 0) return;
+
+  if(currentScore < amount){
+    alert("积分不足");
     return;
   }
 
-  if(user.score < amount){
-    baccaratResult.innerText = "积分不足，无法兑换";
-    return;
-  }
+  currentScore -= amount;
+  chips += amount;
 
-  user.score = Number((user.score - amount).toFixed(2));
-  user.chips = Number(((user.chips || 0) + amount).toFixed(2));
-
-  chipExchangeAmount.value = "";
-
-  updateCurrentUser(user);
-  updateUI();
-  updateBaccaratUI();
-
-  baccaratResult.innerText = "已兑换 " + formatMoney(amount) + " 筹码";
+  saveUser();
 }
 
 function exchangeChipsBack(){
-  let user = getCurrentUser();
-  if(!user) return;
 
-  if(!user.chips || user.chips <= 0){
-    baccaratResult.innerText = "当前没有可兑换筹码";
-    return;
-  }
+  if(chips <= 0) return;
 
-  let chips = Number(user.chips.toFixed(2));
+  currentScore += chips;
+  chips = 0;
 
-  user.score = Number((user.score + chips).toFixed(2));
-  user.chips = 0;
-
-  updateCurrentUser(user);
-  updateUI();
-  updateBaccaratUI();
-
-  baccaratResult.innerText = "筹码已兑换回积分：" + formatMoney(chips);
+  saveUser();
 }
 
 function selectBaccaratBet(side){
-  baccaratSelectedSide = side;
-  selectedBetSide.innerText = "当前选择：" + side;
 
-  document.querySelectorAll(".baccarat-bet-zone").forEach(el => {
-    el.classList.remove("selected");
-  });
+  baccaratSelected = side;
 
-  if(side === "闲"){
-    document.querySelector(".player-zone").classList.add("selected");
-  }
-
-  if(side === "和"){
-    document.querySelector(".tie-zone").classList.add("selected");
-  }
-
-  if(side === "庄"){
-    document.querySelector(".banker-zone").classList.add("selected");
-  }
+  document.getElementById("selectedBetSide").innerText =
+    "当前选择："+side;
 }
 
 function placeBaccaratBet(){
-  let user = getCurrentUser();
-  if(!user) return;
 
-  let amount = Number(baccaratBetAmount.value);
-
-  if(!baccaratSelectedSide){
-    baccaratResult.innerText = "请先选择庄 / 闲 / 和";
+  if(!baccaratSelected){
+    alert("请选择下注区域");
     return;
   }
 
-  if(!amount || amount <= 0){
-    baccaratResult.innerText = "请输入下注筹码";
+  let amount =
+    Number(
+      document.getElementById("baccaratBetAmount").value
+    );
+
+  if(amount <= 0) return;
+
+  if(chips < amount){
+    alert("筹码不足");
     return;
   }
 
-  if((user.chips || 0) < amount){
-    baccaratResult.innerText = "筹码不足";
-    return;
-  }
+  chips -= amount;
 
-  user.chips = Number((user.chips - amount).toFixed(2));
+  baccaratBetData[baccaratSelected] += amount;
 
-  if(baccaratSelectedSide === "庄"){
-    baccaratBets.banker = Number((baccaratBets.banker + amount).toFixed(2));
-  }
+  document.getElementById("bankerBet").innerText =
+    baccaratBetData["庄"].toFixed(2);
 
-  if(baccaratSelectedSide === "闲"){
-    baccaratBets.player = Number((baccaratBets.player + amount).toFixed(2));
-  }
+  document.getElementById("playerBet").innerText =
+    baccaratBetData["闲"].toFixed(2);
 
-  if(baccaratSelectedSide === "和"){
-    baccaratBets.tie = Number((baccaratBets.tie + amount).toFixed(2));
-  }
+  document.getElementById("tieBet").innerText =
+    baccaratBetData["和"].toFixed(2);
 
-  baccaratBetAmount.value = "";
-
-  updateCurrentUser(user);
-  updateUI();
-  updateBaccaratUI();
-
-  baccaratResult.innerText = "已下注：" + baccaratSelectedSide + " " + formatMoney(amount);
+  saveUser();
 }
 
 function clearBaccaratBets(){
-  let user = getCurrentUser();
-  if(!user) return;
 
-  let total =
-    baccaratBets.banker +
-    baccaratBets.player +
-    baccaratBets.tie;
+  chips +=
+    baccaratBetData["庄"] +
+    baccaratBetData["闲"] +
+    baccaratBetData["和"];
 
-  if(total <= 0){
-    baccaratResult.innerText = "当前没有下注";
-    return;
-  }
-
-  user.chips = Number(((user.chips || 0) + total).toFixed(2));
-
-  baccaratBets = {
-    banker: 0,
-    player: 0,
-    tie: 0
+  baccaratBetData = {
+    庄:0,
+    闲:0,
+    和:0
   };
 
-  updateCurrentUser(user);
-  updateUI();
-  updateBaccaratUI();
+  document.getElementById("bankerBet").innerText = "0";
+  document.getElementById("playerBet").innerText = "0";
+  document.getElementById("tieBet").innerText = "0";
 
-  baccaratResult.innerText = "已清空下注，筹码已退回";
+  saveUser();
 }
 
-/* 发牌规则 */
-function drawCard(){
-  const suits = ["♠", "♥", "♦", "♣"];
-  const values = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+function randomCard(){
 
-  return {
-    suit: suits[Math.floor(Math.random() * suits.length)],
-    value: values[Math.floor(Math.random() * values.length)]
-  };
+  let arr = [
+    "A","2","3","4","5",
+    "6","7","8","9","10",
+    "J","Q","K"
+  ];
+
+  return arr[
+    Math.floor(Math.random()*arr.length)
+  ];
 }
 
-function cardPoint(card){
-  if(card.value === "A") return 1;
-  if(["10","J","Q","K"].includes(card.value)) return 0;
-  return Number(card.value);
-}
+function baccaratPoint(cards){
 
-function handPoint(cards){
-  let total = cards.reduce((sum, c) => sum + cardPoint(c), 0);
+  let total = 0;
+
+  cards.forEach(card=>{
+
+    if(card==="A"){
+      total += 1;
+    }else if(
+      ["10","J","Q","K"].includes(card)
+    ){
+      total += 0;
+    }else{
+      total += Number(card);
+    }
+
+  });
+
   return total % 10;
 }
 
-function cardHTML(card, id){
-  const red = card.suit === "♥" || card.suit === "♦";
+function startBaccaratRound(){
 
-  return `
-    <div class="playing-card" id="${id}">
-      <div class="card-inner">
-        <div class="card-back">★</div>
-        <div class="card-front ${red ? "red" : "black"}">
-          ${card.suit}${card.value}
-        </div>
-      </div>
-    </div>
-  `;
-}
+  let bankerCards = [
+    randomCard(),
+    randomCard()
+  ];
 
-function sleep(ms){
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+  let playerCards = [
+    randomCard(),
+    randomCard()
+  ];
 
-function revealCard(id){
-  const card = document.getElementById(id);
-  if(card){
-    card.classList.add("revealed");
-  }
-}
+  let bankerPoint =
+    baccaratPoint(bankerCards);
 
-function shouldPlayerDraw(playerPoint){
-  return playerPoint <= 5;
-}
+  let playerPoint =
+    baccaratPoint(playerCards);
 
-function shouldBankerDraw(bankerPoint, playerThirdPoint, playerDrew){
-  if(!playerDrew){
-    return bankerPoint <= 5;
-  }
+  document.getElementById("bankerCards").innerText =
+    bankerCards.join(" ");
 
-  if(bankerPoint <= 2) return true;
-  if(bankerPoint === 3) return playerThirdPoint !== 8;
-  if(bankerPoint === 4) return playerThirdPoint >= 2 && playerThirdPoint <= 7;
-  if(bankerPoint === 5) return playerThirdPoint >= 4 && playerThirdPoint <= 7;
-  if(bankerPoint === 6) return playerThirdPoint === 6 || playerThirdPoint === 7;
+  document.getElementById("playerCards").innerText =
+    playerCards.join(" ");
 
-  return false;
-}
+  document.getElementById("bankerPoint").innerText =
+    bankerPoint;
 
-async function dealBaccaratCard(target, card, id, text){
-  baccaratResult.innerText = text;
-  target.innerHTML += cardHTML(card, id);
-  await sleep(500);
-  revealCard(id);
-  await sleep(700);
-}
-
-async function startBaccaratRound(){
-  let user = getCurrentUser();
-  if(!user) return;
-
-  let totalBet =
-    baccaratBets.banker +
-    baccaratBets.player +
-    baccaratBets.tie;
-
-  if(totalBet <= 0){
-    baccaratResult.innerText = "请先下注筹码";
-    return;
-  }
-
-  bankerCards.innerHTML = "";
-  playerCards.innerHTML = "";
-  bankerPoint.innerText = "-";
-  playerPoint.innerText = "-";
-
-  baccaratResult.classList.add("dealing");
-  baccaratResult.innerText = "筹码已锁定，洗牌中...";
-
-  let banker = [];
-  let player = [];
-
-  await sleep(600);
-
-  player.push(drawCard());
-  await dealBaccaratCard(playerCards, player[0], "playerCard1", "发闲家第一张...");
-
-  banker.push(drawCard());
-  await dealBaccaratCard(bankerCards, banker[0], "bankerCard1", "发庄家第一张...");
-
-  player.push(drawCard());
-  await dealBaccaratCard(playerCards, player[1], "playerCard2", "发闲家第二张...");
-
-  banker.push(drawCard());
-  await dealBaccaratCard(bankerCards, banker[1], "bankerCard2", "发庄家第二张...");
-
-  let playerP = handPoint(player);
-  let bankerP = handPoint(banker);
-
-  playerPoint.innerText = playerP;
-  bankerPoint.innerText = bankerP;
-
-  await sleep(700);
-
-  let natural = playerP >= 8 || bankerP >= 8;
-  let playerDrew = false;
-  let playerThirdPoint = null;
-
-  if(natural){
-    baccaratResult.innerText = "天牌！不补牌，直接比点...";
-    await sleep(900);
-  }else{
-    if(shouldPlayerDraw(playerP)){
-      let third = drawCard();
-      player.push(third);
-      playerDrew = true;
-      playerThirdPoint = cardPoint(third);
-
-      await dealBaccaratCard(playerCards, third, "playerCard3", "闲家补第三张...");
-      playerP = handPoint(player);
-      playerPoint.innerText = playerP;
-
-      await sleep(500);
-    }else{
-      baccaratResult.innerText = "闲家停牌...";
-      await sleep(700);
-    }
-
-    bankerP = handPoint(banker);
-
-    if(shouldBankerDraw(bankerP, playerThirdPoint, playerDrew)){
-      let third = drawCard();
-      banker.push(third);
-
-      await dealBaccaratCard(bankerCards, third, "bankerCard3", "庄家补第三张...");
-      bankerP = handPoint(banker);
-      bankerPoint.innerText = bankerP;
-
-      await sleep(500);
-    }else{
-      baccaratResult.innerText = "庄家停牌...";
-      await sleep(700);
-    }
-  }
-
-  baccaratResult.innerText = "正在比点...";
-  await sleep(800);
-
-  playerP = handPoint(player);
-  bankerP = handPoint(banker);
-
-  playerPoint.innerText = playerP;
-  bankerPoint.innerText = bankerP;
+  document.getElementById("playerPoint").innerText =
+    playerPoint;
 
   let resultSide = "";
 
-  if(bankerP > playerP){
+  if(bankerPoint > playerPoint){
     resultSide = "庄";
-  }else if(playerP > bankerP){
+  }else if(playerPoint > bankerPoint){
     resultSide = "闲";
   }else{
     resultSide = "和";
   }
 
-  let payout = 0;
+  let reward = 0;
 
-  if(resultSide === "庄" && baccaratBets.banker > 0){
-    payout += baccaratBets.banker * 1.95;
+  if(resultSide==="庄"){
+    reward =
+      baccaratBetData["庄"]*1.95;
   }
 
-  if(resultSide === "闲" && baccaratBets.player > 0){
-    payout += baccaratBets.player * 2;
+  if(resultSide==="闲"){
+    reward =
+      baccaratBetData["闲"]*2;
   }
 
-  if(resultSide === "和" && baccaratBets.tie > 0){
-    payout += baccaratBets.tie * 9;
+  if(resultSide==="和"){
+    reward =
+      baccaratBetData["和"]*9;
   }
 
-  payout = Number(payout.toFixed(2));
+  chips += reward;
 
-  if(payout > 0){
-    user.chips = Number(((user.chips || 0) + payout).toFixed(2));
-    baccaratResult.innerText =
-      "💰 " + resultSide + "赢！返还筹码 " + formatMoney(payout);
-    explodeCoins();
-  }else{
-    baccaratResult.innerText =
-      "😌 " + resultSide + "赢，本局未命中";
-  }
+  document.getElementById("baccaratResult").innerText =
+    "本局结果："+resultSide+
+    " ｜ 获得："+reward.toFixed(2);
 
-  baccaratResult.classList.remove("dealing");
+  baccaratRoadData.unshift(resultSide);
 
-  if(!user.baccaratRoad){
-    user.baccaratRoad = [];
-  }
+  updateBaccaratRoad();
 
-  user.baccaratRoad.push(resultSide);
-  if(user.baccaratRoad.length > 30){
-    user.baccaratRoad.shift();
-  }
-
-  baccaratBets = {
-    banker: 0,
-    player: 0,
-    tie: 0
+  baccaratBetData = {
+    庄:0,
+    闲:0,
+    和:0
   };
 
-  updateCurrentUser(user);
-  updateUI();
-  updateBaccaratUI();
+  document.getElementById("bankerBet").innerText = "0";
+  document.getElementById("playerBet").innerText = "0";
+  document.getElementById("tieBet").innerText = "0";
+
+  saveUser();
 }
 
-/* UI */
-function updateUI(){
-  let user = getCurrentUser();
-  if(!user) return;
+function updateBaccaratRoad(){
 
-  name.innerText = user.username;
-  userId.innerText = user.id;
-  score.innerText = formatMoney(user.score);
+  let road =
+    document.getElementById("baccaratRoad");
 
-  if(document.getElementById("settingName")) settingName.innerText = user.username;
-  if(document.getElementById("settingId")) settingId.innerText = user.id;
-  if(document.getElementById("settingScore")) settingScore.innerText = formatMoney(user.score);
+  road.innerHTML = "";
 
-  renderRoad(user.road || []);
-  renderWinRoad(user.winRoad || []);
-  renderBaccaratRoad(user.baccaratRoad || []);
+  baccaratRoadData.forEach(item=>{
 
-  if(document.getElementById("baccaratScore")){
-    updateBaccaratUI();
-  }
-}
-
-function renderRoad(road){
-  let map = document.getElementById("roadMap");
-  if(!map) return;
-
-  map.innerHTML = "";
-
-  road.forEach(r => {
-    let dot = document.createElement("div");
-    dot.className = "road-dot " + (r === "正面" ? "front" : "back");
-    dot.innerText = r === "正面" ? "正" : "反";
-    map.appendChild(dot);
-  });
-}
-
-function renderWinRoad(road){
-  let map = document.getElementById("winRoadMap");
-  if(!map) return;
-
-  map.innerHTML = "";
-
-  road.forEach(r => {
-    let dot = document.createElement("div");
-    dot.className = "road-dot " + (r === "win" ? "win" : "lose");
-    dot.innerText = r === "win" ? "赢" : "输";
-    map.appendChild(dot);
-  });
-}
-
-function renderBaccaratRoad(road){
-  let map = document.getElementById("baccaratRoad");
-  if(!map) return;
-
-  map.innerHTML = "";
-
-  road.forEach(r => {
     let dot = document.createElement("div");
 
-    if(r === "庄"){
-      dot.className = "road-dot banker";
-      dot.innerText = "庄";
-    }else if(r === "闲"){
-      dot.className = "road-dot player";
-      dot.innerText = "闲";
-    }else{
-      dot.className = "road-dot tie";
-      dot.innerText = "和";
-    }
+    dot.className =
+      "road-dot " +
+      (
+        item==="庄"
+        ? "banker"
+        : item==="闲"
+        ? "player"
+        : "tie"
+      );
 
-    map.appendChild(dot);
+    dot.innerText = item;
+
+    road.appendChild(dot);
+
   });
-}
-
-/* 爆金币 */
-function explodeCoins(){
-  let box = document.getElementById("coinExplosion");
-  if(!box) return;
-
-  box.innerHTML = "";
-
-  for(let i = 0; i < 30; i++){
-    let c = document.createElement("div");
-    c.className = "coin-particle";
-
-    c.style.setProperty("--x", (Math.random() - 0.5) * 360 + "px");
-    c.style.setProperty("--y", (Math.random() - 0.5) * 360 + "px");
-
-    c.style.left = "50%";
-    c.style.top = "45%";
-
-    box.appendChild(c);
-  }
-
-  let flash = document.createElement("div");
-  flash.className = "flash";
-  document.body.appendChild(flash);
-
-  setTimeout(() => {
-    flash.remove();
-  }, 400);
-}
-/* ===== 修复硬币开奖翻面效果 ===== */
-
-let rollingCoinTimer = null;
-
-function roll(){
-  stopFakePlayers();
-
-  coinText.innerText = "开奖中...";
-  result.innerText = "停止下注，硬币翻转中...";
-
-  let coin = document.getElementById("coin");
-
-  if(coin){
-    coin.classList.add("rolling");
-  }
-
-  clearInterval(rollingCoinTimer);
-
-  rollingCoinTimer = setInterval(() => {
-    coinImg.src = coinImg.src.includes("coin.png2.PNG")
-      ? "coin.png.PNG"
-      : "coin.png2.PNG";
-  }, 120);
-
-  setTimeout(() => {
-    clearInterval(rollingCoinTimer);
-
-    let resultSide = Math.random() < 0.5 ? "正面" : "反面";
-
-    coinImg.src = resultSide === "正面"
-      ? "coin.png.PNG"
-      : "coin.png2.PNG";
-
-    coinText.innerText = resultSide;
-
-    if(coin){
-      coin.classList.remove("rolling");
-    }
-
-    settle(resultSide);
-  }, 1600);
-}
-/* ===== 硬币开奖快速旋转增强版 ===== */
-
-let rollingCoinTimer = null;
-
-function roll(){
-  stopFakePlayers();
-
-  coinText.innerText = "开奖中...";
-  result.innerText = "停止下注，硬币高速翻转中...";
-
-  let coin = document.getElementById("coin");
-
-  if(coin){
-    coin.classList.add("rolling");
-  }
-
-  clearInterval(rollingCoinTimer);
-
-  rollingCoinTimer = setInterval(() => {
-    coinImg.src = coinImg.src.includes("coin.png2.PNG")
-      ? "coin.png.PNG"
-      : "coin.png2.PNG";
-  }, 110);
-
-  setTimeout(() => {
-    clearInterval(rollingCoinTimer);
-
-    let resultSide = Math.random() < 0.5 ? "正面" : "反面";
-
-    coinImg.src = resultSide === "正面"
-      ? "coin.png.PNG"
-      : "coin.png2.PNG";
-
-    coinText.innerText = resultSide;
-
-    if(coin){
-      coin.classList.remove("rolling");
-    }
-
-    settle(resultSide);
-  }, 1800);
 }
