@@ -916,7 +916,7 @@ body::before{
       rgba(0,0,0,.42),
       rgba(0,0,0,.72)
     ),
-    url("casino-bg.PNG");
+    url("casino-bg.GIF");
 
   background-size:cover;
   background-position:center top;
