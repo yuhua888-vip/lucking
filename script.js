@@ -911,3 +911,45 @@ function explodeCoins(){
     flash.remove();
   }, 400);
 }
+/* ===== 修复硬币开奖翻面效果 ===== */
+
+let rollingCoinTimer = null;
+
+function roll(){
+  stopFakePlayers();
+
+  coinText.innerText = "开奖中...";
+  result.innerText = "停止下注，硬币翻转中...";
+
+  let coin = document.getElementById("coin");
+
+  if(coin){
+    coin.classList.add("rolling");
+  }
+
+  clearInterval(rollingCoinTimer);
+
+  rollingCoinTimer = setInterval(() => {
+    coinImg.src = coinImg.src.includes("coin.png2.PNG")
+      ? "coin.png.PNG"
+      : "coin.png2.PNG";
+  }, 120);
+
+  setTimeout(() => {
+    clearInterval(rollingCoinTimer);
+
+    let resultSide = Math.random() < 0.5 ? "正面" : "反面";
+
+    coinImg.src = resultSide === "正面"
+      ? "coin.png.PNG"
+      : "coin.png2.PNG";
+
+    coinText.innerText = resultSide;
+
+    if(coin){
+      coin.classList.remove("rolling");
+    }
+
+    settle(resultSide);
+  }, 1600);
+}
