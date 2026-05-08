@@ -498,3 +498,48 @@ button{
     box-shadow:0 0 38px rgba(255,215,0,.8);
   }
 }
+/* ===== 底部导航栏 ===== */
+
+.bottom-nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:999;
+
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+
+  height:78px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.78),
+      rgba(0,0,0,.96)
+    );
+
+  border-top:1px solid rgba(255,215,0,.18);
+
+  backdrop-filter:blur(12px);
+}
+
+.nav-item{
+  flex:1;
+  text-align:center;
+  color:#aaa;
+  font-size:13px;
+  font-weight:700;
+}
+
+.nav-item.active{
+  color:#facc15;
+  text-shadow:0 0 14px rgba(255,215,0,.7);
+}
+
+.nav-icon{
+  display:block;
+  font-size:24px;
+  margin-bottom:4px;
+}
