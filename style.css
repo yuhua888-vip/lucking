@@ -1016,3 +1016,35 @@ body{
 
   margin-top:10px !important;
 }
+/* ===== 游戏卡片中间黑条优化 ===== */
+
+.game-card p,
+.game-card .desc,
+.game-card span{
+
+  color:#f5deb3 !important;
+
+  font-size:15px !important;
+
+  font-weight:600 !important;
+
+  letter-spacing:1px !important;
+
+  background:rgba(0,0,0,.38) !important;
+
+  border:1px solid rgba(255,215,0,.14) !important;
+
+  border-radius:999px !important;
+
+  padding:10px 16px !important;
+
+  display:inline-block !important;
+
+  backdrop-filter:blur(6px) !important;
+
+  box-shadow:
+    0 0 14px rgba(255,215,0,.08);
+
+  text-shadow:
+    0 0 8px rgba(255,215,0,.12);
+}
