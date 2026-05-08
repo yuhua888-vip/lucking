@@ -5,18 +5,19 @@
 }
 
 body{
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;
+  min-height:100vh;
+  color:white;
   background:
-  linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.82)),
-  url("casino-bg..GIF");
+    linear-gradient(rgba(0,0,0,.48),rgba(0,0,0,.78)),
+    url("casino-bg..GIF");
   background-size:cover;
   background-position:center;
   background-attachment:fixed;
-  color:#fff;
 }
 
 .hidden{
-  display:none !important;
+  display:none!important;
 }
 
 .app{
@@ -28,86 +29,91 @@ body{
   width:100%;
   max-width:520px;
   margin:auto;
-  padding:20px 16px 120px;
+  padding:18px 14px 110px;
 }
 
-/* 登录 */
+/* 登录页 */
 
 .login-card{
-  background:rgba(0,0,0,.45);
-  border-radius:34px;
   padding:22px;
-  border:1px solid rgba(255,215,0,.15);
-  backdrop-filter:blur(10px);
-  box-shadow:0 0 40px rgba(255,215,0,.1);
+  border-radius:34px;
+  background:rgba(0,0,0,.34);
+  border:1px solid rgba(255,215,0,.22);
+  backdrop-filter:blur(8px);
+  box-shadow:
+    0 0 42px rgba(255,215,0,.18),
+    inset 0 0 45px rgba(255,255,255,.03);
 }
 
 .brand{
   display:inline-block;
-  padding:10px 18px;
+  padding:9px 18px;
   border-radius:999px;
-  background:rgba(255,215,0,.08);
   color:#facc15;
-  letter-spacing:4px;
+  background:rgba(255,215,0,.12);
   font-size:12px;
+  letter-spacing:3px;
+  font-weight:900;
 }
 
 .login-card h1{
-  margin-top:20px;
-  font-size:58px;
+  margin-top:18px;
+  font-size:56px;
   color:#facc15;
-  text-shadow:0 0 20px rgba(255,215,0,.6);
+  text-shadow:0 0 24px rgba(255,215,0,.75);
 }
 
 .login-card p{
-  margin-top:12px;
-  color:#f8e7a0;
-  font-size:18px;
+  margin-top:10px;
+  color:#fff0b8;
+  font-size:17px;
 }
 
 .hero-img{
   width:100%;
-  border-radius:28px;
   margin-top:18px;
+  border-radius:28px;
+  border:1px solid rgba(255,215,0,.22);
+  box-shadow:0 0 38px rgba(255,215,0,.18);
 }
 
 input{
   width:100%;
-  margin-top:18px;
+  margin-top:16px;
+  padding:17px;
   border:none;
   outline:none;
-  border-radius:22px;
-  padding:18px;
-  font-size:18px;
-  color:#fff;
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(8px);
+  border-radius:20px;
+  color:white;
+  font-size:17px;
+  background:rgba(0,0,0,.44);
+  border:1px solid rgba(255,215,0,.12);
+  backdrop-filter:blur(6px);
 }
 
 button{
   width:100%;
-  border:none;
-  margin-top:18px;
-  border-radius:24px;
+  margin-top:16px;
   padding:18px;
-  font-size:24px;
-  font-weight:900;
-  background:
-  linear-gradient(90deg,#fde047,#f59e0b);
-  color:#1f1400;
-  box-shadow:0 0 28px rgba(255,215,0,.35);
+  border:none;
+  border-radius:22px;
+  color:#201200;
+  font-size:21px;
+  font-weight:1000;
+  background:linear-gradient(90deg,#fff2a8,#facc15,#f59e0b);
+  box-shadow:0 0 26px rgba(255,215,0,.42);
 }
 
 /* 大厅 */
 
 .top-card{
   display:flex;
-  gap:14px;
-  background:rgba(0,0,0,.42);
-  border-radius:28px;
+  gap:12px;
   padding:18px;
-  border:1px solid rgba(255,215,0,.15);
-  backdrop-filter:blur(10px);
+  border-radius:28px;
+  background:rgba(0,0,0,.42);
+  border:1px solid rgba(255,215,0,.18);
+  backdrop-filter:blur(8px);
 }
 
 .top-card div{
@@ -116,13 +122,15 @@ button{
 
 .top-card span{
   color:#ddd;
+  font-size:13px;
 }
 
 .top-card b{
   display:block;
   margin-top:8px;
-  font-size:34px;
   color:#facc15;
+  font-size:28px;
+  text-shadow:0 0 15px rgba(255,215,0,.55);
 }
 
 .top-card small{
@@ -132,27 +140,31 @@ button{
 }
 
 .notice-line{
-  margin-top:18px;
-  padding:14px;
-  border-radius:18px;
-  background:rgba(0,0,0,.4);
-  color:#fff;
+  margin-top:16px;
+  padding:13px;
+  border-radius:999px;
+  color:#facc15;
+  background:rgba(0,0,0,.42);
+  border:1px solid rgba(255,215,0,.18);
+  white-space:nowrap;
   overflow:hidden;
 }
 
 .hall-title{
-  margin:28px 0 20px;
+  margin:26px 0 18px;
   text-align:center;
 }
 
 .hall-title h2{
-  font-size:54px;
   color:#facc15;
+  font-size:48px;
+  text-shadow:0 0 24px rgba(255,215,0,.7);
 }
 
 .hall-title p{
-  color:#ddd;
-  margin-top:8px;
+  margin-top:6px;
+  color:#eee;
+  letter-spacing:2px;
 }
 
 .game-card{
@@ -160,7 +172,9 @@ button{
   overflow:hidden;
   border-radius:34px;
   margin-top:22px;
-  border:1px solid rgba(255,215,0,.15);
+  min-height:260px;
+  border:1px solid rgba(255,215,0,.28);
+  box-shadow:0 0 38px rgba(255,215,0,.18);
 }
 
 .game-card img{
@@ -171,48 +185,61 @@ button{
 .game-info{
   position:absolute;
   inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,.82),transparent);
   display:flex;
   flex-direction:column;
   justify-content:flex-end;
   padding:24px;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.08));
 }
 
 .game-info h3{
-  font-size:42px;
   color:#facc15;
+  font-size:42px;
+  text-shadow:0 0 18px rgba(255,215,0,.8);
 }
 
 .game-info p{
-  margin-top:8px;
-  color:#fff;
+  display:inline-block;
+  margin-top:10px;
+  padding:9px 14px;
+  border-radius:999px;
+  color:#fff3c4;
+  background:rgba(0,0,0,.5);
+  border:1px solid rgba(255,215,0,.16);
+  font-size:15px;
 }
 
-.enter-btn{
+.game-info button{
   margin-top:16px;
 }
 
-/* 百家乐 */
+/* 白小姐 */
 
 .back-btn{
-  background:rgba(0,0,0,.6);
-  color:#fff;
+  background:rgba(0,0,0,.56);
+  color:#facc15;
   font-size:16px;
   padding:14px;
+  border:1px solid rgba(255,215,0,.18);
 }
 
 .baccarat-wrap{
-  background:rgba(0,0,0,.48);
+  padding:16px;
   border-radius:34px;
-  padding:18px;
-  border:1px solid rgba(255,215,0,.15);
-  backdrop-filter:blur(10px);
+  background:
+    radial-gradient(circle at top,rgba(255,215,0,.14),transparent 32%),
+    rgba(0,0,0,.46);
+  border:1px solid rgba(255,215,0,.22);
+  backdrop-filter:blur(8px);
+  box-shadow:0 0 42px rgba(255,215,0,.15);
 }
 
 .dealer-stage{
   position:relative;
   overflow:hidden;
-  border-radius:28px;
+  border-radius:30px;
+  border:2px solid rgba(255,215,0,.28);
+  box-shadow:0 0 36px rgba(255,215,0,.18);
 }
 
 .dealer-stage img{
@@ -220,217 +247,254 @@ button{
   display:block;
 }
 
+.dealer-stage::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,.04),rgba(0,0,0,.38));
+}
+
 .live-tag{
   position:absolute;
-  top:16px;
-  right:16px;
-  background:#ef4444;
-  color:#fff;
-  padding:8px 14px;
+  z-index:2;
+  top:14px;
+  right:14px;
+  padding:7px 13px;
   border-radius:999px;
-  font-weight:700;
+  background:#dc2626;
+  color:white;
+  font-size:12px;
+  font-weight:900;
+  box-shadow:0 0 18px rgba(239,68,68,.65);
 }
 
 .b-title{
   margin-top:18px;
-  font-size:72px;
+  text-align:center;
   color:#facc15;
-  text-shadow:0 0 24px rgba(255,215,0,.6);
+  font-size:62px;
+  line-height:1;
+  text-shadow:
+    0 0 22px rgba(255,215,0,.85),
+    0 0 48px rgba(255,215,0,.35);
 }
 
 .b-sub{
+  text-align:center;
   margin-top:10px;
-  color:#f3e5ab;
-  font-size:20px;
+  color:#fff0b8;
+  font-size:18px;
 }
 
 .wallet{
   display:flex;
-  gap:14px;
-  margin-top:22px;
+  gap:12px;
+  margin-top:20px;
 }
 
 .wallet div{
   flex:1;
-  background:rgba(0,0,0,.42);
-  border-radius:24px;
   padding:18px;
-  border:1px solid rgba(255,215,0,.15);
+  border-radius:24px;
+  text-align:center;
+  background:rgba(0,0,0,.48);
+  border:1px solid rgba(255,215,0,.18);
 }
 
 .wallet b{
   display:block;
-  margin-top:12px;
-  font-size:42px;
+  margin-top:8px;
   color:#facc15;
+  font-size:30px;
 }
 
-.exchange-box{
-  margin-top:24px;
-  background:rgba(0,0,0,.4);
+.exchange-box,
+.chip-panel{
+  margin-top:22px;
+  padding:18px;
   border-radius:28px;
-  padding:20px;
-  border:1px solid rgba(255,215,0,.15);
+  background:rgba(0,0,0,.46);
+  border:1px solid rgba(255,215,0,.16);
 }
 
 .exchange-box h3{
   color:#facc15;
-  font-size:34px;
+  font-size:28px;
 }
 
 .bet-table{
-  margin-top:24px;
-  background:
-  radial-gradient(circle at center,#14532d,#04130a);
+  margin-top:22px;
+  padding:18px;
   border-radius:34px;
-  padding:20px;
-  border:2px solid rgba(255,215,0,.18);
+  background:
+    radial-gradient(circle at center,rgba(22,163,74,.48),rgba(0,0,0,.86));
+  border:2px solid rgba(255,215,0,.25);
+  box-shadow:inset 0 0 60px rgba(0,0,0,.65);
 }
 
 .bet-zones{
   display:flex;
-  gap:12px;
+  gap:10px;
 }
 
 .bet-zone{
   flex:1;
+  min-height:138px;
   text-align:center;
   border-radius:26px;
-  padding:26px 10px;
-  border:1px solid rgba(255,255,255,.08);
-}
-
-.player{
-  background:linear-gradient(180deg,#1d4ed8,#07152d);
-}
-
-.tie{
-  background:linear-gradient(180deg,#16a34a,#05200d);
-}
-
-.banker{
-  background:linear-gradient(180deg,#b91c1c,#2a0505);
+  padding:18px 6px;
+  border:1px solid rgba(255,215,0,.22);
+  box-shadow:inset 0 0 28px rgba(0,0,0,.36);
 }
 
 .bet-zone h2{
-  font-size:70px;
   color:#facc15;
+  font-size:54px;
+  line-height:1;
+  text-shadow:0 0 18px rgba(255,215,0,.75);
 }
 
 .bet-zone p{
-  margin-top:10px;
-  font-size:20px;
+  margin-top:9px;
+  color:white;
+  font-size:17px;
 }
 
 .bet-zone small{
   display:block;
-  margin-top:16px;
-  font-size:18px;
+  margin-top:12px;
+  color:#fff0b8;
+  font-size:14px;
 }
 
-.chip-panel{
-  margin-top:24px;
-  background:rgba(0,0,0,.4);
-  border-radius:28px;
-  padding:20px;
-  border:1px solid rgba(255,215,0,.12);
+.player{
+  background:radial-gradient(circle at top,#2563eb,#06142b);
+}
+
+.tie{
+  background:radial-gradient(circle at top,#16a34a,#031d0c);
+}
+
+.banker{
+  background:radial-gradient(circle at top,#dc2626,#2a0505);
 }
 
 .chips{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
+  justify-content:center;
 }
 
 .chips button{
-  width:80px;
-  height:80px;
-  border-radius:50%;
-  font-size:24px;
+  width:64px;
+  height:64px;
   padding:0;
+  border-radius:50%;
+  font-size:16px;
+  background:radial-gradient(circle at 30% 30%,#fff7b2,#facc15 45%,#b45309);
+  box-shadow:
+    0 0 22px rgba(255,215,0,.45),
+    inset 0 0 12px rgba(255,255,255,.45);
 }
 
 #selectedSide{
-  margin-top:18px;
-  color:#facc15;
-  font-size:22px;
+  margin-top:16px;
   text-align:center;
+  color:#facc15;
+  font-size:20px;
+  font-weight:900;
 }
 
 .deal-btn{
-  font-size:28px;
+  font-size:24px;
+  animation:goldBreath 1.7s ease-in-out infinite;
 }
 
 .card-table{
   display:flex;
-  gap:14px;
-  margin-top:28px;
+  gap:12px;
+  margin-top:24px;
 }
 
 .card-box{
   flex:1;
-  background:rgba(0,0,0,.45);
+  min-height:220px;
+  padding:18px;
   border-radius:28px;
-  padding:20px;
   text-align:center;
-  border:1px solid rgba(255,215,0,.12);
+  background:rgba(0,0,0,.52);
+  border:1px solid rgba(255,215,0,.2);
+  backdrop-filter:blur(6px);
 }
 
 .card-box h3{
-  font-size:54px;
   color:#facc15;
+  font-size:36px;
+  text-shadow:0 0 16px rgba(255,215,0,.7);
 }
 
 .cards{
-  margin-top:20px;
-  min-height:80px;
-  font-size:28px;
+  min-height:92px;
+  margin-top:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color:white;
+  font-size:24px;
 }
 
 .card-box p{
-  margin-top:20px;
-  font-size:22px;
+  margin-top:18px;
+  font-size:20px;
+  color:#fff0b8;
 }
 
 .result-box{
-  margin-top:24px;
-  padding:20px;
+  margin-top:22px;
+  padding:18px;
   border-radius:24px;
   text-align:center;
-  background:rgba(255,215,0,.08);
   color:#facc15;
-  font-size:24px;
-  font-weight:700;
+  background:rgba(255,215,0,.08);
+  border:1px solid rgba(255,215,0,.16);
+  font-size:21px;
+  font-weight:900;
 }
 
 .road-title{
-  margin-top:28px;
+  margin-top:24px;
   color:#facc15;
-  font-size:28px;
-  font-weight:700;
+  font-size:24px;
+  font-weight:900;
 }
 
 .road-map{
-  margin-top:16px;
   display:flex;
   flex-wrap:wrap;
-  gap:10px;
+  gap:8px;
+  margin-top:12px;
 }
 
 .road-dot{
-  width:36px;
-  height:36px;
+  width:34px;
+  height:34px;
   border-radius:50%;
+  box-shadow:0 0 12px rgba(255,255,255,.15);
 }
 
-.red{
-  background:#dc2626;
-}
+.red{background:#dc2626;}
+.blue{background:#2563eb;}
+.green{background:#16a34a;}
 
-.blue{
-  background:#2563eb;
-}
-
-.green{
-  background:#16a34a;
+@keyframes goldBreath{
+  0%,100%{
+    transform:scale(1);
+    box-shadow:0 0 20px rgba(255,215,0,.35);
+  }
+  50%{
+    transform:scale(1.03);
+    box-shadow:0 0 38px rgba(255,215,0,.8);
+  }
 }
