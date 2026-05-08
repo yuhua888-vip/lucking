@@ -717,3 +717,162 @@ button{
   font-size:24px !important;
   letter-spacing:1px;
 }
+/* ===== 真人百家乐牌桌布局版 ===== */
+
+.baccarat-wrap{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  background:
+    radial-gradient(circle at top, rgba(255,215,0,.18), transparent 24%),
+    linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.82)) !important;
+}
+
+/* 荷官区压缩，像牌桌上方 */
+.dealer-stage{
+  height:360px;
+  border-radius:34px !important;
+}
+
+.dealer-stage img{
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+}
+
+/* 标题缩小，不抢牌桌 */
+.b-title{
+  font-size:46px !important;
+  margin-top:4px !important;
+}
+
+.b-sub{
+  margin-top:0 !important;
+}
+
+/* 钱包小型化 */
+.wallet{
+  order:1;
+}
+
+.wallet div{
+  padding:14px !important;
+}
+
+.wallet b{
+  font-size:26px !important;
+}
+
+/* 发牌区提前，变成主视觉 */
+.card-table{
+  order:2;
+  display:grid !important;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  padding:18px !important;
+  border-radius:34px !important;
+
+  background:
+    radial-gradient(circle at center, rgba(22,163,74,.48), rgba(0,0,0,.88)) !important;
+
+  border:2px solid rgba(255,215,0,.28) !important;
+  box-shadow:
+    inset 0 0 65px rgba(0,0,0,.65),
+    0 0 36px rgba(255,215,0,.16);
+}
+
+.card-box{
+  margin-top:0 !important;
+  min-height:180px !important;
+  background:rgba(0,0,0,.55) !important;
+  border:1px solid rgba(255,215,0,.24) !important;
+}
+
+.card-box h3{
+  font-size:34px !important;
+}
+
+/* 结果放到发牌区下面 */
+.result-box{
+  order:3;
+  font-size:22px !important;
+}
+
+/* 下注区放中间，做成真正庄闲和大区 */
+.bet-table{
+  order:4;
+  padding:18px !important;
+  border-radius:36px !important;
+  background:
+    radial-gradient(circle at center, rgba(20,83,45,.75), rgba(0,0,0,.9)) !important;
+  border:2px solid rgba(255,215,0,.32) !important;
+}
+
+.bet-zones{
+  display:grid !important;
+  grid-template-columns:1fr .78fr 1fr;
+  gap:10px !important;
+}
+
+.bet-zone{
+  min-height:150px !important;
+  padding:18px 8px !important;
+  border-radius:28px !important;
+  transition:.2s;
+}
+
+.bet-zone h2{
+  font-size:56px !important;
+}
+
+.bet-zone small{
+  font-size:16px !important;
+}
+
+/* 点下注区有按压感 */
+.bet-zone:active{
+  transform:scale(.94);
+  box-shadow:0 0 28px rgba(255,215,0,.75);
+}
+
+/* 筹码区放下注区下面 */
+.chip-panel{
+  order:5;
+  padding:16px !important;
+}
+
+.chips{
+  justify-content:center !important;
+  gap:12px !important;
+}
+
+.chips button{
+  width:64px !important;
+  height:64px !important;
+  font-size:15px !important;
+}
+
+/* 兑换区放后面，不抢画面 */
+.exchange-box{
+  order:6;
+}
+
+/* 路子最后 */
+.road-title{
+  order:7;
+}
+
+.road-map{
+  order:8;
+}
+
+/* 牌更像实体牌 */
+.mini-card{
+  width:54px !important;
+  height:76px !important;
+}
+
+.card-back,
+.card-face{
+  font-size:20px !important;
+}
