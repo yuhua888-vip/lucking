@@ -1190,3 +1190,101 @@ body{
     opacity:0;
   }
 }
+/* ===== 筹码百家乐 · 高级牌桌UI版 ===== */
+
+#baccaratPanel{
+  background:
+    radial-gradient(circle at center, rgba(22,163,74,.18), transparent 45%),
+    linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.45));
+  border-radius:30px;
+  padding:18px;
+}
+
+.baccarat-title{
+  font-size:52px !important;
+  letter-spacing:2px;
+  text-shadow:
+    0 0 20px rgba(250,204,21,.75),
+    0 0 42px rgba(250,204,21,.35);
+}
+
+.baccarat-table-v3{
+  position:relative;
+  padding:18px;
+  border-radius:32px;
+  background:
+    radial-gradient(circle at center, rgba(21,128,61,.55), rgba(6,78,59,.55)),
+    linear-gradient(145deg, rgba(0,0,0,.45), rgba(0,0,0,.2));
+  border:2px solid rgba(250,204,21,.28);
+  box-shadow:
+    inset 0 0 55px rgba(0,0,0,.55),
+    0 0 35px rgba(250,204,21,.16);
+}
+
+.baccarat-bet-zone{
+  min-height:155px !important;
+  border-radius:28px !important;
+  box-shadow:
+    inset 0 0 28px rgba(0,0,0,.35),
+    0 0 18px rgba(250,204,21,.08);
+}
+
+.baccarat-bet-zone.selected{
+  transform:translateY(-4px) scale(1.04);
+  box-shadow:
+    0 0 28px rgba(250,204,21,.7),
+    inset 0 0 28px rgba(255,255,255,.08) !important;
+}
+
+.zone-title{
+  font-size:42px !important;
+}
+
+.chip-wallet div,
+.chip-exchange-box,
+.chip-bet-control,
+.card-side{
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.08), rgba(0,0,0,.36)) !important;
+  border:1px solid rgba(250,204,21,.16) !important;
+  box-shadow:
+    inset 0 0 24px rgba(255,255,255,.03),
+    0 0 18px rgba(250,204,21,.08);
+}
+
+#chipButtons button{
+  border:2px solid rgba(255,255,255,.35) !important;
+  color:#3b2200 !important;
+  box-shadow:
+    0 0 20px rgba(250,204,21,.45),
+    inset 0 0 12px rgba(255,255,255,.35);
+}
+
+#chipButtons button:active{
+  transform:scale(.92);
+}
+
+.baccarat-card-table{
+  padding:16px;
+  border-radius:30px;
+  background:
+    linear-gradient(145deg, rgba(0,0,0,.36), rgba(255,255,255,.04));
+  border:1px solid rgba(250,204,21,.16);
+}
+
+.playing-card{
+  width:66px !important;
+  height:94px !important;
+}
+
+.baccarat-result{
+  font-size:18px;
+  font-weight:900;
+  box-shadow:
+    0 0 24px rgba(250,204,21,.14),
+    inset 0 0 20px rgba(255,255,255,.04);
+}
+
+.deal-btn{
+  animation: goldBreath 1.6s ease-in-out infinite;
+}
