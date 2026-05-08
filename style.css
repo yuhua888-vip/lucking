@@ -619,3 +619,101 @@ button{
   align-items:center;
   justify-content:center;
 }
+/* ===== 乐彩百家乐豪华牌桌版 ===== */
+
+.baccarat-wrap{
+  background:
+    radial-gradient(circle at top, rgba(255,215,0,.18), transparent 28%),
+    radial-gradient(circle at center, rgba(22,163,74,.22), transparent 50%),
+    rgba(0,0,0,.58) !important;
+}
+
+.bet-table{
+  padding:14px !important;
+  border-radius:36px !important;
+}
+
+.bet-zones{
+  gap:8px !important;
+}
+
+.bet-zone{
+  min-height:120px !important;
+  padding:14px 6px !important;
+  border:2px solid rgba(255,215,0,.25) !important;
+}
+
+.bet-zone h2{
+  font-size:46px !important;
+}
+
+.bet-zone:active{
+  transform:scale(.96);
+}
+
+.chip-panel{
+  padding:14px !important;
+}
+
+.chips{
+  justify-content:space-between !important;
+}
+
+.chips button{
+  width:58px !important;
+  height:58px !important;
+  font-size:15px !important;
+}
+
+.card-table{
+  position:relative;
+  padding:18px;
+  border-radius:36px;
+  background-image:
+    linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.82)),
+    url("dealer.PNG.PNG");
+  background-size:cover;
+  background-position:center top;
+  border:2px solid rgba(255,215,0,.32);
+  box-shadow:
+    0 0 45px rgba(255,215,0,.2),
+    inset 0 0 80px rgba(0,0,0,.75);
+}
+
+.card-table::before{
+  content:"LIVE BACCARAT";
+  position:absolute;
+  top:14px;
+  right:14px;
+  z-index:4;
+  padding:6px 12px;
+  border-radius:999px;
+  background:#dc2626;
+  color:white;
+  font-size:12px;
+  font-weight:900;
+  box-shadow:0 0 18px rgba(239,68,68,.65);
+}
+
+.card-box{
+  margin-top:300px;
+  background:rgba(0,0,0,.62) !important;
+  border:1px solid rgba(255,215,0,.26) !important;
+  backdrop-filter:blur(8px);
+}
+
+.card-box h3{
+  font-size:38px !important;
+}
+
+.result-box{
+  background:
+    linear-gradient(145deg, rgba(255,215,0,.14), rgba(0,0,0,.72)) !important;
+  border:1px solid rgba(255,215,0,.28) !important;
+  box-shadow:0 0 28px rgba(255,215,0,.18);
+}
+
+.deal-btn{
+  font-size:24px !important;
+  letter-spacing:1px;
+}
