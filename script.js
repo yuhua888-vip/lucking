@@ -927,3 +927,76 @@ setInterval(updateVipBadge, 1500);
 
 updateLuckyBroadcast();
 updateVipBadge();
+/* ===== 幸运7动态播报 + VIP等级 + 金币粒子 ===== */
+
+function updateVipBadge(){
+  const nameBox = document.getElementById("name");
+  if(!nameBox) return;
+
+  let vipLevel = 1;
+
+  if(currentScore >= 1000) vipLevel = 2;
+  if(currentScore >= 5000) vipLevel = 3;
+  if(currentScore >= 20000) vipLevel = 5;
+  if(currentScore >= 100000) vipLevel = 7;
+
+  if(!document.getElementById("vipBadge")){
+    const badge = document.createElement("span");
+    badge.id = "vipBadge";
+    badge.className = "vip-badge";
+    nameBox.after(badge);
+  }
+
+  document.getElementById("vipBadge").innerText = "VIP" + vipLevel;
+}
+
+const luckyNames = [
+  "VIP8821","Lucky777","金手阿豪","夜王","财神哥","黑桃A",
+  "龙哥","星辰玩家","皇家贵宾","幸运玩家"
+];
+
+const luckyEvents = [
+  "在百家乐获得 98,000 娱乐积分",
+  "在幸运硬币命中高倍奖励",
+  "成功晋级 VIP6",
+  "刚刚兑换了高级筹码",
+  "在娱乐大厅豪取连胜",
+  "获得今日幸运奖励"
+];
+
+function updateLuckyBroadcast(){
+  const track = document.querySelector(".ticker-track");
+  if(!track) return;
+
+  let text = "";
+
+  for(let i = 0; i < 6; i++){
+    const name = luckyNames[Math.floor(Math.random() * luckyNames.length)];
+    const event = luckyEvents[Math.floor(Math.random() * luckyEvents.length)];
+    text += "🎉 恭喜玩家 " + name + " " + event + "　";
+  }
+
+  track.innerText = text;
+}
+
+function createGoldParticle(){
+  const p = document.createElement("div");
+  p.className = "gold-particle";
+
+  p.style.left = Math.random() * 100 + "vw";
+  p.style.animationDuration = 4 + Math.random() * 4 + "s";
+  p.style.transform = "scale(" + (0.6 + Math.random() * 1.2) + ")";
+
+  document.body.appendChild(p);
+
+  setTimeout(() => {
+    p.remove();
+  }, 8000);
+}
+
+setInterval(createGoldParticle, 650);
+setInterval(updateLuckyBroadcast, 7000);
+setInterval(updateVipBadge, 1500);
+
+updateLuckyBroadcast();
+updateVipBadge();
