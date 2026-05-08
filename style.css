@@ -1321,3 +1321,62 @@ body{
   content:"LIVE DEALER";
   position:absolute;
 }
+/* ===== 荷官放到发牌界面 ===== */
+
+/* 取消顶部大荷官图 */
+#baccaratPanel::before{
+  display:none !important;
+}
+
+/* 发牌区域改成荷官背景 */
+.baccarat-card-table{
+  position:relative;
+  overflow:hidden;
+  min-height:520px;
+
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,.18),
+      rgba(0,0,0,.72)
+    ),
+    url("dealer.PNG.PNG") !important;
+
+  background-size:cover !important;
+  background-position:center top !important;
+
+  border:2px solid rgba(250,204,21,.28) !important;
+  box-shadow:
+    0 0 45px rgba(250,204,21,.2),
+    inset 0 0 50px rgba(0,0,0,.55) !important;
+}
+
+/* 让庄闲牌浮在荷官图上 */
+.card-side{
+  position:relative;
+  z-index:2;
+  background:rgba(0,0,0,.46) !important;
+  backdrop-filter:blur(6px);
+}
+
+/* 发牌区标题更亮 */
+.card-side h3{
+  text-shadow:0 0 18px rgba(250,204,21,.8);
+}
+
+/* 荷官角标 */
+.baccarat-card-table::after{
+  content:"LIVE DEALER";
+  position:absolute;
+  top:16px;
+  right:16px;
+  z-index:3;
+
+  background:#dc2626;
+  color:white;
+  font-size:12px;
+  font-weight:900;
+  padding:6px 12px;
+  border-radius:999px;
+  box-shadow:0 0 18px rgba(239,68,68,.55);
+}
