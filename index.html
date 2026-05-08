@@ -2,334 +2,227 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>幸运7娱乐</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div id="coinExplosion"></div>
+<div class="container">
 
-<div class="app">
+  <!-- 首页 -->
+  <div id="loginPage">
 
-  <div id="loginBox" class="platform-card lucky-home">
+    <div class="hero-card">
 
-    <div class="brand-badge">LUCKY 7 ENTERTAINMENT</div>
+      <div class="hero-mini">
+        LUCKY 7 ENTERTAINMENT
+      </div>
 
-    <h1>幸运7娱乐</h1>
+      <div class="hero-title">
+        幸运7娱乐
+      </div>
 
-    <p class="brand-subtitle">VIP牌桌 · 金色筹码 · 娱乐积分模式</p>
+      <div class="hero-sub">
+        VIP牌桌 · 金色筹码 · 娱乐积分模式
+      </div>
 
-    <div class="lucky-hero"></div>
+      <img src="lucky7hero.PNG" class="hero-img">
 
-    <div class="notice-bar">
-      📢 公告：本平台为娱乐积分玩法，不涉及真实货币交易
-    </div>
+      <div class="notice">
+        📢 公告：本平台为娱乐积分玩法，不涉及真实货币交易
+      </div>
 
-    <div class="login-panel">
       <input id="username" placeholder="账号：5位字母数字混合">
       <input id="password" type="password" placeholder="密码：5位字母数字混合">
 
-      <button onclick="login()">进入幸运7</button>
-      <button onclick="register()">创建账号</button>
+      <button onclick="login()">
+        进入幸运7
+      </button>
 
-      <p id="msg"></p>
-    </div>
+      <button onclick="registerUser()">
+        创建账号
+      </button>
 
-    <div class="rule-box">
-      <div class="rule-title">平台规则</div>
-      <div class="rule-content">
-        ① 新用户注册赠送 500.00 娱乐积分<br><br>
-        ② 幸运硬币：8秒盘口，快速开奖<br><br>
-        ③ 筹码百家乐：兑换筹码后进入牌桌下注<br><br>
-        ④ 全场盘口、热度条、模拟玩家仅为氛围展示<br><br>
-        ⑤ 本平台为娱乐积分模式，不涉及真实货币交易
-      </div>
     </div>
 
   </div>
 
-  <div id="gameBox" class="hidden platform-card">
+  <!-- 娱乐大厅 -->
+  <div id="hallPage" class="hidden">
 
-    <div id="entertainmentPanel">
+    <div class="panel">
 
-      <div class="top-status lucky-status">
-        <div>
-          <div class="small-label">VIP玩家</div>
-          <b id="name"></b>
-          <div class="id-line">ID：<span id="userId"></span></div>
+      <div class="top-user">
+
+        <div class="user-box">
+          VIP玩家
+          <b id="playerName">admin</b>
+          ID：
+          <span id="playerId">88888</span>
         </div>
 
-        <div>
-          <div class="small-label">账户积分</div>
-          <b><span id="score"></span></b>
+        <div class="user-box">
+          账户积分
+          <b id="playerScore">500.00</b>
         </div>
+
       </div>
 
-      <div id="gameLobby">
+      <div class="marquee">
+        🎉 恭喜玩家 财神哥 成功晋级 VIP6　
+        🎉 恭喜玩家 金手阿豪 在百家乐获得 98,000 娱乐积分　
+        🎉 恭喜玩家 夜王 刚刚兑换了高级筹码
+      </div>
 
-        <div class="live-ticker">
-          <div class="ticker-track">
-            🎉 恭喜玩家 VIP8821 获得 98,000 娱乐积分　🎉 恭喜玩家 Lucky777 升级 VIP6　🎉 筹码百家乐 VIP牌桌火热进行中　🎉 幸运硬币连续爆红中　🎉 新用户注册赠送 500 娱乐积分　
-          </div>
-        </div>
+      <div class="stats">
+        <b>12,863</b> 当前在线<br>
+        <b>8,920,000</b> 今日派彩<br>
+        <b>VIP 7</b> 最高等级
+      </div>
 
-        <div class="hall-title lucky-hall-title">
-          <div>幸运7娱乐</div>
-          <span>WELCOME TO LUCKY 7</span>
-        </div>
+      <!-- 幸运硬币 -->
+      <div class="game-card">
 
-        <div class="platform-data">
-          <div>
-            <b>12,863</b>
-            <span>当前在线</span>
-          </div>
+        <img src="coinhall.PNG">
 
-          <div>
-            <b>8,920,000</b>
-            <span>今日派彩</span>
-          </div>
+        <div class="game-overlay"></div>
 
-          <div>
-            <b>VIP 7</b>
-            <span>最高等级</span>
-          </div>
-        </div>
+        <div class="game-content">
 
-        <div class="event-zone">
-          <div class="event-card">
-            <b>🎁 新人礼包</b>
-            <span>注册即领 500 娱乐积分</span>
+          <div class="game-title">
+            幸运硬币
           </div>
 
-          <div class="event-card">
-            <b>💎 VIP专属</b>
-            <span>专属牌桌 · 高级体验</span>
-          </div>
-        </div>
-
-        <div class="lobby-stats">
-          <div>🔥 热门在线</div>
-          <div>🎰 娱乐大厅</div>
-          <div>💎 VIP牌桌</div>
-        </div>
-
-        <div class="game-lobby">
-
-          <div class="lobby-card coin-lobby-card" onclick="enterGame('coin')">
-            <div class="lobby-info">
-              <h3>幸运硬币</h3>
-              <p>高倍狂欢・极速开奖・实时热度</p>
-              <span>ENTER GAME</span>
-            </div>
+          <div class="game-desc">
+            高倍狂欢 · 极速开奖 · 实时热度
           </div>
 
-          <div class="lobby-card baccarat-lobby-card" onclick="enterGame('baccarat')">
-            <div class="lobby-info">
-              <h3>筹码百家乐</h3>
-              <p>VIP牌桌・真人氛围・豪华对局</p>
-              <span>ENTER TABLE</span>
-            </div>
-          </div>
+          <button class="enter-btn" onclick="openCoinGame()">
+            ENTER GAME
+          </button>
 
         </div>
 
       </div>
 
-      <div id="coinGamePanel" class="hidden game-section">
+      <!-- 百家乐 -->
+      <div class="game-card">
 
-        <button class="back-lobby-btn" onclick="backToLobby()">← 返回娱乐大厅</button>
+        <img src="baccarat.PNG">
 
-        <div class="section-title">幸运硬币 · 快速盘口</div>
+        <div class="game-overlay"></div>
 
-        <h2 id="countdown">倒计时：8</h2>
+        <div class="game-content">
 
-        <div class="coin" id="coin">
-          <img id="coinImg" src="coin.png.PNG">
-        </div>
-
-        <div id="coinText">等待下注</div>
-
-        <div class="bet-area">
-
-          <div class="bet-side">
-            <h3>反面</h3>
-            <div>下注：<span id="backBet">0</span></div>
-            <input id="backAmount" type="number" placeholder="输入下注额">
-            <button onclick="betCustom('反面')">下注反面</button>
+          <div class="game-title">
+            筹码百家乐
           </div>
 
-          <div class="bet-side">
-            <h3>正面</h3>
-            <div>下注：<span id="frontBet">0</span></div>
-            <input id="frontAmount" type="number" placeholder="输入下注额">
-            <button onclick="betCustom('正面')">下注正面</button>
+          <div class="game-desc">
+            真人荷官 · VIP牌桌 · 翻牌开奖
           </div>
 
-        </div>
+          <button class="enter-btn" onclick="openBaccarat()">
+            ENTER TABLE
+          </button>
 
-        <div class="market-board">
-          <div class="market-title">全场盘口</div>
-
-          <div class="market-row">
-            <div>反面总注：<span id="fakeBackTotal">0</span></div>
-            <div>正面总注：<span id="fakeFrontTotal">0</span></div>
-          </div>
-
-          <div class="heat-box">
-            <div class="heat-label">
-              <span>反面热度</span>
-              <span>正面热度</span>
-            </div>
-
-            <div class="heat-bar">
-              <div id="backHeat" class="heat-back"></div>
-              <div id="frontHeat" class="heat-front"></div>
-            </div>
-
-            <div id="hotText" class="hot-text">盘口正在变化...</div>
-          </div>
-
-          <div id="fakeFeed" class="fake-feed">等待玩家下注...</div>
-        </div>
-
-        <div id="result">等待下注...</div>
-
-        <div class="road-title">正反路子</div>
-        <div id="roadMap" class="road-map"></div>
-
-        <div class="road-title">输赢路子</div>
-        <div id="winRoadMap" class="road-map"></div>
-
-      </div>
-
-      <div id="baccaratPanel" class="hidden game-section">
-
-        <button class="back-lobby-btn" onclick="backToLobby()">← 返回娱乐大厅</button>
-
-        <div class="section-title">筹码百家乐 · VIP牌桌</div>
-
-        <h2 class="baccarat-title">Baccarat</h2>
-
-        <p class="baccarat-sub">兑换筹码后下注：庄 / 闲 / 和</p>
-
-        <div class="chip-wallet">
-          <div>
-            当前积分<br>
-            <b id="baccaratScore">0.00</b>
-          </div>
-
-          <div>
-            当前筹码<br>
-            <b id="baccaratChips">0.00</b>
-          </div>
-        </div>
-
-        <div class="chip-exchange-box">
-          <div class="exchange-title">筹码兑换中心</div>
-          <input id="chipExchangeAmount" type="number" placeholder="输入要兑换的积分">
-          <button onclick="exchangeToChips()">兑换成筹码</button>
-          <button onclick="exchangeChipsBack()">筹码兑换回积分</button>
-        </div>
-
-        <div class="baccarat-table-v3">
-
-          <div class="baccarat-bet-zone player-zone" onclick="selectBaccaratBet('闲')">
-            <div class="zone-title">闲</div>
-            <div class="zone-odds">1 : 1</div>
-            <div>下注：<span id="playerBet">0.00</span></div>
-          </div>
-
-          <div class="baccarat-bet-zone tie-zone" onclick="selectBaccaratBet('和')">
-            <div class="zone-title">和</div>
-            <div class="zone-odds">1 : 8</div>
-            <div>下注：<span id="tieBet">0.00</span></div>
-          </div>
-
-          <div class="baccarat-bet-zone banker-zone" onclick="selectBaccaratBet('庄')">
-            <div class="zone-title">庄</div>
-            <div class="zone-odds">1 : 0.95</div>
-            <div>下注：<span id="bankerBet">0.00</span></div>
-          </div>
-
-        </div>
-
-        <div class="chip-bet-control">
-          <input id="baccaratBetAmount" type="number" placeholder="输入下注筹码">
-
-          <div id="selectedBetSide">当前选择：无</div>
-
-          <button onclick="placeBaccaratBet()">放置筹码</button>
-          <button onclick="clearBaccaratBets()">清空下注</button>
-          <button class="deal-btn" onclick="startBaccaratRound()">确认下注 / 开始发牌</button>
-        </div>
-
-        <div class="baccarat-card-table">
-
-          <div class="card-side">
-            <h3>庄家</h3>
-            <div id="bankerCards" class="cards">等待发牌</div>
-            <div>点数：<span id="bankerPoint">-</span></div>
-          </div>
-
-          <div class="card-side">
-            <h3>闲家</h3>
-            <div id="playerCards" class="cards">等待发牌</div>
-            <div>点数：<span id="playerPoint">-</span></div>
-          </div>
-
-        </div>
-
-        <div id="baccaratResult" class="baccarat-result">请先兑换筹码并下注</div>
-
-        <div class="road-title">百家乐路子</div>
-        <div id="baccaratRoad" class="road-map"></div>
-
-        <div class="baccarat-rule">
-          庄赢返还 1.95 倍｜闲赢返还 2 倍｜和局返还 9 倍
         </div>
 
       </div>
 
     </div>
 
-    <div id="servicePanel" class="hidden">
-      <div class="section-title">客服中心</div>
+  </div>
 
-      <div class="service-card">
-        <b>🎧 24小时在线客服</b>
-        <p>账户问题、游戏问题、积分问题均可联系客服处理。</p>
-      </div>
+  <!-- 百家乐 -->
+  <div id="baccaratPanel" class="hidden">
 
-      <div class="service-card">
-        <b>📌 常见问题</b>
-        <p>本平台为娱乐积分模式，不涉及真实货币交易。</p>
-      </div>
-
-      <div class="service-card">
-        <b>🛡 安全说明</b>
-        <p>请妥善保管账号密码，避免多人共用同一账号。</p>
-      </div>
+    <div class="baccarat-title">
+      Baccarat
     </div>
 
-    <div id="settingsPanel" class="hidden">
-      <div class="section-title">账户设置</div>
+    <div class="baccarat-sub">
+      真人荷官 · VIP牌桌 · 娱乐积分
+    </div>
 
-      <div class="account-card">
-        <p>账号：<span id="settingName"></span></p>
-        <p>ID：<span id="settingId"></span></p>
-        <p>积分：<span id="settingScore"></span></p>
+    <div class="wallet">
+
+      <div class="wallet-card">
+        当前积分
+        <b id="baccaratScore">
+          500.00
+        </b>
       </div>
 
-      <button onclick="logout()">退出登录</button>
+      <div class="wallet-card">
+        当前筹码
+        <b id="chipBalance">
+          0.00
+        </b>
+      </div>
+
     </div>
 
-    <div class="tabbar">
-      <div id="tabEntertainment" class="active" onclick="switchTab('entertainment')">🎰<br>娱乐</div>
-      <div id="tabService" onclick="switchTab('service')">🎧<br>客服</div>
-      <div id="tabSettings" onclick="switchTab('settings')">⚙️<br>设置</div>
+    <div class="bet-table">
+
+      <div class="bet-zones">
+
+        <div class="bet-zone player">
+          <h2>闲</h2>
+          <p>1 : 1</p>
+        </div>
+
+        <div class="bet-zone tie">
+          <h2>和</h2>
+          <p>1 : 8</p>
+        </div>
+
+        <div class="bet-zone banker">
+          <h2>庄</h2>
+          <p>1 : 0.95</p>
+        </div>
+
+      </div>
+
+      <div class="chips">
+
+        <div class="chip">100</div>
+        <div class="chip">500</div>
+        <div class="chip">1000</div>
+        <div class="chip">5000</div>
+        <div class="chip">10000</div>
+
+      </div>
+
     </div>
+
+    <div class="card-table">
+
+      <div class="card-area">
+
+        <div class="card-box">
+          <h3>庄家</h3>
+          等待发牌
+        </div>
+
+        <div class="card-box">
+          <h3>闲家</h3>
+          等待发牌
+        </div>
+
+      </div>
+
+      <div class="result-box">
+        请先下注并开始发牌
+      </div>
+
+    </div>
+
+    <button onclick="backHall()">
+      返回大厅
+    </button>
 
   </div>
 
@@ -339,8 +232,3 @@
 
 </body>
 </html>
-/* 隐藏平台规则 */
-
-.notice{
-  display:none !important;
-}
