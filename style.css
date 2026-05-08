@@ -939,3 +939,8 @@ body::after{
 body{
   background:#050005 !important;
 }
+/* 隐藏平台规则 */
+
+.rule-box{
+  display:none !important;
+}
