@@ -1,1382 +1,292 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
+/* ===== 百家乐娱乐城终极UI版 ===== */
 
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;
+#baccaratPanel{
+  position:relative;
   background:
-    radial-gradient(circle at top, rgba(255,215,0,.18), transparent 28%),
-    radial-gradient(circle at bottom, rgba(168,85,247,.22), transparent 35%),
-    linear-gradient(160deg,#120018,#050505 72%);
-  background-attachment:fixed;
-  color:#fff;
-  min-height:100vh;
-  overflow-x:hidden;
-}
-
-.hidden{
-  display:none!important;
-}
-
-.app{
-  width:100%;
-  max-width:520px;
-  margin:auto;
-  padding:18px;
-}
-
-.platform-card{
-  background:linear-gradient(145deg,rgba(255,215,0,.08),rgba(0,0,0,.84));
-  border:1px solid rgba(255,215,0,.18);
+    radial-gradient(circle at top, rgba(255,215,0,.18), transparent 26%),
+    radial-gradient(circle at center, rgba(127,29,29,.22), transparent 42%),
+    linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.72)) !important;
   border-radius:34px;
   padding:18px;
-  box-shadow:0 0 45px rgba(255,215,0,.14), inset 0 0 40px rgba(255,255,255,.02);
-  backdrop-filter:blur(18px);
-}
-
-/* 登录页 */
-
-.lucky-home{
-  text-align:center;
-}
-
-.brand-badge{
-  display:inline-block;
-  padding:9px 18px;
-  border-radius:999px;
-  background:rgba(255,215,0,.14);
-  color:#facc15;
-  font-size:12px;
-  margin-bottom:18px;
-  letter-spacing:3px;
-}
-
-.lucky-home h1{
-  font-size:46px;
-  margin-bottom:12px;
-  color:#facc15;
-  text-shadow:0 0 20px rgba(255,215,0,.35);
-}
-
-.brand-subtitle{
-  color:#ddd;
-  margin-bottom:22px;
-  font-size:17px;
-}
-
-#loginBox .lucky-hero{
-  position:relative;
-  height:420px;
-  border-radius:34px;
   overflow:hidden;
-  margin-bottom:24px;
-  background-image:
-    linear-gradient(to top,rgba(0,0,0,.42),rgba(0,0,0,.03)),
-    url("lucky7hero.PNG");
-  background-size:cover;
-  background-position:center;
-  border:1px solid rgba(255,215,0,.24);
-  box-shadow:0 0 36px rgba(255,215,0,.2);
-  animation:luckyFloat 4s ease-in-out infinite;
 }
 
-#loginBox .lucky-hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.14),transparent);
-  transform:translateX(-120%);
-  animation:lightMove 4.5s infinite;
+#baccaratPanel::before{
+  display:none !important;
 }
 
-.notice-bar{
-  margin-bottom:18px;
-  padding:14px;
-  border-radius:18px;
-  background:rgba(255,255,255,.07);
-  color:#eee;
-  font-size:13px;
-  border:1px solid rgba(255,255,255,.05);
-}
-
-.login-panel{
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-  margin-bottom:22px;
-}
-
-.login-panel input,
-.bet-side input,
-.chip-exchange-box input,
-.chip-bet-control input{
-  border:none;
-  outline:none;
-  color:white;
-  background:rgba(255,255,255,.09);
-}
-
-.login-panel input{
-  height:56px;
-  border-radius:20px;
-  padding:0 18px;
-  font-size:16px;
-}
-
-.login-panel button,
-.bet-side button,
-.chip-exchange-box button,
-.chip-bet-control button{
-  border:none;
-  background:linear-gradient(90deg,#facc15,#f59e0b);
-  color:black;
-  font-weight:900;
-  box-shadow:0 0 20px rgba(255,215,0,.32);
-}
-
-.login-panel button{
-  height:56px;
-  border-radius:20px;
-  font-size:18px;
-}
-
-.rule-box{
-  text-align:left;
-  padding:20px;
-  border-radius:26px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-}
-
-.rule-title{
-  color:#facc15;
-  font-size:22px;
-  margin-bottom:14px;
-  font-weight:900;
-}
-
-.rule-content{
-  line-height:1.9;
-  color:#ddd;
-  font-size:15px;
-}
-
-/* 顶部账户 */
-
-.top-status{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:12px;
-  padding:22px;
-  border-radius:28px;
-  margin-bottom:20px;
-  background:linear-gradient(145deg,rgba(255,215,0,.12),rgba(0,0,0,.45));
-  border:1px solid rgba(255,215,0,.08);
-}
-
-.small-label{
-  color:#bbb;
-  font-size:12px;
-  margin-bottom:6px;
-}
-
-.id-line{
-  margin-top:6px;
-  color:#ddd;
-  font-size:14px;
-}
-
-.top-status b{
-  color:#facc15;
-  font-size:26px;
-  word-break:break-all;
-}
-
-/* 大厅 */
-
-.live-ticker{
-  height:42px;
-  overflow:hidden;
-  border-radius:999px;
-  background:rgba(0,0,0,.42);
-  border:1px solid rgba(255,215,0,.18);
-  margin-bottom:16px;
-  display:flex;
-  align-items:center;
-}
-
-.ticker-track{
-  white-space:nowrap;
-  color:#facc15;
-  font-size:14px;
-  animation:tickerMove 18s linear infinite;
-  padding-left:100%;
-}
-
-@keyframes tickerMove{
-  from{transform:translateX(0);}
-  to{transform:translateX(-100%);}
-}
-
-.hall-title{
-  padding:26px;
-  border-radius:28px;
-  text-align:center;
-  margin-bottom:18px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,215,0,.08);
-}
-
-.hall-title div{
-  font-size:40px;
-  font-weight:900;
-  color:#facc15;
-}
-
-.hall-title span{
-  color:#ddd;
-}
-
-.platform-data{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-bottom:18px;
-}
-
-.platform-data div{
-  padding:14px 6px;
-  border-radius:20px;
-  text-align:center;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,215,0,.13);
-}
-
-.platform-data b{
-  display:block;
-  color:#facc15;
-  font-size:17px;
-  margin-bottom:6px;
-}
-
-.platform-data span{
-  font-size:12px;
-  color:#ddd;
-}
-
-.event-zone{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-bottom:18px;
-}
-
-.event-card{
-  padding:16px;
-  border-radius:22px;
-  background:radial-gradient(circle at top,rgba(250,204,21,.16),rgba(255,255,255,.05));
-  border:1px solid rgba(255,215,0,.12);
-}
-
-.event-card b{
-  display:block;
-  color:#facc15;
-  font-size:17px;
-  margin-bottom:8px;
-}
-
-.event-card span{
-  color:#ddd;
-  font-size:13px;
-}
-
-.lobby-stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-bottom:18px;
-}
-
-.lobby-stats div{
-  padding:12px 6px;
-  border-radius:999px;
-  text-align:center;
-  font-size:12px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,215,0,.15);
-  color:#facc15;
-}
-
-.game-lobby{
-  display:flex;
-  flex-direction:column;
-  gap:24px;
-}
-
-.lobby-card{
-  position:relative;
-  height:280px;
-  border-radius:34px;
-  overflow:hidden;
-  background-size:cover;
-  background-position:center;
-  display:flex;
-  align-items:flex-end;
-  padding:26px;
-  border:1px solid rgba(255,215,0,.28);
-  box-shadow:0 0 34px rgba(255,215,0,.18);
-  animation:luckyFloat 4s ease-in-out infinite;
-}
-
-.coin-lobby-card{
-  background-image:
-    linear-gradient(to top,rgba(0,0,0,.92),rgba(0,0,0,.08)),
-    url("coinhall.PNG");
-}
-
-.baccarat-lobby-card{
-  background-image:
-    linear-gradient(to top,rgba(0,0,0,.92),rgba(0,0,0,.08)),
-    url("baccarat.PNG");
-}
-
-.lobby-card::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.14),transparent);
-  transform:translateX(-120%);
-  animation:lightMove 5s infinite;
-}
-
-.lobby-info{
-  position:relative;
-  z-index:2;
-}
-
-.lobby-info h3{
-  font-size:40px;
-  margin-bottom:10px;
-  color:#facc15;
-  text-shadow:0 0 18px rgba(255,215,0,.8),0 2px 8px rgba(0,0,0,.9);
-}
-
-.lobby-info p{
-  color:#fff;
-  font-size:18px;
-  font-weight:700;
-  line-height:1.7;
-  margin:14px 0 18px;
-  padding:10px 16px;
-  border-radius:14px;
-  background:rgba(0,0,0,.52);
-  backdrop-filter:blur(6px);
-  text-shadow:0 0 8px rgba(0,0,0,.95);
-  display:inline-block;
-}
-
-.lobby-info span{
-  display:inline-block;
-  padding:14px 26px;
-  border-radius:999px;
-  background:linear-gradient(90deg,#facc15,#f59e0b);
-  color:black;
-  font-weight:900;
-  box-shadow:0 0 24px rgba(255,215,0,.45);
-}
-
-/* 通用游戏页 */
-
-.game-section{
-  margin-top:14px;
-}
-
-.section-title{
-  text-align:center;
-  font-size:32px;
-  margin-bottom:20px;
-  color:#facc15;
-  font-weight:900;
-}
-
-.back-lobby-btn{
-  margin-bottom:18px;
-  min-height:48px;
-  border:none;
-  padding:0 18px;
-  border-radius:16px;
-  background:rgba(255,255,255,.08);
-  color:#facc15;
-  font-weight:bold;
-}
-
-/* 硬币玩法 */
-
-#countdown{
-  font-size:34px;
-  color:#fff;
-  margin:18px 0;
-}
-
-.coin{
-  width:180px;
-  height:180px;
-  margin:24px auto;
-}
-
-.coin img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  animation:coinIdleSpin 4.5s ease-in-out infinite;
-  filter:drop-shadow(0 0 20px rgba(255,215,0,.55)) drop-shadow(0 0 34px rgba(250,204,21,.25));
-}
-
-.coin.rolling img{
-  animation:coinRollSpin .16s linear infinite!important;
-}
-
-#coinText,
-#result{
-  text-align:center;
-  font-size:20px;
-  color:#facc15;
-  margin:18px 0;
-  font-weight:900;
-}
-
-.bet-area{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
-  margin-top:24px;
-}
-
-.bet-side{
-  padding:20px;
-  border-radius:24px;
-  background:rgba(255,255,255,.06);
-  text-align:center;
-  border:1px solid rgba(255,215,0,.08);
-}
-
-.bet-side h3{
-  margin-bottom:12px;
-  color:#facc15;
-  font-size:28px;
-}
-
-.bet-side input{
-  width:100%;
-  height:48px;
-  border-radius:14px;
-  margin-top:14px;
-  padding:0 12px;
-}
-
-.bet-side button{
-  width:100%;
-  min-height:48px;
-  border-radius:14px;
-  margin-top:14px;
-}
-
-.market-board{
-  margin-top:24px;
-  padding:22px;
-  border-radius:26px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,215,0,.08);
-}
-
-.market-title{
-  color:#facc15;
-  font-size:24px;
-  margin-bottom:16px;
-  font-weight:bold;
-}
-
-.market-row{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:14px;
-}
-
-.heat-box{
-  margin-top:18px;
-}
-
-.heat-label{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-
-.heat-bar{
-  width:100%;
-  height:14px;
-  border-radius:999px;
-  overflow:hidden;
-  background:#111;
-  display:flex;
-}
-
-.heat-back{
-  background:#2563eb;
-}
-
-.heat-front{
-  background:#dc2626;
-}
-
-.hot-text{
-  margin-top:12px;
-  color:#facc15;
-}
-
-.fake-feed{
-  margin-top:16px;
-  color:#ddd;
-}
-
-/* 百家樂 */
-
+/* 标题更像VIP厅 */
 .baccarat-title{
-  text-align:center;
-  font-size:44px;
-  color:#facc15;
-  margin-bottom:8px;
+  font-size:58px !important;
+  color:#ffd54a !important;
+  letter-spacing:2px;
+  text-shadow:
+    0 0 18px rgba(255,215,0,.9),
+    0 0 46px rgba(255,215,0,.35);
 }
 
 .baccarat-sub{
-  text-align:center;
-  color:#ddd;
-  margin-bottom:18px;
+  font-size:17px !important;
+  color:#f5e6b8 !important;
+  margin-bottom:24px !important;
 }
 
+/* 积分/筹码面板 */
 .chip-wallet{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin-bottom:18px;
+  gap:16px !important;
 }
 
 .chip-wallet div{
-  padding:18px;
-  border-radius:22px;
-  text-align:center;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,215,0,.08);
+  background:
+    linear-gradient(145deg, rgba(255,215,0,.10), rgba(0,0,0,.55)) !important;
+  border:1px solid rgba(255,215,0,.22) !important;
+  box-shadow:
+    inset 0 0 24px rgba(255,255,255,.04),
+    0 0 24px rgba(255,215,0,.08);
 }
 
 .chip-wallet b{
-  display:block;
-  margin-top:8px;
-  font-size:28px;
-  color:#facc15;
+  font-size:32px !important;
+  text-shadow:0 0 18px rgba(255,215,0,.7);
 }
 
-.chip-exchange-box,
-.chip-bet-control{
-  padding:18px;
-  border-radius:24px;
-  background:rgba(255,255,255,.06);
-  margin-bottom:20px;
-  border:1px solid rgba(255,215,0,.08);
+/* 兑换区压缩一点，别抢牌桌视觉 */
+.chip-exchange-box{
+  background:rgba(0,0,0,.36) !important;
+  border:1px solid rgba(255,215,0,.16) !important;
 }
 
-.exchange-title{
-  color:#facc15;
-  font-size:22px;
-  font-weight:900;
-  margin-bottom:12px;
-}
-
-.chip-exchange-box input,
-.chip-bet-control input{
-  width:100%;
-  height:50px;
-  border-radius:16px;
-  padding:0 14px;
-  font-size:15px;
-  margin-bottom:12px;
-}
-
-.chip-exchange-box button,
-.chip-bet-control button{
-  width:100%;
-  min-height:50px;
-  border-radius:16px;
-  margin-top:10px;
-}
-
-.deal-btn{
-  min-height:58px!important;
-  font-size:17px;
-}
-
+/* 下注区做成真正赌台 */
 .baccarat-table-v3{
-  display:grid;
-  grid-template-columns:1fr .8fr 1fr;
-  gap:10px;
-  margin-bottom:20px;
+  position:relative;
+  padding:20px !important;
+  border-radius:36px !important;
+  background:
+    radial-gradient(circle at center, rgba(22,163,74,.5), rgba(3,31,24,.9)),
+    linear-gradient(145deg, rgba(255,215,0,.08), rgba(0,0,0,.55)) !important;
+  border:2px solid rgba(255,215,0,.32) !important;
+  box-shadow:
+    inset 0 0 60px rgba(0,0,0,.75),
+    0 0 38px rgba(255,215,0,.18);
+}
+
+.baccarat-table-v3::before{
+  content:"VIP BETTING TABLE";
+  position:absolute;
+  top:-13px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:5px 18px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#facc15,#f59e0b);
+  color:#1a1200;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1px;
+  box-shadow:0 0 18px rgba(255,215,0,.55);
 }
 
 .baccarat-bet-zone{
-  min-height:130px;
-  padding:16px 8px;
-  border-radius:24px;
-  text-align:center;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,215,0,.08);
+  min-height:175px !important;
+  border-radius:30px !important;
+  transform:translateY(0);
+  transition:.22s ease;
+  border:1px solid rgba(255,215,0,.25) !important;
+  box-shadow:
+    inset 0 0 35px rgba(0,0,0,.45),
+    0 0 18px rgba(255,215,0,.12);
+}
+
+.baccarat-bet-zone:active{
+  transform:scale(.96);
 }
 
 .baccarat-bet-zone.selected{
-  outline:2px solid #facc15;
-  box-shadow:0 0 20px rgba(250,204,21,.5);
+  transform:translateY(-6px) scale(1.06) !important;
+  border:2px solid #facc15 !important;
+  box-shadow:
+    0 0 36px rgba(255,215,0,.9),
+    inset 0 0 38px rgba(255,255,255,.08) !important;
 }
 
 .player-zone{
-  background:linear-gradient(145deg,rgba(37,99,235,.32),rgba(0,0,0,.35));
+  background:
+    radial-gradient(circle at top, rgba(59,130,246,.58), rgba(2,6,23,.82)) !important;
 }
 
 .tie-zone{
-  background:linear-gradient(145deg,rgba(22,163,74,.32),rgba(0,0,0,.35));
+  background:
+    radial-gradient(circle at top, rgba(34,197,94,.58), rgba(2,44,34,.86)) !important;
 }
 
 .banker-zone{
-  background:linear-gradient(145deg,rgba(220,38,38,.32),rgba(0,0,0,.35));
+  background:
+    radial-gradient(circle at top, rgba(239,68,68,.55), rgba(69,10,10,.86)) !important;
 }
 
 .zone-title{
-  font-size:34px;
-  color:#facc15;
-  font-weight:900;
+  font-size:54px !important;
+  line-height:1.1;
+  color:#ffd54a !important;
+  text-shadow:
+    0 0 18px rgba(255,215,0,.8),
+    0 2px 8px rgba(0,0,0,.8);
 }
 
 .zone-odds{
-  margin:6px 0;
-  color:#ddd;
-}
-
-#selectedBetSide{
-  text-align:center;
-  color:#facc15;
-  font-weight:900;
-  margin:8px 0 12px;
-}
-
-.baccarat-card-table{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin-bottom:20px;
-}
-
-.card-side{
-  padding:18px;
-  border-radius:24px;
-  text-align:center;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,215,0,.08);
-}
-
-.card-side h3{
-  color:#facc15;
-  font-size:24px;
-  margin-bottom:10px;
-}
-
-.cards{
-  min-height:110px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  margin:12px 0;
-  flex-wrap:wrap;
-}
-
-.playing-card{
-  width:58px;
-  height:84px;
-  perspective:1000px;
-}
-
-.card-inner{
-  width:100%;
-  height:100%;
-  position:relative;
-  transform-style:preserve-3d;
-  transition:transform .6s;
-}
-
-.playing-card.revealed .card-inner{
-  transform:rotateY(180deg);
-}
-
-.card-front,
-.card-back{
-  position:absolute;
-  inset:0;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  backface-visibility:hidden;
-  font-weight:900;
-  font-size:18px;
-}
-
-.card-back{
-  background:linear-gradient(145deg,#7f1d1d,#111);
-  color:#facc15;
-  border:1px solid rgba(255,215,0,.5);
-}
-
-.card-front{
-  background:white;
-  transform:rotateY(180deg);
-}
-
-.card-front.red{
-  color:#dc2626;
-}
-
-.card-front.black{
-  color:black;
-}
-
-.baccarat-result{
-  padding:16px;
-  border-radius:22px;
-  text-align:center;
-  color:#facc15;
-  background:rgba(255,255,255,.06);
-  margin-bottom:20px;
-  border:1px solid rgba(255,215,0,.08);
-}
-
-.baccarat-rule{
-  margin-top:18px;
-  padding:16px;
-  border-radius:20px;
-  color:#ddd;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,215,0,.08);
-}
-
-/* 路子 */
-
-.road-title{
-  margin:20px 0 12px;
-  color:#facc15;
-  font-size:22px;
-  font-weight:bold;
-}
-
-.road-map{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-
-.road-dot{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:14px;
-  font-weight:bold;
-}
-
-.road-dot.front,
-.road-dot.banker{
-  background:#dc2626;
-}
-
-.road-dot.back,
-.road-dot.player{
-  background:#2563eb;
-}
-
-.road-dot.tie{
-  background:#16a34a;
-}
-
-.road-dot.win{
-  background:#facc15;
-  color:black;
-}
-
-.road-dot.lose{
-  background:#444;
-}
-
-/* 客服/设置 */
-
-.service-card,
-.account-card{
-  padding:18px;
-  border-radius:22px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,215,0,.08);
-  margin-bottom:14px;
-}
-
-.service-card b{
-  color:#facc15;
-  display:block;
-  margin-bottom:8px;
-}
-
-.service-card p,
-.account-card p{
-  color:#ddd;
-  line-height:1.6;
-}
-
-#settingsPanel button{
-  width:100%;
-  min-height:52px;
-  border:none;
-  border-radius:18px;
-  background:linear-gradient(90deg,#facc15,#f59e0b);
-  color:#000;
-  font-weight:900;
-}
-
-/* 底部导航 */
-
-.tabbar{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-top:26px;
-  padding:14px;
-  border-radius:24px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,215,0,.08);
-}
-
-.tabbar div{
-  text-align:center;
-  padding:14px 0;
-  border-radius:18px;
-  color:#bbb;
-  font-size:14px;
-}
-
-.tabbar .active{
-  background:linear-gradient(90deg,#facc15,#f59e0b);
-  color:black;
-  font-weight:bold;
-}
-
-/* 动画 */
-
-@keyframes coinIdleSpin{
-  0%{transform:perspective(800px) rotateY(-10deg) scale(1);}
-  50%{transform:perspective(800px) rotateY(10deg) scale(1.03);}
-  100%{transform:perspective(800px) rotateY(-10deg) scale(1);}
-}
-
-@keyframes coinRollSpin{
-  from{transform:perspective(800px) rotateY(0deg) scale(1);}
-  to{transform:perspective(800px) rotateY(360deg) scale(1.08);}
-}
-
-@keyframes luckyFloat{
-  0%,100%{transform:translateY(0) scale(1);}
-  50%{transform:translateY(-5px) scale(1.01);}
-}
-
-@keyframes lightMove{
-  0%{transform:translateX(-120%);}
-  45%,100%{transform:translateX(120%);}
-}
-/* ===== 幸运7主页高级背景图 ===== */
-
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-2;
-
-  background-image:
-    linear-gradient(
-      to bottom,
-      rgba(0,0,0,.42),
-      rgba(0,0,0,.72)
-    ),
-    url("casino-bg..GIF");
-
-  background-size:cover;
-  background-position:center top;
-  background-repeat:no-repeat;
-}
-
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-1;
-
-  background:
-    radial-gradient(circle at top, rgba(255,215,0,.16), transparent 35%),
-    linear-gradient(to bottom, rgba(20,0,25,.35), rgba(0,0,0,.82));
-
-  pointer-events:none;
-}
-
-body{
-  background:#050005 !important;
-}
-/* 隐藏平台规则 */
-
-.rule-box{
-  display:none !important;
-}
-/* ===== 让动态背景透出来 ===== */
-
-.platform-card{
-
-  background:rgba(0,0,0,.35) !important;
-
-  backdrop-filter:blur(6px) !important;
-}
-/* ===== 让主页背景真正露出来 ===== */
-
-#loginBox{
-  background:rgba(0,0,0,.08) !important;
-  backdrop-filter:blur(2px) !important;
-  box-shadow:none !important;
-}
-
-#loginBox .lucky-hero{
-  box-shadow:
-    0 0 28px rgba(255,215,0,.25) !important;
-}
-
-.notice-bar,
-.login-panel input{
-  background:rgba(0,0,0,.38) !important;
-  backdrop-filter:blur(4px) !important;
-}
-
-.app{
-  padding:10px !important;
-}
-#loginBox .lucky-hero{
-  opacity:.88;
-}
-/* ===== 大厅卡片文字高级化 ===== */
-
-.lobby-info p{
-
-  color:#f5e6b8 !important;
-
-  font-size:15px !important;
-
-  font-weight:600 !important;
-
-  letter-spacing:1px;
-
-  line-height:1.6;
-
-  padding:8px 14px !important;
-
-  border-radius:999px;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(0,0,0,.45),
-      rgba(0,0,0,.25)
-    ) !important;
-
-  border:1px solid rgba(255,215,0,.15);
-
-  backdrop-filter:blur(6px);
-
-  text-shadow:
-    0 0 8px rgba(255,215,0,.18);
-
-  box-shadow:
-    0 0 16px rgba(255,215,0,.08);
-
-  display:inline-block;
-
-  margin-top:10px !important;
-}
-/* ===== 游戏卡片中间黑条优化 ===== */
-
-.game-card p,
-.game-card .desc,
-.game-card span{
-
-  color:#f5deb3 !important;
-
-  font-size:15px !important;
-
-  font-weight:600 !important;
-
-  letter-spacing:1px !important;
-
-  background:rgba(0,0,0,.38) !important;
-
-  border:1px solid rgba(255,215,0,.14) !important;
-
-  border-radius:999px !important;
-
-  padding:10px 16px !important;
-
-  display:inline-block !important;
-
-  backdrop-filter:blur(6px) !important;
-
-  box-shadow:
-    0 0 14px rgba(255,215,0,.08);
-
-  text-shadow:
-    0 0 8px rgba(255,215,0,.12);
-}
-/* ===== 幸运7动态氛围升级 ===== */
-
-.lobby-info span,
-.login-panel button,
-.deal-btn{
-  animation: goldBreath 1.8s ease-in-out infinite;
-}
-
-@keyframes goldBreath{
-  0%,100%{
-    box-shadow:0 0 16px rgba(255,215,0,.35);
-    transform:scale(1);
-  }
-  50%{
-    box-shadow:0 0 34px rgba(255,215,0,.78);
-    transform:scale(1.035);
-  }
-}
-
-.vip-badge{
-  display:inline-block;
-  margin-left:8px;
-  padding:4px 9px;
-  border-radius:999px;
-  background:linear-gradient(90deg,#facc15,#f59e0b);
-  color:#000;
-  font-size:11px;
-  font-weight:900;
-  box-shadow:0 0 16px rgba(255,215,0,.45);
-}
-
-.gold-particle{
-  position:fixed;
-  top:-20px;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#facc15;
-  z-index:1;
-  pointer-events:none;
-  opacity:.85;
-  box-shadow:0 0 14px rgba(255,215,0,.8);
-  animation:goldFall linear forwards;
-}
-
-@keyframes goldFall{
-  to{
-    transform:translateY(110vh) rotate(360deg);
-    opacity:0;
-  }
-}
-
-.live-ticker{
-  box-shadow:0 0 22px rgba(255,215,0,.16);
-}
-/* ===== 幸运7动态氛围升级 ===== */
-
-.lobby-info span,
-.login-panel button,
-.deal-btn{
-  animation: goldBreath 1.8s ease-in-out infinite;
-}
-
-@keyframes goldBreath{
-  0%,100%{
-    box-shadow:0 0 16px rgba(255,215,0,.35);
-    transform:scale(1);
-  }
-  50%{
-    box-shadow:0 0 34px rgba(255,215,0,.78);
-    transform:scale(1.035);
-  }
-}
-
-.vip-badge{
-  display:inline-block;
-  margin-left:8px;
-  padding:4px 9px;
-  border-radius:999px;
-  background:linear-gradient(90deg,#facc15,#f59e0b);
-  color:#000;
-  font-size:11px;
-  font-weight:900;
-  box-shadow:0 0 16px rgba(255,215,0,.45);
-}
-
-.gold-particle{
-  position:fixed;
-  top:-20px;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#facc15;
-  z-index:1;
-  pointer-events:none;
-  opacity:.85;
-  box-shadow:0 0 14px rgba(255,215,0,.8);
-  animation:goldFall linear forwards;
-}
-
-@keyframes goldFall{
-  to{
-    transform:translateY(110vh) rotate(360deg);
-    opacity:0;
-  }
-}
-
-.live-ticker{
-  box-shadow:0 0 22px rgba(255,215,0,.16);
-}
-.vip-badge{
-  display:inline-block;
-  margin-left:8px;
-  padding:4px 9px;
-  border-radius:999px;
-  background:linear-gradient(90deg,#facc15,#f59e0b);
-  color:#000;
-  font-size:11px;
-  font-weight:900;
-  box-shadow:0 0 16px rgba(255,215,0,.45);
-}
-
-.gold-particle{
-  position:fixed;
-  top:-20px;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#facc15;
-  z-index:1;
-  pointer-events:none;
-  opacity:.85;
-  box-shadow:0 0 14px rgba(255,215,0,.8);
-  animation:goldFall linear forwards;
-}
-
-@keyframes goldFall{
-  to{
-    transform:translateY(110vh) rotate(360deg);
-    opacity:0;
-  }
-}
-/* ===== 筹码百家乐 · 高级牌桌UI版 ===== */
-
-#baccaratPanel{
-  background:
-    radial-gradient(circle at center, rgba(22,163,74,.18), transparent 45%),
-    linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.45));
-  border-radius:30px;
-  padding:18px;
-}
-
-.baccarat-title{
-  font-size:52px !important;
-  letter-spacing:2px;
-  text-shadow:
-    0 0 20px rgba(250,204,21,.75),
-    0 0 42px rgba(250,204,21,.35);
-}
-
-.baccarat-table-v3{
-  position:relative;
-  padding:18px;
-  border-radius:32px;
-  background:
-    radial-gradient(circle at center, rgba(21,128,61,.55), rgba(6,78,59,.55)),
-    linear-gradient(145deg, rgba(0,0,0,.45), rgba(0,0,0,.2));
-  border:2px solid rgba(250,204,21,.28);
-  box-shadow:
-    inset 0 0 55px rgba(0,0,0,.55),
-    0 0 35px rgba(250,204,21,.16);
-}
-
-.baccarat-bet-zone{
-  min-height:155px !important;
-  border-radius:28px !important;
-  box-shadow:
-    inset 0 0 28px rgba(0,0,0,.35),
-    0 0 18px rgba(250,204,21,.08);
-}
-
-.baccarat-bet-zone.selected{
-  transform:translateY(-4px) scale(1.04);
-  box-shadow:
-    0 0 28px rgba(250,204,21,.7),
-    inset 0 0 28px rgba(255,255,255,.08) !important;
-}
-
-.zone-title{
-  font-size:42px !important;
-}
-
-.chip-wallet div,
-.chip-exchange-box,
-.chip-bet-control,
-.card-side{
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.08), rgba(0,0,0,.36)) !important;
-  border:1px solid rgba(250,204,21,.16) !important;
-  box-shadow:
-    inset 0 0 24px rgba(255,255,255,.03),
-    0 0 18px rgba(250,204,21,.08);
+  font-size:18px !important;
+  color:#fff2b8 !important;
+  margin:10px 0 !important;
+}
+
+/* 筹码按钮更像真实筹码 */
+#chipButtons{
+  gap:12px !important;
+  margin-bottom:18px !important;
 }
 
 #chipButtons button{
-  border:2px solid rgba(255,255,255,.35) !important;
-  color:#3b2200 !important;
+  height:58px !important;
+  width:58px !important;
+  border-radius:50% !important;
+  margin:auto;
+  background:
+    radial-gradient(circle at 35% 30%, #fff5a8, #facc15 42%, #b45309 100%) !important;
+  border:3px solid rgba(255,255,255,.45) !important;
+  color:#2b1600 !important;
+  font-size:13px !important;
+  font-weight:1000 !important;
   box-shadow:
-    0 0 20px rgba(250,204,21,.45),
-    inset 0 0 12px rgba(255,255,255,.35);
+    0 0 22px rgba(255,215,0,.5),
+    inset 0 0 14px rgba(255,255,255,.45) !important;
 }
 
 #chipButtons button:active{
-  transform:scale(.92);
+  transform:scale(.88);
 }
 
-.baccarat-card-table{
-  padding:16px;
-  border-radius:30px;
+/* 下注控制区 */
+.chip-bet-control{
   background:
-    linear-gradient(145deg, rgba(0,0,0,.36), rgba(255,255,255,.04));
-  border:1px solid rgba(250,204,21,.16);
+    linear-gradient(145deg, rgba(0,0,0,.52), rgba(255,215,0,.06)) !important;
+  border:1px solid rgba(255,215,0,.22) !important;
+  box-shadow:0 0 28px rgba(255,215,0,.12);
 }
 
-.playing-card{
-  width:66px !important;
-  height:94px !important;
+#selectedBetSide{
+  font-size:20px !important;
+  text-shadow:0 0 16px rgba(255,215,0,.65);
 }
 
-.baccarat-result{
-  font-size:18px;
-  font-weight:900;
-  box-shadow:
-    0 0 24px rgba(250,204,21,.14),
-    inset 0 0 20px rgba(255,255,255,.04);
-}
-
-.deal-btn{
-  animation: goldBreath 1.6s ease-in-out infinite;
-}
-/* ===== 百真人荷官图 ===== */
-
-#baccaratPanel::before{
-  content:"";
-  display:block;
-  width:100%;
-  height:520px;
-  margin-bottom:24px;
-
-  border-radius:30px;
-
-  background-image:
-    linear-gradient(
-      to bottom,
-      rgba(0,0,0,.05),
-      rgba(0,0,0,.35)
-    ),
-    url("dealer.PNG.PNG");
-
-  background-size:cover;
-  background-position:center top;
-
-  border:2px solid rgba(250,204,21,.28);
-
-  box-shadow:
-    0 0 40px rgba(250,204,21,.18),
-    inset 0 0 30px rgba(255,255,255,.04);
-}
-
-#baccaratPanel::after{
-  content:"LIVE DEALER";
-  position:absolute;
-}
-/* ===== 荷官放到发牌界面 ===== */
-
-/* 取消顶部大荷官图 */
-#baccaratPanel::before{
-  display:none !important;
-}
-
-/* 发牌区域改成荷官背景 */
+/* 发牌区：荷官背景融合 */
 .baccarat-card-table{
   position:relative;
   overflow:hidden;
-  min-height:520px;
-
+  min-height:560px !important;
+  padding:22px !important;
+  border-radius:36px !important;
   background-image:
-    linear-gradient(
-      to bottom,
-      rgba(0,0,0,.18),
-      rgba(0,0,0,.72)
-    ),
+    linear-gradient(to bottom, rgba(0,0,0,.08), rgba(0,0,0,.78)),
     url("dealer.PNG.PNG") !important;
-
   background-size:cover !important;
   background-position:center top !important;
-
-  border:2px solid rgba(250,204,21,.28) !important;
+  border:2px solid rgba(255,215,0,.34) !important;
   box-shadow:
-    0 0 45px rgba(250,204,21,.2),
-    inset 0 0 50px rgba(0,0,0,.55) !important;
+    0 0 48px rgba(255,215,0,.22),
+    inset 0 0 80px rgba(0,0,0,.7) !important;
+  align-items:end;
 }
 
-/* 让庄闲牌浮在荷官图上 */
-.card-side{
-  position:relative;
-  z-index:2;
-  background:rgba(0,0,0,.46) !important;
-  backdrop-filter:blur(6px);
-}
-
-/* 发牌区标题更亮 */
-.card-side h3{
-  text-shadow:0 0 18px rgba(250,204,21,.8);
-}
-
-/* 荷官角标 */
 .baccarat-card-table::after{
   content:"LIVE DEALER";
   position:absolute;
   top:16px;
   right:16px;
-  z-index:3;
-
+  z-index:5;
   background:#dc2626;
-  color:white;
+  color:#fff;
   font-size:12px;
   font-weight:900;
-  padding:6px 12px;
+  padding:7px 13px;
   border-radius:999px;
-  box-shadow:0 0 18px rgba(239,68,68,.55);
+  letter-spacing:1px;
+  box-shadow:0 0 20px rgba(239,68,68,.65);
+}
+
+/* 庄闲牌区浮在荷官下方 */
+.card-side{
+  position:relative;
+  z-index:3;
+  min-height:210px !important;
+  background:rgba(0,0,0,.58) !important;
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,215,0,.24) !important;
+  box-shadow:
+    inset 0 0 28px rgba(255,255,255,.04),
+    0 0 26px rgba(255,215,0,.14) !important;
+}
+
+.card-side h3{
+  font-size:30px !important;
+  color:#ffd54a !important;
+  text-shadow:0 0 18px rgba(255,215,0,.85);
+}
+
+/* 扑克牌放大 */
+.playing-card{
+  width:76px !important;
+  height:108px !important;
+}
+
+.card-front,
+.card-back{
+  font-size:22px !important;
+  border-radius:12px !important;
+}
+
+.card-back{
+  background:
+    radial-gradient(circle at top,#7f1d1d,#111) !important;
+  border:2px solid rgba(255,215,0,.55) !important;
+  box-shadow:0 0 18px rgba(255,215,0,.22);
+}
+
+.card-front{
+  box-shadow:0 0 16px rgba(255,255,255,.18);
+}
+
+/* 结果区更刺激 */
+.baccarat-result{
+  font-size:20px !important;
+  font-weight:1000 !important;
+  color:#ffd54a !important;
+  background:
+    linear-gradient(145deg, rgba(255,215,0,.10), rgba(0,0,0,.65)) !important;
+  border:1px solid rgba(255,215,0,.25) !important;
+  box-shadow:
+    0 0 30px rgba(255,215,0,.18),
+    inset 0 0 30px rgba(255,255,255,.04) !important;
+}
+
+/* 按钮呼吸 */
+.deal-btn,
+.chip-bet-control button{
+  box-shadow:0 0 24px rgba(255,215,0,.35) !important;
+}
+
+.deal-btn{
+  font-size:20px !important;
+  letter-spacing:1px;
+  animation:goldBreath 1.6s ease-in-out infinite;
+}
+
+@keyframes goldBreath{
+  0%,100%{
+    transform:scale(1);
+    box-shadow:0 0 18px rgba(255,215,0,.35);
+  }
+  50%{
+    transform:scale(1.035);
+    box-shadow:0 0 38px rgba(255,215,0,.82);
+  }
 }
