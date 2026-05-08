@@ -907,3 +907,39 @@ body{
     transform:rotateY(180deg);
   }
 }
+/* ===== 硬币常态慢转 + 开奖快转 ===== */
+
+.coin img{
+  animation: coinIdleSpin 4.5s ease-in-out infinite !important;
+  filter:
+    drop-shadow(0 0 20px rgba(255,215,0,.55))
+    drop-shadow(0 0 34px rgba(250,204,21,.25));
+}
+
+.coin.rolling img{
+  animation: coinRollSpin .16s linear infinite !important;
+  filter:
+    drop-shadow(0 0 28px rgba(255,215,0,.85))
+    drop-shadow(0 0 55px rgba(250,204,21,.45));
+}
+
+@keyframes coinIdleSpin{
+  0%{
+    transform: perspective(800px) rotateY(-10deg) rotateZ(0deg) scale(1);
+  }
+  50%{
+    transform: perspective(800px) rotateY(10deg) rotateZ(1deg) scale(1.03);
+  }
+  100%{
+    transform: perspective(800px) rotateY(-10deg) rotateZ(0deg) scale(1);
+  }
+}
+
+@keyframes coinRollSpin{
+  0%{
+    transform: perspective(800px) rotateY(0deg) rotateZ(0deg) scale(1);
+  }
+  100%{
+    transform: perspective(800px) rotateY(360deg) rotateZ(18deg) scale(1.08);
+  }
+}
