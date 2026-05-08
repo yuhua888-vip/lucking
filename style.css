@@ -902,3 +902,40 @@ body{
   0%{transform:translateX(-120%);}
   45%,100%{transform:translateX(120%);}
 }
+/* ===== 幸运7主页高级背景图 ===== */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,.42),
+      rgba(0,0,0,.72)
+    ),
+    url("casino-bg.PNG");
+
+  background-size:cover;
+  background-position:center top;
+  background-repeat:no-repeat;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+
+  background:
+    radial-gradient(circle at top, rgba(255,215,0,.16), transparent 35%),
+    linear-gradient(to bottom, rgba(20,0,25,.35), rgba(0,0,0,.82));
+
+  pointer-events:none;
+}
+
+body{
+  background:#050005 !important;
+}
