@@ -543,3 +543,15 @@ button{
   font-size:24px;
   margin-bottom:4px;
 }
+/* 首页7图完整显示 */
+
+.hero-img{
+  height:auto !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  display:block !important;
+}
+
+.login-card{
+  overflow:visible !important;
+}
