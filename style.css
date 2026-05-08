@@ -952,3 +952,25 @@ body{
 
   backdrop-filter:blur(6px) !important;
 }
+/* ===== 让主页背景真正露出来 ===== */
+
+#loginBox{
+  background:rgba(0,0,0,.08) !important;
+  backdrop-filter:blur(2px) !important;
+  box-shadow:none !important;
+}
+
+#loginBox .lucky-hero{
+  box-shadow:
+    0 0 28px rgba(255,215,0,.25) !important;
+}
+
+.notice-bar,
+.login-panel input{
+  background:rgba(0,0,0,.38) !important;
+  backdrop-filter:blur(4px) !important;
+}
+
+.app{
+  padding:10px !important;
+}
