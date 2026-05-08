@@ -944,3 +944,11 @@ body{
 .rule-box{
   display:none !important;
 }
+/* ===== 让动态背景透出来 ===== */
+
+.platform-card{
+
+  background:rgba(0,0,0,.35) !important;
+
+  backdrop-filter:blur(6px) !important;
+}
