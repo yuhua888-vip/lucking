@@ -953,3 +953,45 @@ function roll(){
     settle(resultSide);
   }, 1600);
 }
+/* ===== 硬币开奖快速旋转增强版 ===== */
+
+let rollingCoinTimer = null;
+
+function roll(){
+  stopFakePlayers();
+
+  coinText.innerText = "开奖中...";
+  result.innerText = "停止下注，硬币高速翻转中...";
+
+  let coin = document.getElementById("coin");
+
+  if(coin){
+    coin.classList.add("rolling");
+  }
+
+  clearInterval(rollingCoinTimer);
+
+  rollingCoinTimer = setInterval(() => {
+    coinImg.src = coinImg.src.includes("coin.png2.PNG")
+      ? "coin.png.PNG"
+      : "coin.png2.PNG";
+  }, 110);
+
+  setTimeout(() => {
+    clearInterval(rollingCoinTimer);
+
+    let resultSide = Math.random() < 0.5 ? "正面" : "反面";
+
+    coinImg.src = resultSide === "正面"
+      ? "coin.png.PNG"
+      : "coin.png2.PNG";
+
+    coinText.innerText = resultSide;
+
+    if(coin){
+      coin.classList.remove("rolling");
+    }
+
+    settle(resultSide);
+  }, 1800);
+}
