@@ -555,3 +555,67 @@ button{
 .login-card{
   overflow:visible !important;
 }
+/* ===== 修复百家乐翻牌和路子 ===== */
+
+.mini-card{
+  position:relative;
+  display:inline-flex;
+  width:46px;
+  height:64px;
+  margin:4px;
+  perspective:600px;
+}
+
+.card-back,
+.card-face{
+  position:absolute;
+  inset:0;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backface-visibility:hidden;
+  font-size:18px;
+  font-weight:900;
+}
+
+.card-back{
+  background:linear-gradient(145deg,#7f1d1d,#111);
+  color:#facc15;
+  border:1px solid rgba(255,215,0,.55);
+}
+
+.card-face{
+  background:#fff;
+  transform:rotateY(180deg);
+}
+
+.red-card{
+  color:#dc2626;
+}
+
+.black-card{
+  color:#111;
+}
+
+.mini-card .card-back,
+.mini-card .card-face{
+  transition:transform .55s ease;
+}
+
+.mini-card.show .card-back{
+  transform:rotateY(180deg);
+}
+
+.mini-card.show .card-face{
+  transform:rotateY(360deg);
+}
+
+.road-dot{
+  color:#fff;
+  font-weight:900;
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
