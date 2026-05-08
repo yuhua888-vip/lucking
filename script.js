@@ -147,6 +147,7 @@ function enterGame(type){
     baccaratPanel.classList.remove("hidden");
     coinGamePanel.classList.add("hidden");
     createChipButtons();
+    updateUserInfo();
   }
 }
 
@@ -184,6 +185,8 @@ function switchTab(type){
 function logout(){
   location.reload();
 }
+
+/* ===== 幸运硬币 ===== */
 
 function betCustom(side){
   let amount = Number(
@@ -335,6 +338,8 @@ setInterval(() => {
     roll();
   }
 }, 1000);
+
+/* ===== 筹码百家乐 ===== */
 
 function exchangeToChips(){
   let amount = Number(document.getElementById("chipExchangeAmount").value);
@@ -492,7 +497,7 @@ function cardHTML(card,id){
   let red = card.suit === "♥" || card.suit === "♦";
 
   return `
-    <div class="playing-card revealed" id="${id}">
+    <div class="playing-card" id="${id}">
       <div class="card-inner">
         <div class="card-back">★</div>
         <div class="card-front ${red ? "red" : "black"}">
@@ -503,7 +508,33 @@ function cardHTML(card,id){
   `;
 }
 
-function startBaccaratRound(){
+function sleep(ms){
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function revealCard(id){
+  let card = document.getElementById(id);
+
+  if(card){
+    card.classList.add("revealed");
+  }
+}
+
+async function dealOneCard(targetId, card, cardId, text){
+  let target = document.getElementById(targetId);
+
+  document.getElementById("baccaratResult").innerText = text;
+
+  target.innerHTML += cardHTML(card, cardId);
+
+  await sleep(450);
+
+  revealCard(cardId);
+
+  await sleep(650);
+}
+
+async function startBaccaratRound(){
   let totalBet = baccaratBetData["庄"] + baccaratBetData["闲"] + baccaratBetData["和"];
 
   if(totalBet <= 0){
@@ -514,22 +545,37 @@ function startBaccaratRound(){
   document.getElementById("bankerCards").innerHTML = "";
   document.getElementById("playerCards").innerHTML = "";
 
-  let bankerCards = [randomCard(), randomCard()];
-  let playerCards = [randomCard(), randomCard()];
+  document.getElementById("bankerPoint").innerText = "-";
+  document.getElementById("playerPoint").innerText = "-";
 
-  bankerCards.forEach((card,index) => {
-    document.getElementById("bankerCards").innerHTML += cardHTML(card,"b"+index);
-  });
+  document.getElementById("baccaratResult").innerText = "洗牌中...";
 
-  playerCards.forEach((card,index) => {
-    document.getElementById("playerCards").innerHTML += cardHTML(card,"p"+index);
-  });
+  await sleep(700);
+
+  let bankerCards = [];
+  let playerCards = [];
+
+  playerCards.push(randomCard());
+  await dealOneCard("playerCards", playerCards[0], "playerCard1", "发闲家第一张...");
+
+  bankerCards.push(randomCard());
+  await dealOneCard("bankerCards", bankerCards[0], "bankerCard1", "发庄家第一张...");
+
+  playerCards.push(randomCard());
+  await dealOneCard("playerCards", playerCards[1], "playerCard2", "发闲家第二张...");
+
+  bankerCards.push(randomCard());
+  await dealOneCard("bankerCards", bankerCards[1], "bankerCard2", "发庄家第二张...");
 
   let bankerPoint = baccaratPoint(bankerCards);
   let playerPoint = baccaratPoint(playerCards);
 
   document.getElementById("bankerPoint").innerText = bankerPoint;
   document.getElementById("playerPoint").innerText = playerPoint;
+
+  document.getElementById("baccaratResult").innerText = "正在比点...";
+
+  await sleep(900);
 
   let resultSide = "";
 
@@ -598,7 +644,7 @@ function updateBaccaratRoad(){
   });
 }
 
-/* 动态播报 + VIP + 金币粒子 */
+/* ===== 动态播报 + VIP + 金币粒子 ===== */
 
 function updateVipBadge(){
   if(!currentUser) return;
