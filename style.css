@@ -1048,3 +1048,58 @@ body{
   text-shadow:
     0 0 8px rgba(255,215,0,.12);
 }
+/* ===== 幸运7动态氛围升级 ===== */
+
+.lobby-info span,
+.login-panel button,
+.deal-btn{
+  animation: goldBreath 1.8s ease-in-out infinite;
+}
+
+@keyframes goldBreath{
+  0%,100%{
+    box-shadow:0 0 16px rgba(255,215,0,.35);
+    transform:scale(1);
+  }
+  50%{
+    box-shadow:0 0 34px rgba(255,215,0,.78);
+    transform:scale(1.035);
+  }
+}
+
+.vip-badge{
+  display:inline-block;
+  margin-left:8px;
+  padding:4px 9px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#facc15,#f59e0b);
+  color:#000;
+  font-size:11px;
+  font-weight:900;
+  box-shadow:0 0 16px rgba(255,215,0,.45);
+}
+
+.gold-particle{
+  position:fixed;
+  top:-20px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#facc15;
+  z-index:1;
+  pointer-events:none;
+  opacity:.85;
+  box-shadow:0 0 14px rgba(255,215,0,.8);
+  animation:goldFall linear forwards;
+}
+
+@keyframes goldFall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+.live-ticker{
+  box-shadow:0 0 22px rgba(255,215,0,.16);
+}
