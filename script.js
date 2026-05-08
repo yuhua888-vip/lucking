@@ -3,58 +3,39 @@ let currentScore = 500;
 let currentChips = 0;
 
 let selectedSide = null;
-let selectedChip = 100;
 
 let bets = {
-  "庄":0,
-  "闲":0,
-  "和":0
+  "庄": 0,
+  "闲": 0,
+  "和": 0
 };
 
 let roadHistory = [];
 
-/* 注册 */
-
 function registerUser(){
-
-  const username =
-  document.getElementById("username").value.trim();
-
-  const password =
-  document.getElementById("password").value.trim();
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
 
   if(username.length < 5 || password.length < 5){
     alert("账号密码至少5位");
     return;
   }
 
-  const userData = {
+  localStorage.setItem("user_" + username, JSON.stringify({
     password,
-    score:500,
-    chips:0,
-    id:Math.floor(10000 + Math.random()*90000)
-  };
-
-  localStorage.setItem(
-    "user_" + username,
-    JSON.stringify(userData)
-  );
+    score: 500,
+    chips: 0,
+    id: Math.floor(10000 + Math.random() * 90000)
+  }));
 
   alert("创建成功，请登录");
 }
 
-/* 登录 */
-
 function login(){
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-  const username =
-  document.getElementById("username").value.trim();
-
-  const password =
-  document.getElementById("password").value.trim();
-
-  let user =
-  localStorage.getItem("user_" + username);
+  let user = localStorage.getItem("user_" + username);
 
   if(!user){
     alert("账号不存在");
@@ -69,81 +50,53 @@ function login(){
   }
 
   currentUser = username;
-  currentScore = Number(user.score);
-  currentChips = Number(user.chips);
+  currentScore = Number(user.score || 500);
+  currentChips = Number(user.chips || 0);
 
-  document
-  .getElementById("loginPage")
-  .classList.add("hidden");
+  document.getElementById("loginPage").classList.add("hidden");
+  document.getElementById("hallPage").classList.remove("hidden");
 
-  document
-  .getElementById("hallPage")
-  .classList.remove("hidden");
-
-  document.getElementById("playerName").innerText =
-  username;
-
-  document.getElementById("playerId").innerText =
-  user.id;
-
-  document.getElementById("playerScore").innerText =
-  currentScore.toFixed(2);
+  document.getElementById("playerName").innerText = username;
+  document.getElementById("playerId").innerText = user.id;
+  document.getElementById("playerScore").innerText = currentScore.toFixed(2);
 }
 
-/* 进入百家乐 */
+function saveUser(){
+  if(!currentUser) return;
+
+  let user = JSON.parse(localStorage.getItem("user_" + currentUser));
+
+  user.score = currentScore;
+  user.chips = currentChips;
+
+  localStorage.setItem("user_" + currentUser, JSON.stringify(user));
+}
 
 function openBaccarat(){
-
-  document
-  .getElementById("hallPage")
-  .classList.add("hidden");
-
-  document
-  .getElementById("baccaratPage")
-  .classList.remove("hidden");
-
+  document.getElementById("hallPage").classList.add("hidden");
+  document.getElementById("baccaratPage").classList.remove("hidden");
   updateWallet();
 }
 
-/* 返回大厅 */
-
 function backHall(){
+  document.getElementById("baccaratPage").classList.add("hidden");
+  document.getElementById("hallPage").classList.remove("hidden");
 
-  document
-  .getElementById("baccaratPage")
-  .classList.add("hidden");
-
-  document
-  .getElementById("hallPage")
-  .classList.remove("hidden");
-
-  document.getElementById("playerScore").innerText =
-  currentScore.toFixed(2);
+  document.getElementById("playerScore").innerText = currentScore.toFixed(2);
 }
-
-/* 幸运硬币 */
 
 function openCoinGame(){
   alert("幸运硬币正在维护升级");
 }
 
-/* 更新钱包 */
-
 function updateWallet(){
-
-  document.getElementById("baccaratScore").innerText =
-  currentScore.toFixed(2);
-
-  document.getElementById("chipBalance").innerText =
-  currentChips.toFixed(2);
+  document.getElementById("baccaratScore").innerText = currentScore.toFixed(2);
+  document.getElementById("chipBalance").innerText = currentChips.toFixed(2);
+  saveUser();
 }
 
-/* 兑换筹码 */
-
 function exchangeToChips(){
-
-  const amount =
-  Number(document.getElementById("exchangeAmount").value);
+  const amount = Number(document.getElementById("exchangeAmount").value);
 
   if(amount <= 0){
     alert("请输入正确积分");
@@ -158,15 +111,12 @@ function exchangeToChips(){
   currentScore -= amount;
   currentChips += amount;
 
-  updateWallet();
+  document.getElementById("exchangeAmount").value = "";
 
-  alert("兑换成功");
+  updateWallet();
 }
 
-/* 筹码换积分 */
-
 function exchangeBack(){
-
   if(currentChips <= 0){
     alert("没有可兑换筹码");
     return;
@@ -176,40 +126,25 @@ function exchangeBack(){
   currentChips = 0;
 
   updateWallet();
-
-  alert("兑换成功");
 }
-
-/* 选择下注区域 */
 
 function selectBet(side){
-
   selectedSide = side;
 
-  document.getElementById("selectedSide").innerText =
-  "当前选择：" + side;
+  document.getElementById("selectedSide").innerText = "当前选择：" + side;
 }
 
-/* 选择筹码 */
-
 function setChip(num){
-
-  selectedChip = num;
-
   document.getElementById("betAmount").value = num;
 }
 
-/* 放置下注 */
-
 function placeBet(){
-
   if(!selectedSide){
     alert("请先选择庄闲和");
     return;
   }
 
-  const amount =
-  Number(document.getElementById("betAmount").value);
+  const amount = Number(document.getElementById("betAmount").value);
 
   if(amount <= 0){
     alert("请输入下注金额");
@@ -222,163 +157,193 @@ function placeBet(){
   }
 
   currentChips -= amount;
-
   bets[selectedSide] += amount;
+
+  document.getElementById("betAmount").value = "";
 
   updateWallet();
   updateBetView();
 }
 
-/* 更新下注 */
-
 function updateBetView(){
-
-  document.getElementById("playerBet").innerText =
-  bets["闲"].toFixed(2);
-
-  document.getElementById("tieBet").innerText =
-  bets["和"].toFixed(2);
-
-  document.getElementById("bankerBet").innerText =
-  bets["庄"].toFixed(2);
+  document.getElementById("playerBet").innerText = bets["闲"].toFixed(2);
+  document.getElementById("tieBet").innerText = bets["和"].toFixed(2);
+  document.getElementById("bankerBet").innerText = bets["庄"].toFixed(2);
 }
 
-/* 清空下注 */
-
 function clearBets(){
-
-  const total =
-  bets["庄"] + bets["闲"] + bets["和"];
+  const total = bets["庄"] + bets["闲"] + bets["和"];
 
   currentChips += total;
 
-  bets["庄"] = 0;
-  bets["闲"] = 0;
-  bets["和"] = 0;
+  bets = {
+    "庄": 0,
+    "闲": 0,
+    "和": 0
+  };
 
   updateWallet();
   updateBetView();
 }
 
-/* 发牌 */
+function sleep(ms){
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-function startBaccarat(){
+function randomCard(){
+  const values = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+  const suits = ["♠","♥","♦","♣"];
 
-  const total =
-  bets["庄"] + bets["闲"] + bets["和"];
+  return {
+    value: values[Math.floor(Math.random() * values.length)],
+    suit: suits[Math.floor(Math.random() * suits.length)]
+  };
+}
+
+function cardPoint(card){
+  if(card.value === "A") return 1;
+  if(["10","J","Q","K"].includes(card.value)) return 0;
+  return Number(card.value);
+}
+
+function baccaratPoint(cards){
+  let total = 0;
+
+  cards.forEach(card => {
+    total += cardPoint(card);
+  });
+
+  return total % 10;
+}
+
+function cardHTML(card, id){
+  const red = card.suit === "♥" || card.suit === "♦";
+
+  return `
+    <span class="mini-card" id="${id}">
+      <span class="card-back">▧</span>
+      <span class="card-face ${red ? "red-card" : "black-card"}">
+        ${card.suit}${card.value}
+      </span>
+    </span>
+  `;
+}
+
+function revealCard(id){
+  const card = document.getElementById(id);
+  if(card){
+    card.classList.add("show");
+  }
+}
+
+async function dealOneCard(targetId, card, cardId, text){
+  document.getElementById("baccaratResult").innerText = text;
+
+  const target = document.getElementById(targetId);
+  target.innerHTML += cardHTML(card, cardId);
+
+  await sleep(450);
+  revealCard(cardId);
+  await sleep(650);
+}
+
+async function startBaccarat(){
+  const total = bets["庄"] + bets["闲"] + bets["和"];
 
   if(total <= 0){
     alert("请先下注");
     return;
   }
 
-  const cards = [
-    "A","2","3","4","5",
-    "6","7","8","9","10"
-  ];
+  document.getElementById("bankerCards").innerHTML = "";
+  document.getElementById("playerCards").innerHTML = "";
 
-  const b1 = cards[Math.floor(Math.random()*cards.length)];
-  const b2 = cards[Math.floor(Math.random()*cards.length)];
+  document.getElementById("bankerPoint").innerText = "-";
+  document.getElementById("playerPoint").innerText = "-";
 
-  const p1 = cards[Math.floor(Math.random()*cards.length)];
-  const p2 = cards[Math.floor(Math.random()*cards.length)];
+  document.getElementById("baccaratResult").innerText = "洗牌中...";
 
-  document.getElementById("bankerCards").innerHTML =
-  "🂠 " + b1 + "　🂠 " + b2;
+  await sleep(700);
 
-  document.getElementById("playerCards").innerHTML =
-  "🂠 " + p1 + "　🂠 " + p2;
+  const bankerCards = [];
+  const playerCards = [];
 
-  const bankerPoint =
-  baccaratPoint(b1) + baccaratPoint(b2);
+  playerCards.push(randomCard());
+  await dealOneCard("playerCards", playerCards[0], "playerCard1", "发闲家第一张...");
 
-  const playerPoint =
-  baccaratPoint(p1) + baccaratPoint(p2);
+  bankerCards.push(randomCard());
+  await dealOneCard("bankerCards", bankerCards[0], "bankerCard1", "发庄家第一张...");
 
-  const bFinal = bankerPoint % 10;
-  const pFinal = playerPoint % 10;
+  playerCards.push(randomCard());
+  await dealOneCard("playerCards", playerCards[1], "playerCard2", "发闲家第二张...");
 
-  document.getElementById("bankerPoint").innerText =
-  bFinal;
+  bankerCards.push(randomCard());
+  await dealOneCard("bankerCards", bankerCards[1], "bankerCard2", "发庄家第二张...");
 
-  document.getElementById("playerPoint").innerText =
-  pFinal;
+  const bankerFinal = baccaratPoint(bankerCards);
+  const playerFinal = baccaratPoint(playerCards);
+
+  document.getElementById("bankerPoint").innerText = bankerFinal;
+  document.getElementById("playerPoint").innerText = playerFinal;
+
+  document.getElementById("baccaratResult").innerText = "正在比点...";
+
+  await sleep(900);
 
   let result = "";
 
-  if(bFinal > pFinal){
+  if(bankerFinal > playerFinal){
     result = "庄";
-  }else if(pFinal > bFinal){
+  }else if(playerFinal > bankerFinal){
     result = "闲";
   }else{
     result = "和";
   }
 
   settleGame(result);
-
   addRoad(result);
 }
 
-/* 点数 */
-
-function baccaratPoint(card){
-
-  if(card === "A"){
-    return 1;
-  }
-
-  return Number(card);
-}
-
-/* 结算 */
-
 function settleGame(result){
-
   let win = 0;
 
   if(result === "庄"){
-    win += bets["庄"] * 1.95;
+    win = bets["庄"] * 1.95;
   }
 
   if(result === "闲"){
-    win += bets["闲"] * 2;
+    win = bets["闲"] * 2;
   }
 
   if(result === "和"){
-    win += bets["和"] * 9;
+    win = bets["和"] * 9;
   }
 
   currentChips += win;
 
   document.getElementById("baccaratResult").innerText =
-  "本局结果：" + result +
-  "　获得：" + win.toFixed(2);
+    "本局结果：" + result + "　获得：" + win.toFixed(2);
 
-  bets["庄"] = 0;
-  bets["闲"] = 0;
-  bets["和"] = 0;
+  bets = {
+    "庄": 0,
+    "闲": 0,
+    "和": 0
+  };
 
   updateWallet();
   updateBetView();
 }
 
-/* 路子 */
-
 function addRoad(result){
+  roadHistory.unshift(result);
 
-  roadHistory.push(result);
-
-  const road =
-  document.getElementById("baccaratRoad");
-
+  const road = document.getElementById("baccaratRoad");
   road.innerHTML = "";
 
-  roadHistory.forEach(item=>{
+  roadHistory.slice(0, 30).forEach(item => {
+    const dot = document.createElement("div");
 
-    const dot =
-    document.createElement("div");
-
-    dot.classList.add("road-dot");
+    dot.className = "road-dot";
 
     if(item === "庄"){
       dot.classList.add("red");
@@ -391,6 +356,8 @@ function addRoad(result){
     if(item === "和"){
       dot.classList.add("green");
     }
+
+    dot.innerText = item;
 
     road.appendChild(dot);
   });
