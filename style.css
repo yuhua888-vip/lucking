@@ -876,3 +876,31 @@ button{
 .card-face{
   font-size:20px !important;
 }
+/* 修复荷官图过大 */
+
+.table-dealer{
+  height:260px !important;
+  border-radius:28px !important;
+  overflow:hidden !important;
+}
+
+.table-dealer img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center top !important;
+}
+
+.real-table{
+  margin-top:18px !important;
+}
+
+.b-title{
+  position:relative !important;
+  z-index:3 !important;
+}
+
+.live-tag{
+  top:14px !important;
+  right:14px !important;
+}
