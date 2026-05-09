@@ -495,3 +495,42 @@ button{
 .green{
   background:#16a34a;
 }
+/* ===== 给百家乐添加赌桌台面 ===== */
+
+.real-table{
+  position:relative;
+  overflow:hidden;
+}
+
+.real-table::before{
+  content:"";
+  position:absolute;
+  left:4%;
+  right:4%;
+  top:285px;
+  height:260px;
+  border-radius:0 0 260px 260px;
+
+  background:
+    radial-gradient(circle at center, rgba(255,215,0,.16), transparent 42%),
+    linear-gradient(180deg, #14633b, #052918 70%, #020f09);
+
+  border:3px solid rgba(255,215,0,.35);
+
+  box-shadow:
+    inset 0 0 60px rgba(0,0,0,.75),
+    0 0 35px rgba(255,215,0,.22);
+
+  z-index:0;
+}
+
+.real-center,
+.tie-area,
+.real-chips,
+.table-select,
+.real-table input,
+.real-table button,
+.result-box{
+  position:relative;
+  z-index:2;
+}
