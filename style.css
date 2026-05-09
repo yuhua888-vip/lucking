@@ -4,12 +4,20 @@
   box-sizing:border-box;
 }
 
+html,
+body{
+  touch-action:manipulation;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+}
+
 body{
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;
   min-height:100vh;
-  color:white;
+  color:#fff;
   background:
-    linear-gradient(rgba(0,0,0,.48),rgba(0,0,0,.78)),
+    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.82)),
     url("casino-bg..GIF");
   background-size:cover;
   background-position:center;
@@ -22,50 +30,48 @@ body{
 
 .app{
   width:100%;
-  min-height:100vh;
 }
 
 .page{
   width:100%;
   max-width:520px;
   margin:auto;
-  padding:18px 14px 110px;
+  padding:18px 14px 90px;
 }
 
 /* 登录页 */
 
-.login-card{
-  padding:22px;
+.login-card,
+.top-card,
+.baccarat-wrap{
+  background:rgba(0,0,0,.48);
+  border:1px solid rgba(255,215,0,.18);
   border-radius:34px;
-  background:rgba(0,0,0,.34);
-  border:1px solid rgba(255,215,0,.22);
+  padding:20px;
   backdrop-filter:blur(8px);
-  box-shadow:
-    0 0 42px rgba(255,215,0,.18),
-    inset 0 0 45px rgba(255,255,255,.03);
+  box-shadow:0 0 35px rgba(255,215,0,.12);
 }
 
 .brand{
   display:inline-block;
-  padding:9px 18px;
+  padding:8px 16px;
   border-radius:999px;
   color:#facc15;
   background:rgba(255,215,0,.12);
   font-size:12px;
   letter-spacing:3px;
-  font-weight:900;
+  font-weight:800;
 }
 
 .login-card h1{
   margin-top:18px;
-  font-size:56px;
+  font-size:52px;
   color:#facc15;
-  text-shadow:0 0 24px rgba(255,215,0,.75);
 }
 
 .login-card p{
   margin-top:10px;
-  color:#fff0b8;
+  color:#f8e7a0;
   font-size:17px;
 }
 
@@ -73,8 +79,7 @@ body{
   width:100%;
   margin-top:18px;
   border-radius:28px;
-  border:1px solid rgba(255,215,0,.22);
-  box-shadow:0 0 38px rgba(255,215,0,.18);
+  display:block;
 }
 
 input{
@@ -84,24 +89,23 @@ input{
   border:none;
   outline:none;
   border-radius:20px;
-  color:white;
+  color:#fff;
   font-size:17px;
-  background:rgba(0,0,0,.44);
+  background:rgba(0,0,0,.46);
   border:1px solid rgba(255,215,0,.12);
-  backdrop-filter:blur(6px);
 }
 
 button{
   width:100%;
   margin-top:16px;
-  padding:18px;
+  padding:17px;
   border:none;
   border-radius:22px;
-  color:#201200;
-  font-size:21px;
-  font-weight:1000;
+  color:#1f1400;
+  font-size:20px;
+  font-weight:900;
   background:linear-gradient(90deg,#fff2a8,#facc15,#f59e0b);
-  box-shadow:0 0 26px rgba(255,215,0,.42);
+  box-shadow:0 0 22px rgba(255,215,0,.32);
 }
 
 /* 大厅 */
@@ -109,20 +113,15 @@ button{
 .top-card{
   display:flex;
   gap:12px;
-  padding:18px;
-  border-radius:28px;
-  background:rgba(0,0,0,.42);
-  border:1px solid rgba(255,215,0,.18);
-  backdrop-filter:blur(8px);
 }
 
 .top-card div{
   flex:1;
 }
 
-.top-card span{
-  color:#ddd;
-  font-size:13px;
+.top-card span,
+.top-card small{
+  color:#ccc;
 }
 
 .top-card b{
@@ -130,13 +129,6 @@ button{
   margin-top:8px;
   color:#facc15;
   font-size:28px;
-  text-shadow:0 0 15px rgba(255,215,0,.55);
-}
-
-.top-card small{
-  display:block;
-  margin-top:8px;
-  color:#bbb;
 }
 
 .notice-line{
@@ -145,36 +137,33 @@ button{
   border-radius:999px;
   color:#facc15;
   background:rgba(0,0,0,.42);
-  border:1px solid rgba(255,215,0,.18);
+  border:1px solid rgba(255,215,0,.16);
   white-space:nowrap;
   overflow:hidden;
 }
 
 .hall-title{
-  margin:26px 0 18px;
   text-align:center;
+  margin:26px 0 18px;
 }
 
 .hall-title h2{
   color:#facc15;
-  font-size:48px;
-  text-shadow:0 0 24px rgba(255,215,0,.7);
+  font-size:46px;
 }
 
 .hall-title p{
+  color:#ddd;
   margin-top:6px;
-  color:#eee;
-  letter-spacing:2px;
 }
 
 .game-card{
   position:relative;
   overflow:hidden;
-  border-radius:34px;
+  border-radius:32px;
   margin-top:22px;
-  min-height:260px;
-  border:1px solid rgba(255,215,0,.28);
-  box-shadow:0 0 38px rgba(255,215,0,.18);
+  border:1px solid rgba(255,215,0,.22);
+  box-shadow:0 0 28px rgba(255,215,0,.14);
 }
 
 .game-card img{
@@ -189,100 +178,44 @@ button{
   flex-direction:column;
   justify-content:flex-end;
   padding:24px;
-  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.08));
+  background:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,.08));
 }
 
 .game-info h3{
   color:#facc15;
-  font-size:42px;
-  text-shadow:0 0 18px rgba(255,215,0,.8);
+  font-size:40px;
 }
 
 .game-info p{
-  display:inline-block;
-  margin-top:10px;
-  padding:9px 14px;
-  border-radius:999px;
-  color:#fff3c4;
-  background:rgba(0,0,0,.5);
-  border:1px solid rgba(255,215,0,.16);
-  font-size:15px;
+  margin-top:8px;
+  color:#fff0b8;
 }
 
 .game-info button{
-  margin-top:16px;
+  margin-top:14px;
 }
 
-/* 白小姐 */
+/* บาคาร่า */
 
 .back-btn{
-  background:rgba(0,0,0,.56);
+  background:rgba(0,0,0,.55);
   color:#facc15;
   font-size:16px;
   padding:14px;
   border:1px solid rgba(255,215,0,.18);
 }
 
-.baccarat-wrap{
-  padding:16px;
-  border-radius:34px;
-  background:
-    radial-gradient(circle at top,rgba(255,215,0,.14),transparent 32%),
-    rgba(0,0,0,.46);
-  border:1px solid rgba(255,215,0,.22);
-  backdrop-filter:blur(8px);
-  box-shadow:0 0 42px rgba(255,215,0,.15);
-}
-
-.dealer-stage{
-  position:relative;
-  overflow:hidden;
-  border-radius:30px;
-  border:2px solid rgba(255,215,0,.28);
-  box-shadow:0 0 36px rgba(255,215,0,.18);
-}
-
-.dealer-stage img{
-  width:100%;
-  display:block;
-}
-
-.dealer-stage::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to bottom,rgba(0,0,0,.04),rgba(0,0,0,.38));
-}
-
-.live-tag{
-  position:absolute;
-  z-index:2;
-  top:14px;
-  right:14px;
-  padding:7px 13px;
-  border-radius:999px;
-  background:#dc2626;
-  color:white;
-  font-size:12px;
-  font-weight:900;
-  box-shadow:0 0 18px rgba(239,68,68,.65);
-}
-
 .b-title{
-  margin-top:18px;
   text-align:center;
   color:#facc15;
-  font-size:62px;
+  font-size:54px;
   line-height:1;
-  text-shadow:
-    0 0 22px rgba(255,215,0,.85),
-    0 0 48px rgba(255,215,0,.35);
 }
 
 .b-sub{
   text-align:center;
   margin-top:10px;
-  color:#fff0b8;
+  color:#f8e7a0;
   font-size:18px;
 }
 
@@ -294,111 +227,152 @@ button{
 
 .wallet div{
   flex:1;
-  padding:18px;
-  border-radius:24px;
+  padding:16px;
+  border-radius:22px;
   text-align:center;
-  background:rgba(0,0,0,.48);
-  border:1px solid rgba(255,215,0,.18);
+  background:rgba(0,0,0,.46);
+  border:1px solid rgba(255,215,0,.15);
 }
 
 .wallet b{
   display:block;
   margin-top:8px;
   color:#facc15;
-  font-size:30px;
+  font-size:28px;
 }
 
-.exchange-box,
-.chip-panel{
-  margin-top:22px;
+.exchange-box{
+  margin-top:20px;
   padding:18px;
-  border-radius:28px;
-  background:rgba(0,0,0,.46);
-  border:1px solid rgba(255,215,0,.16);
+  border-radius:26px;
+  background:rgba(0,0,0,.44);
+  border:1px solid rgba(255,215,0,.15);
 }
 
 .exchange-box h3{
   color:#facc15;
-  font-size:28px;
+  font-size:26px;
 }
 
-.bet-table{
+/* 稳定百家乐桌 */
+
+.real-table{
   margin-top:22px;
-  padding:18px;
+  padding:16px;
   border-radius:34px;
   background:
-    radial-gradient(circle at center,rgba(22,163,74,.48),rgba(0,0,0,.86));
-  border:2px solid rgba(255,215,0,.25);
-  box-shadow:inset 0 0 60px rgba(0,0,0,.65);
+    radial-gradient(circle at center,rgba(20,83,45,.52),rgba(0,0,0,.9));
+  border:2px solid rgba(255,215,0,.22);
+  box-shadow:inset 0 0 55px rgba(0,0,0,.7);
 }
 
-.bet-zones{
-  display:flex;
-  gap:10px;
+.table-dealer{
+  height:240px;
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  margin-bottom:18px;
 }
 
-.bet-zone{
-  flex:1;
-  min-height:138px;
-  text-align:center;
-  border-radius:26px;
-  padding:18px 6px;
-  border:1px solid rgba(255,215,0,.22);
-  box-shadow:inset 0 0 28px rgba(0,0,0,.36);
-}
-
-.bet-zone h2{
-  color:#facc15;
-  font-size:54px;
-  line-height:1;
-  text-shadow:0 0 18px rgba(255,215,0,.75);
-}
-
-.bet-zone p{
-  margin-top:9px;
-  color:white;
-  font-size:17px;
-}
-
-.bet-zone small{
+.table-dealer img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
   display:block;
-  margin-top:12px;
-  color:#fff0b8;
-  font-size:14px;
 }
 
-.player{
-  background:radial-gradient(circle at top,#2563eb,#06142b);
+.dealer-light{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.45));
 }
 
-.tie{
-  background:radial-gradient(circle at top,#16a34a,#031d0c);
+.live-tag{
+  position:absolute;
+  top:12px;
+  right:12px;
+  background:#dc2626;
+  color:white;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  z-index:2;
 }
 
-.banker{
-  background:radial-gradient(circle at top,#dc2626,#2a0505);
-}
-
-.chips{
+.real-center{
   display:flex;
+  align-items:center;
   gap:10px;
+}
+
+.side-area{
+  flex:1;
+  min-height:210px;
+  border-radius:26px;
+  padding:16px 8px;
+  text-align:center;
+  border:1px solid rgba(255,215,0,.2);
+  background:rgba(0,0,0,.5);
+}
+
+.player-area{
+  background:radial-gradient(circle at top,#1d4ed8,#06142b);
+}
+
+.banker-area{
+  background:radial-gradient(circle at top,#b91c1c,#2a0505);
+}
+
+.side-title{
+  color:#facc15;
+  font-size:48px;
+  font-weight:900;
+}
+
+.side-rate,
+.point,
+.side-bet{
+  color:#fff0b8;
+  margin-top:8px;
+}
+
+.vs-text{
+  color:#facc15;
+  font-size:28px;
+  font-weight:900;
+}
+
+.tie-area{
+  margin-top:14px;
+  padding:15px;
+  border-radius:22px;
+  text-align:center;
+  color:#facc15;
+  font-size:26px;
+  font-weight:900;
+  background:radial-gradient(circle at top,#16a34a,#031d0c);
+  border:1px solid rgba(255,215,0,.2);
+}
+
+.real-chips{
+  margin-top:18px;
+  display:flex;
   flex-wrap:wrap;
   justify-content:center;
+  gap:10px;
 }
 
-.chips button{
-  width:64px;
-  height:64px;
+.real-chips button{
+  width:62px;
+  height:62px;
   padding:0;
   border-radius:50%;
-  font-size:16px;
-  background:radial-gradient(circle at 30% 30%,#fff7b2,#facc15 45%,#b45309);
-  box-shadow:
-    0 0 22px rgba(255,215,0,.45),
-    inset 0 0 12px rgba(255,255,255,.45);
+  font-size:15px;
 }
 
-#selectedSide{
+.table-select{
   margin-top:16px;
   text-align:center;
   color:#facc15;
@@ -406,156 +380,28 @@ button{
   font-weight:900;
 }
 
-.deal-btn{
-  font-size:24px;
-  animation:goldBreath 1.7s ease-in-out infinite;
-}
-
-.card-table{
-  display:flex;
-  gap:12px;
-  margin-top:24px;
-}
-
-.card-box{
-  flex:1;
-  min-height:220px;
-  padding:18px;
-  border-radius:28px;
-  text-align:center;
-  background:rgba(0,0,0,.52);
-  border:1px solid rgba(255,215,0,.2);
-  backdrop-filter:blur(6px);
-}
-
-.card-box h3{
-  color:#facc15;
-  font-size:36px;
-  text-shadow:0 0 16px rgba(255,215,0,.7);
-}
-
-.cards{
-  min-height:92px;
-  margin-top:18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  color:white;
-  font-size:24px;
-}
-
-.card-box p{
-  margin-top:18px;
-  font-size:20px;
-  color:#fff0b8;
-}
-
 .result-box{
-  margin-top:22px;
-  padding:18px;
-  border-radius:24px;
+  margin-top:18px;
+  padding:17px;
+  border-radius:22px;
   text-align:center;
   color:#facc15;
   background:rgba(255,215,0,.08);
-  border:1px solid rgba(255,215,0,.16);
-  font-size:21px;
+  border:1px solid rgba(255,215,0,.15);
+  font-size:20px;
   font-weight:900;
 }
 
-.road-title{
-  margin-top:24px;
-  color:#facc15;
-  font-size:24px;
-  font-weight:900;
-}
-
-.road-map{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
+.cards{
+  min-height:76px;
   margin-top:12px;
-}
-
-.road-dot{
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  box-shadow:0 0 12px rgba(255,255,255,.15);
-}
-
-.red{background:#dc2626;}
-.blue{background:#2563eb;}
-.green{background:#16a34a;}
-
-@keyframes goldBreath{
-  0%,100%{
-    transform:scale(1);
-    box-shadow:0 0 20px rgba(255,215,0,.35);
-  }
-  50%{
-    transform:scale(1.03);
-    box-shadow:0 0 38px rgba(255,215,0,.8);
-  }
-}
-/* ===== 底部导航栏 ===== */
-
-.bottom-nav{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:999;
-
   display:flex;
-  justify-content:space-around;
   align-items:center;
-
-  height:78px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,.78),
-      rgba(0,0,0,.96)
-    );
-
-  border-top:1px solid rgba(255,215,0,.18);
-
-  backdrop-filter:blur(12px);
+  justify-content:center;
+  gap:6px;
 }
 
-.nav-item{
-  flex:1;
-  text-align:center;
-  color:#aaa;
-  font-size:13px;
-  font-weight:700;
-}
-
-.nav-item.active{
-  color:#facc15;
-  text-shadow:0 0 14px rgba(255,215,0,.7);
-}
-
-.nav-icon{
-  display:block;
-  font-size:24px;
-  margin-bottom:4px;
-}
-/* 首页7图完整显示 */
-
-.hero-img{
-  height:auto !important;
-  object-fit:contain !important;
-  object-position:center !important;
-  display:block !important;
-}
-
-.login-card{
-  overflow:visible !important;
-}
-/* ===== 修复百家乐翻牌和路子 ===== */
+/* 翻牌 */
 
 .mini-card{
   position:relative;
@@ -611,296 +457,41 @@ button{
   transform:rotateY(360deg);
 }
 
+/* 路子 */
+
+.road-title{
+  margin-top:22px;
+  color:#facc15;
+  font-size:24px;
+  font-weight:900;
+}
+
+.road-map{
+  margin-top:12px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
 .road-dot{
+  width:34px;
+  height:34px;
+  border-radius:50%;
   color:#fff;
   font-weight:900;
-  font-size:14px;
   display:flex;
   align-items:center;
   justify-content:center;
 }
-/* ===== 乐彩百家乐豪华牌桌版 ===== */
 
-.baccarat-wrap{
-  background:
-    radial-gradient(circle at top, rgba(255,215,0,.18), transparent 28%),
-    radial-gradient(circle at center, rgba(22,163,74,.22), transparent 50%),
-    rgba(0,0,0,.58) !important;
-}
-
-.bet-table{
-  padding:14px !important;
-  border-radius:36px !important;
-}
-
-.bet-zones{
-  gap:8px !important;
-}
-
-.bet-zone{
-  min-height:120px !important;
-  padding:14px 6px !important;
-  border:2px solid rgba(255,215,0,.25) !important;
-}
-
-.bet-zone h2{
-  font-size:46px !important;
-}
-
-.bet-zone:active{
-  transform:scale(.96);
-}
-
-.chip-panel{
-  padding:14px !important;
-}
-
-.chips{
-  justify-content:space-between !important;
-}
-
-.chips button{
-  width:58px !important;
-  height:58px !important;
-  font-size:15px !important;
-}
-
-.card-table{
-  position:relative;
-  padding:18px;
-  border-radius:36px;
-  background-image:
-    linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.82)),
-    url("dealer.PNG.PNG");
-  background-size:cover;
-  background-position:center top;
-  border:2px solid rgba(255,215,0,.32);
-  box-shadow:
-    0 0 45px rgba(255,215,0,.2),
-    inset 0 0 80px rgba(0,0,0,.75);
-}
-
-.card-table::before{
-  content:"LIVE BACCARAT";
-  position:absolute;
-  top:14px;
-  right:14px;
-  z-index:4;
-  padding:6px 12px;
-  border-radius:999px;
+.red{
   background:#dc2626;
-  color:white;
-  font-size:12px;
-  font-weight:900;
-  box-shadow:0 0 18px rgba(239,68,68,.65);
 }
 
-.card-box{
-  margin-top:300px;
-  background:rgba(0,0,0,.62) !important;
-  border:1px solid rgba(255,215,0,.26) !important;
-  backdrop-filter:blur(8px);
+.blue{
+  background:#2563eb;
 }
 
-.card-box h3{
-  font-size:38px !important;
-}
-
-.result-box{
-  background:
-    linear-gradient(145deg, rgba(255,215,0,.14), rgba(0,0,0,.72)) !important;
-  border:1px solid rgba(255,215,0,.28) !important;
-  box-shadow:0 0 28px rgba(255,215,0,.18);
-}
-
-.deal-btn{
-  font-size:24px !important;
-  letter-spacing:1px;
-}
-/* ===== 真人百家乐牌桌布局版 ===== */
-
-.baccarat-wrap{
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-  background:
-    radial-gradient(circle at top, rgba(255,215,0,.18), transparent 24%),
-    linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.82)) !important;
-}
-
-/* 荷官区压缩，像牌桌上方 */
-.dealer-stage{
-  height:360px;
-  border-radius:34px !important;
-}
-
-.dealer-stage img{
-  height:100%;
-  object-fit:cover;
-  object-position:center top;
-}
-
-/* 标题缩小，不抢牌桌 */
-.b-title{
-  font-size:46px !important;
-  margin-top:4px !important;
-}
-
-.b-sub{
-  margin-top:0 !important;
-}
-
-/* 钱包小型化 */
-.wallet{
-  order:1;
-}
-
-.wallet div{
-  padding:14px !important;
-}
-
-.wallet b{
-  font-size:26px !important;
-}
-
-/* 发牌区提前，变成主视觉 */
-.card-table{
-  order:2;
-  display:grid !important;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  padding:18px !important;
-  border-radius:34px !important;
-
-  background:
-    radial-gradient(circle at center, rgba(22,163,74,.48), rgba(0,0,0,.88)) !important;
-
-  border:2px solid rgba(255,215,0,.28) !important;
-  box-shadow:
-    inset 0 0 65px rgba(0,0,0,.65),
-    0 0 36px rgba(255,215,0,.16);
-}
-
-.card-box{
-  margin-top:0 !important;
-  min-height:180px !important;
-  background:rgba(0,0,0,.55) !important;
-  border:1px solid rgba(255,215,0,.24) !important;
-}
-
-.card-box h3{
-  font-size:34px !important;
-}
-
-/* 结果放到发牌区下面 */
-.result-box{
-  order:3;
-  font-size:22px !important;
-}
-
-/* 下注区放中间，做成真正庄闲和大区 */
-.bet-table{
-  order:4;
-  padding:18px !important;
-  border-radius:36px !important;
-  background:
-    radial-gradient(circle at center, rgba(20,83,45,.75), rgba(0,0,0,.9)) !important;
-  border:2px solid rgba(255,215,0,.32) !important;
-}
-
-.bet-zones{
-  display:grid !important;
-  grid-template-columns:1fr .78fr 1fr;
-  gap:10px !important;
-}
-
-.bet-zone{
-  min-height:150px !important;
-  padding:18px 8px !important;
-  border-radius:28px !important;
-  transition:.2s;
-}
-
-.bet-zone h2{
-  font-size:56px !important;
-}
-
-.bet-zone small{
-  font-size:16px !important;
-}
-
-/* 点下注区有按压感 */
-.bet-zone:active{
-  transform:scale(.94);
-  box-shadow:0 0 28px rgba(255,215,0,.75);
-}
-
-/* 筹码区放下注区下面 */
-.chip-panel{
-  order:5;
-  padding:16px !important;
-}
-
-.chips{
-  justify-content:center !important;
-  gap:12px !important;
-}
-
-.chips button{
-  width:64px !important;
-  height:64px !important;
-  font-size:15px !important;
-}
-
-/* 兑换区放后面，不抢画面 */
-.exchange-box{
-  order:6;
-}
-
-/* 路子最后 */
-.road-title{
-  order:7;
-}
-
-.road-map{
-  order:8;
-}
-
-/* 牌更像实体牌 */
-.mini-card{
-  width:54px !important;
-  height:76px !important;
-}
-
-.card-back,
-.card-face{
-  font-size:20px !important;
-}
-/* 修复荷官图过大 */
-
-.table-dealer{
-  height:260px !important;
-  border-radius:28px !important;
-  overflow:hidden !important;
-}
-
-.table-dealer img{
-  width:100% !important;
-  height:100% !important;
-  object-fit:cover !important;
-  object-position:center top !important;
-}
-
-.real-table{
-  margin-top:18px !important;
-}
-
-.b-title{
-  position:relative !important;
-  z-index:3 !important;
-}
-
-.live-tag{
-  top:14px !important;
-  right:14px !important;
+.green{
+  background:#16a34a;
 }
